@@ -1,0 +1,137 @@
+.course-card:hover {
+    opacity: 100%;
+}
+.course-card {
+    opacity: 50%;
+}
+
+.course-card.card-clicked {
+    opacity: 100%;
+    border: 3px solid #56a0fe;
+}
+
+.ui-bookmark {
+    --icon-primary-color: #56a0fe;
+    --icon-anmt-duration: 0.3s;
+  }
+  
+  .ui-bookmark input {
+    display: none;
+  }
+  
+  .ui-bookmark .bookmark {
+    width: 24px;
+    height: 24px;
+    fill: #c8c8c8;
+    cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transform-origin: top;
+  }
+  
+  .ui-bookmark .bookmark::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    box-shadow: 0 30px 0 -4px var(--icon-primary-color),
+      30px 0 0 -4px var(--icon-primary-color),
+      0 -30px 0 -4px var(--icon-primary-color),
+      -30px 0 0 -4px var(--icon-primary-color),
+      -22px 22px 0 -4px var(--icon-primary-color),
+      -22px -22px 0 -4px var(--icon-primary-color),
+      22px -22px 0 -4px var(--icon-primary-color),
+      22px 22px 0 -4px var(--icon-primary-color);
+    border-radius: 50%;
+    transform: scale(0);
+  }
+  
+  .ui-bookmark .bookmark::before {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid var(--icon-primary-color);
+    opacity: 0;
+  }
+  
+  .ui-bookmark.active .bookmark {
+    fill: var(--icon-primary-color);
+    animation: bookmark var(--icon-anmt-duration) forwards;
+    transition-delay: 0.3s;
+  }
+  
+  .ui-bookmark.active .bookmark::before {
+    animation: circle var(--icon-anmt-duration)
+      cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    animation-delay: var(--icon-anmt-duration);
+  }
+  
+  .ui-bookmark.active input:checked + .bookmark::after {
+    animation: circles var(--icon-anmt-duration)
+      cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    animation-delay: var(--icon-anmt-duration);
+  }
+  
+  @keyframes bookmark {
+    50% {
+      transform: scaleY(0.6);
+    }
+    100% {
+      transform: scaleY(1);
+    }
+  }
+  
+  @keyframes circle {
+    from {
+      width: 0;
+      height: 0;
+      opacity: 0;
+    }
+    90% {
+      width: 35px;
+      height: 35px;
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  
+  @keyframes circles {
+    from {
+      transform: scale(0);
+    }
+    40% {
+      opacity: 1;
+    }
+    to {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+  }
+
+  .arrow-icon {
+    color: #56a0fe;
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .arrow-icon-lg {
+      display: block
+    }
+    .arrow-icon-sm {
+      display: none;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .arrow-icon-lg {
+      display: none;
+    }
+    .arrow-icon-sm {
+      display: block;
+    }
+  }

@@ -1,9 +1,13 @@
-import React from 'react'
+import CourseDisplayPage from "@/components/course-general-components/CourseDisplayPage";
 
-const page = () => {
+function SavedCourses() {
   return (
-    <div>page</div>
-  )
+    <CourseDisplayPage
+      pageTitle={"Saved Courses"}
+      navigationPath={"./courses"}
+      navigationName={"My Courses"}
+    />
+  );
 }
 
-export default page
+export default SavedCourses;
