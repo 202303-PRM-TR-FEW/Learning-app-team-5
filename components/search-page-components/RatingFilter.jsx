@@ -1,10 +1,12 @@
 "use client";
 import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import Rating from "@mui/material/Rating";
-import StarIcon from "@mui/icons-material/Star";
+import dynamic from 'next/dynamic';
 
-function RatingFilter() {
+const Box = dynamic(() => import("@mui/material/Box"));
+const Rating = dynamic(() => import("@mui/material/Rating"));
+const StarIcon = dynamic(() => import("@mui/icons-material/Star"));
+
+function RatingFilter({ searchResult, setSearchResult }) {
   const [value, setValue] = useState(2);
   const [hover, setHover] = useState(-1);
 
@@ -24,6 +26,14 @@ function RatingFilter() {
   function getLabelText(value) {
     return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
   }
+
+  const handleRatingChange = (newValue) => {
+    setValue(newValue);
+    const filteredResults = searchResult.filter(
+      (course) => course.rating >= newValue
+    );
+    setSearchResult(filteredResults);
+  };
 
   return (
     <>
@@ -45,7 +55,7 @@ function RatingFilter() {
               precision={0.5}
               getLabelText={getLabelText}
               onChange={(event, newValue) => {
-                setValue(newValue);
+                handleRatingChange(newValue);
               }}
               onChangeActive={(event, newHover) => {
                 setHover(newHover);

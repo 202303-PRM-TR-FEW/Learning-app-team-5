@@ -5,57 +5,98 @@ import SearchResults from "./SearchResults";
 import CategoriesFilter from "./CategoriesFilter";
 import RatingFilter from "./RatingFilter";
 import LevelFilter from "./LevelFilter";
-// import { collection, query, onSnapshot } from 'firebase/firestore';
-// import { db } from '........';
+import {
+  collection,
+  query,
+  onSnapshot,
+  getFirestore,
+} from "firebase/firestore";
+import { db } from "../../firebase";
 
 function SearchPage() {
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
+  const [originalData, setOriginalData] = useState([]);
+  const [levels, setLevels] = useState([]);
+  const [categories, setCategories] = useState([]);
 
-  // useEffect(() => {
-  //  const q = query(collection(db, 'courses'));
-  //  const unsubscribe = onSnapshot(q, (querySnapshot) => {
-  //   const searchResultArray = [];
-  //   querySnapshot.forEach((doc) => {
-  //    searchResultArray.push({ ...doc.data(), id: doc.id });
-  //   });
-  //   setSearchResult(searchResultArray);
-  //  });
+  useEffect(() => {
 
-  //  return () => unsubscribe();
-  // }, []);
+    const fetchData = async () => {
+      try {
+        const q = query(collection(db, "course-data"));
+        const querySnapshot = await getFirestore(q);
+
+        const searchResultArray = [];
+        const levelsArray = [];
+        const categoriesArray = [];
+
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          searchResultArray.push({ ...data, id: doc.id });
+
+
+          if (!levelsArray.includes(data.level)) {
+            levelsArray.push(data.level);
+          }
+
+
+          if (!categoriesArray.includes(data.category)) {
+            categoriesArray.push(data.category);
+          }
+        });
+
+        setSearchResult(searchResultArray);
+        setOriginalData(searchResultArray);
+        setLevels(levelsArray);
+        setCategories(categoriesArray);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleChange = (e) => {
+    e.preventDefault();
     setSearch(e.target.value);
-
-    const courseSearchResults = searchResult.filter((course) =>
-      course.title.toLowerCase().includes(e.target.value.toLowerCase())
-    );
-    setSearchResult(courseSearchResults);
+    filterData(e.target.value);
   };
 
-  //Categories Part
-  const categories = ["Sales", "HR", "Drawing", "Big Data", "Design"];
+  const handleLevelChange = (levelValue) => {
+    const updatedLevels = levels.map((level) =>
+      level.value === levelValue ? { ...level, checked: !level.checked } : level
+    );
+    setLevels(updatedLevels);
+  };
 
   const handleCategoryChange = (category) => {
     console.log("Selected category:", category);
+
+    const filteredResults = searchResult.filter(
+      (course) => course.category === category
+    );
+    setSearchResult(filteredResults);
   };
 
-  //Level Part
-  const [levels, setLevels] = useState([
-    { value: "beginner", label: "Beginner", checked: false },
-    { value: "intermediate", label: "Intermediate", checked: false },
-    { value: "professional", label: "Professional", checked: false },
-  ]);
+  const handleRatingChange = (newValue) => {
 
-  const handleLevelChange = (levelValue) => {
-    const updatedLevels = levels.map((level) => {
-      if (level.value === levelValue) {
-        return { ...level, checked: !level.checked };
-      }
-      return level;
-    });
-    setLevels(updatedLevels);
+    const filteredResults = originalData.filter(
+      (course) => course.rating >= newValue
+    );
+    setSearchResult(filteredResults);
+  };
+
+  const filterData = (searchTerm) => {
+
+    const courseSearchResults = originalData.filter((course) =>
+      Object.values(course).some((value) =>
+        value.toString().toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    );
+
+    setSearchResult(courseSearchResults);
   };
 
   return (
@@ -64,15 +105,15 @@ function SearchPage() {
         Find your favourites
       </h2>
       <SearchInput value={search} onChange={handleChange} />
-      <SearchResults searchResult={searchResult} />
       <CategoriesFilter
         categories={categories}
         onCategoryChange={handleCategoryChange}
       />
       <LevelFilter levels={levels} onChange={handleLevelChange} />
-      <RatingFilter />
+      <RatingFilter onChange={handleRatingChange} />
       <div className="text-sm font-semibold text-gray-700 py-2 mb-8 mt-2">
         <h3>RECOMMENDED FOR YOU</h3>
+        <SearchResults searchResult={searchResult} />
       </div>
     </>
   );

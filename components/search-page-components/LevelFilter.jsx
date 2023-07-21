@@ -1,19 +1,27 @@
 "use client";
 import React from "react";
-import CheckIcon from "@mui/icons-material/Check";
+import dynamic from 'next/dynamic';
 
-function LevelFilter({ levels, onChange }) {
+const CheckIcon = dynamic(() => import('@mui/icons-material/Check'));
+
+function LevelFilter({ levels, onChange, searchResult, setSearchResult }) {
+  const handleLevelChange = (levelValue) => {
+    const filteredResults = searchResult.filter(
+      (course) => course.level === levelValue
+    );
+    setSearchResult(filteredResults);
+  };
+
   return (
     <div>
       <h3 className="text-sm font-semibold text-gray-700 py-2">LEVEL</h3>
 
       <div className="grid grid-flow-col auto-cols-max gap-6">
         {levels.map((level) => (
-          <div key={level}>
+          <div key={level.value}>
             <CheckIcon
-              className={`w-5 h-5 absolute ${
-                level.checked ? "opacity-100" : "opacity-0"
-              }`}
+              className={`w-5 h-5 absolute ${level.checked ? "opacity-100" : "opacity-0"
+                }`}
             />
             <input
               type="checkbox"

@@ -1,6 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import CheckIcon from "@mui/icons-material/Check";
+import dynamic from "next/dynamic";
+
+const CheckIcon = dynamic(() => import("@mui/icons-material/Check"));
 
 function CategoriesFilter({ categories, onCategoryChange }) {
   const [selectedCategories, setSelectedCategories] = useState(
@@ -24,9 +26,8 @@ function CategoriesFilter({ categories, onCategoryChange }) {
         {categories.map((category) => (
           <div key={category}>
             <CheckIcon
-              className={`w-5 h-5 absolute ${
-                selectedCategories[category] ? "opacity-100" : "opacity-0"
-              }`}
+              className={`w-5 h-5 absolute ${selectedCategories[category] ? "opacity-100" : "opacity-0"
+                }`}
             />
             <input
               type="checkbox"
