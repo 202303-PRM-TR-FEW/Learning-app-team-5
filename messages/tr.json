@@ -1,0 +1,68 @@
+{
+  "Welcome": {
+    "title": "Tutkuyu Keşfedin",
+    "paragraph": "Hangi konuların ilginizi çektiğini bulun, yeni bir beceri öğrenin ve benzer konularda tutkulu insanlarla bağlantı kurun.",
+    "button": "BAŞLAMAK İÇİN"
+  },
+  "Navbar": {
+    "Home": "Ana Sayfa",
+    "Search": "Arama",
+    "Courses": "Dersler",
+    "Profile": "Profil",
+    "Login": "Giriş"
+  },
+  "Home": {
+    "title-1": "Öne Çıkan Dersler",
+    "title-2": "Kategoriler",
+    "button": "Al",
+    "hour": "sa",
+    "minute": "dk",
+    "more": "Daha Fazla Göster",
+    "less": "Daha Az Göster",
+    "Sales": "Satış",
+    "HR": "İnsan Kaynakları",
+    "Drawing": "Çizim",
+    "Big Data": "Büyük Veri",
+    "Design": "Tasarım",
+    "Marketing": "Pazarlama",
+    "Astronomy": "Astronomi",
+    "Web Development": "Web Geliştirme"
+  },
+  "Search": {
+    "title": "Favorilerinizi Bulun",
+    "button": "Ara",
+    "title-2": "KATEGORİLER",
+    "title-3": "SEVİYE",
+    "title-4": "DEĞERLENDİRME",
+    "title-5": "SONUÇLAR",
+    "Beginner": "Başlangıç Seviyesi",
+    "Intermediate": "Orta Seviye",
+    "Professional": "Profesyonel"
+  },
+  "Courses": {
+    "title": "Öğrenimim"
+  },
+  "Saved": {
+    "title": "Kaydedilmiş Dersler"
+  },
+  "Profile": {
+    "title": "Toplam İstatistik",
+    "title-2": "Başarılar",
+    "title-3": "Arkadaş Önerileri",
+    "title-4": "Arkadaşlar",
+    "Courses": "DERSLERİM",
+    "Followers": "TAKİPÇİLER",
+    "Following": "TAKİP EDİLENLER",
+    "Finished": "TAMAMLANAN DERSLER",
+    "Hours": "ÖĞRENİLEN SAAT",
+    "Skills": "KAZANILAN BECERİLER",
+    "Committed": "Kararlı Öğrenci",
+    "Collection": "Puan Toplama",
+    "Profile": "PROFİL",
+    "Log": "Çıkış Yap",
+    "Find": "ARKADAŞLAR BUL",
+    "Invite": "ARKADAŞLARI DAVET ET",
+    "View": "TÜMÜNÜ GÖRÜNTÜLE",
+    "Hide": "Gizle"
+  }
+}

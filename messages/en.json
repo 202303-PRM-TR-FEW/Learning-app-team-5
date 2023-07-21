@@ -1,0 +1,68 @@
+{
+  "Welcome": {
+    "title": "Discover passion",
+    "paragraph": "Find out what topics you find interesting, learn a new skill & connect with people that are passionate about similar topics.",
+    "button":"GET STARTED"
+  },
+  "Navbar":{
+  "Home": "Home",
+  "Search": "Search",
+  "Courses": "Courses",
+  "Profile": "Profile",
+  "Login": "Login"
+  },
+  "Home":{
+    "title-1":"Featured Courses",
+    "title-2":"Categories",
+    "button" :"Get",
+    "hour" :"h",
+    "minute": "m",
+    "more" : "Show More",
+    "less" : "Show Less",
+    "Sales": "Sales",
+    "HR": "HR",
+    "Drawing": "Drawing",
+    "Big Data": "Big Data",
+    "Design": "Design",
+    "Marketing": "Marketing",
+    "Astronomy": "Astronomy",
+    "Web Development": "Web Development"
+  },
+  "Search":{
+    "title":"Find your favourites",
+    "button":"Search",
+    "title-2":"CATEGORIES",
+    "title-3":"LEVEL",
+    "title-4":"RATING",
+    "title-5":"RESULTS",
+    "Beginner" : "Beginner",
+    "Intermediate" : "Intermediate",
+    "Professional": "Profeessionl"
+  },
+  "Courses":{
+    "title":"My Learning"
+  },
+  "Saved":{
+  "title":"Saved Courses"
+  },
+  "Profile":{
+  "title": "Total Statistic",
+  "title-2": "Achievements",
+  "title-3": "Friend Suggestions",
+  "title-4": "Friends",
+  "Courses": "MY COURSES",
+  "Followers": "FOLLOWERS",
+  "Following": "FOLLOWING",
+  "Finished": "FINISHED COURSES",
+  "Hours": "HOURS LEARNED",
+  "Skills": "SKILLS ACHIEVED",
+  "Committed": "Committed Learner",
+  "Collection": "Point Collection",
+  "Profile" : "PROFILE",
+  "Log": "Log Out",
+  "Find" : "FIND FRIENDS",
+  "Invite": "INVITE FRIENDS",
+  "View" : "VIEW ALL",
+  "Hide": "Hide"
+  }
+}

@@ -1,6 +1,6 @@
 import NavBar from "@/components/NavBar/NavBar";
-import { AuthContextProvider } from "../context/AuthContext";
-import { RandomContextProvider } from "../context/RandomNumbers";
+import { AuthContextProvider } from "../../context/AuthContext";
+import { RandomContextProvider } from "../../context/RandomNumbers";
 
 export default function Layout({ children }) {
   return (
