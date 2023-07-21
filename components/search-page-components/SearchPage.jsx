@@ -5,12 +5,7 @@ import SearchResults from "./SearchResults";
 import CategoriesFilter from "./CategoriesFilter";
 import RatingFilter from "./RatingFilter";
 import LevelFilter from "./LevelFilter";
-import {
-  collection,
-  query,
-  onSnapshot,
-  getFirestore,
-} from "firebase/firestore";
+import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../../firebase";
 
 function SearchPage() {
@@ -20,46 +15,37 @@ function SearchPage() {
   const [levels, setLevels] = useState([]);
   const [categories, setCategories] = useState([]);
 
+  const coursesRef = collection(db, "course-data");
+
+  // Fetch all courses from Firebase and store them in the "originalData" state
+  const fetchCourses = async () => {
+    try {
+      const querySnapshot = await getDocs(coursesRef);
+      const courses = querySnapshot.docs.map((doc) => doc.data());
+      setOriginalData(courses);
+    } catch (error) {
+      console.error("Error fetching courses:", error);
+    }
+  };
+
+  // Fetch courses based on the category
+  const fetchCoursesByCategory = async (category) => {
+    try {
+      const q = query(coursesRef, where("category", "==", category));
+      const querySnapshot = await getDocs(q);
+      const courses = querySnapshot.docs.map((doc) => doc.data());
+      setSearchResult(courses);
+    } catch (error) {
+      console.error("Error fetching courses:", error);
+    }
+  };
+
   useEffect(() => {
-
-    const fetchData = async () => {
-      try {
-        const q = query(collection(db, "course-data"));
-        const querySnapshot = await getFirestore(q);
-
-        const searchResultArray = [];
-        const levelsArray = [];
-        const categoriesArray = [];
-
-        querySnapshot.forEach((doc) => {
-          const data = doc.data();
-          searchResultArray.push({ ...data, id: doc.id });
-
-
-          if (!levelsArray.includes(data.level)) {
-            levelsArray.push(data.level);
-          }
-
-
-          if (!categoriesArray.includes(data.category)) {
-            categoriesArray.push(data.category);
-          }
-        });
-
-        setSearchResult(searchResultArray);
-        setOriginalData(searchResultArray);
-        setLevels(levelsArray);
-        setCategories(categoriesArray);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
+    // Fetch all courses when the component mounts
+    fetchCourses();
   }, []);
 
   const handleChange = (e) => {
-    e.preventDefault();
     setSearch(e.target.value);
     filterData(e.target.value);
   };
@@ -69,19 +55,25 @@ function SearchPage() {
       level.value === levelValue ? { ...level, checked: !level.checked } : level
     );
     setLevels(updatedLevels);
+    // Filter the search results based on the selected levels
+    filterData(search);
   };
 
   const handleCategoryChange = (category) => {
     console.log("Selected category:", category);
-
-    const filteredResults = searchResult.filter(
-      (course) => course.category === category
+    setCategories((prevCategories) =>
+      prevCategories.map((cat) =>
+        cat.value === category
+          ? { ...cat, checked: !cat.checked }
+          : { ...cat, checked: false }
+      )
     );
-    setSearchResult(filteredResults);
+    // Fetch courses based on the selected category
+    fetchCoursesByCategory(category);
   };
 
   const handleRatingChange = (newValue) => {
-
+    // Filter the search results based on the selected rating value
     const filteredResults = originalData.filter(
       (course) => course.rating >= newValue
     );
@@ -89,14 +81,32 @@ function SearchPage() {
   };
 
   const filterData = (searchTerm) => {
-
+    // Filter based on the search term
     const courseSearchResults = originalData.filter((course) =>
       Object.values(course).some((value) =>
         value.toString().toLowerCase().includes(searchTerm.toLowerCase())
       )
     );
 
-    setSearchResult(courseSearchResults);
+    // Filter based on selected levels and categories
+    const selectedLevels = levels.filter((level) => level.checked);
+    const selectedCategories = categories.filter((cat) => cat.checked);
+
+    let filteredResults = courseSearchResults;
+
+    if (selectedLevels.length > 0) {
+      filteredResults = filteredResults.filter((course) =>
+        selectedLevels.some((level) => course.level === level.value)
+      );
+    }
+
+    if (selectedCategories.length > 0) {
+      filteredResults = filteredResults.filter((course) =>
+        selectedCategories.some((cat) => course.category === cat.value)
+      );
+    }
+
+    setSearchResult(filteredResults); // Update the search result state
   };
 
   return (
@@ -109,8 +119,15 @@ function SearchPage() {
         categories={categories}
         onCategoryChange={handleCategoryChange}
       />
-      <LevelFilter levels={levels} onChange={handleLevelChange} />
-      <RatingFilter onChange={handleRatingChange} />
+      <LevelFilter
+        levels={levels}
+        onChange={handleLevelChange}
+        searchResult={searchResult}
+        setSearchResult={setSearchResult} />
+      <RatingFilter
+        onChange={handleRatingChange}
+        searchResult={searchResult}
+        setSearchResult={setSearchResult} />
       <div className="text-sm font-semibold text-gray-700 py-2 mb-8 mt-2">
         <h3>RECOMMENDED FOR YOU</h3>
         <SearchResults searchResult={searchResult} />
