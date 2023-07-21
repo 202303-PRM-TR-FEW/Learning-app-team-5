@@ -110,7 +110,7 @@ function debounce(func, timeout = 300) {
             href={`/main/search?category=${category.slug}`}
             key={category.slug}
           >
-            <button className="box-content border-2 p-3 drop-shadow-md leading-10 w-72 xl:w-56 h-44 bg-white rounded-xl mb-2 text-lg text-gray-500 hover:text-blue-500 hover:bg-blue-200 hover:border-blue-400 flex flex-col items-center justify-center">
+            <button className="box-content border-2 p-3 drop-shadow-md leading-10 w-72 lg:w-64 3xl:w-80 h-44 bg-white rounded-xl mb-2 text-lg text-gray-500 hover:text-blue-500 hover:bg-blue-200 hover:border-blue-400 flex flex-col items-center justify-center">
               {category.icon}
               <span className="mt-2">{category.name}</span>
             </button>
@@ -118,7 +118,7 @@ function debounce(func, timeout = 300) {
         ))}
         {!showAllCategories && windowWidth < 640 && (
           <button
-            className="box-content border-2 p-3 drop-shadow-md leading-10 sm:w-72 xl:w-56 h-44 bg-white rounded-xl mb-2 text-lg text-gray-500 hover:text-blue-500 hover:bg-blue-200 hover:border-blue-400 flex flex-col items-center justify-center"
+            className="box-content border-2 p-3 drop-shadow-md leading-10 sm:w-72 lg:w-64 3xl:w-80 h-44 bg-white rounded-xl mb-2 text-lg text-gray-500 hover:text-blue-500 hover:bg-blue-200 hover:border-blue-400 flex flex-col items-center justify-center"
             onClick={handleShowMore}
           >
             <span className="mt-2">More</span>
@@ -126,7 +126,7 @@ function debounce(func, timeout = 300) {
         )}
         {showAllCategories && windowWidth < 640 && (
           <button
-            className="box-content border-2 p-3 drop-shadow-md leading-10 sm:w-72 xl:w-56 h-44 bg-white rounded-xl mb-2 text-lg text-gray-500 hover:text-blue-500 hover:bg-blue-200 hover:border-blue-400 flex flex-col items-center justify-center"
+            className="box-content border-2 p-3 drop-shadow-md leading-10 sm:w-72 lg:w-64 3xl:w-80 h-44 bg-white rounded-xl mb-2 text-lg text-gray-500 hover:text-blue-500 hover:bg-blue-200 hover:border-blue-400 flex flex-col items-center justify-center"
             onClick={handleShowLess}
           >
             <span className="mt-2">Show Less</span>
