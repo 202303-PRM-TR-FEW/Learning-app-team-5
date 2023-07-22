@@ -11,6 +11,19 @@
   "Profile": "Profile",
   "Login": "Login"
   },
+  "login":{
+    "login":"Login",
+    "Signup":"Sign Up",
+    "Email":"Email",
+    "Password":"password",
+    "Uesrname":"Username",
+    "Placeholder-1":"xyz@learnU.com",
+    "Placeholder-2":"Enter your email",
+    "Message-1": "Signup is successful! Please login with your credentials.",
+    "Message-2": "Don't have an account?",
+    "Message-3": "Already have an account?",
+    "Message-4":"Please enter a valid email address"
+  },
   "Home":{
     "title-1":"Featured Courses",
     "title-2":"Categories",
@@ -40,10 +53,13 @@
     "Professional": "Profeessionl"
   },
   "Courses":{
-    "title":"My Learning"
-  },
-  "Saved":{
-  "title":"Saved Courses"
+    "title-1":"My Learning",
+    "title-2":"Saved Courses",
+    "Descripttion":"Coures Descripttion",
+    "Button-1":"Review",
+    "Button-2":"Continue",
+    "Message-1":"Hey there!",
+    "Message-2":"Please select a course to view"
   },
   "Profile":{
   "title": "Total Statistic",

@@ -1,4 +1,6 @@
+"use client";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 import {
   HOME_ICON,
@@ -8,31 +10,36 @@ import {
   LEARNU_ICON,
 } from "../../public/assets/svgPath";
 
-// Define the navigation items as an array of objects
-const navigationItems = [
-  {
-    href: "/home",
-    icon: HOME_ICON,
-    text: "Home",
-  },
-  {
-    href: "/search",
-    icon: SEARCH_ICON,
-    text: "Search",
-  },
-  {
-    href: "/courses",
-    icon: COURSES_ICON,
-    text: "Courses",
-  },
-  {
-    href: "/profile",
-    icon: PROFILE_ICON,
-    text: "Login",
-  },
-];
+// fake user status
+const user = false;
 
 function NavBar() {
+  const t = useTranslations("Navbar");
+
+  // Define the navigation items as an array of objects
+  const navigationItems = [
+    {
+      href: "/home",
+      icon: HOME_ICON,
+      text: `${t("Home")}`,
+    },
+    {
+      href: "/search",
+      icon: SEARCH_ICON,
+      text: `${t("Search")}`,
+    },
+    {
+      href: "/courses",
+      icon: COURSES_ICON,
+      text: `${t("Courses")}`,
+    },
+    {
+      href: "/profile",
+      icon: PROFILE_ICON,
+      text: `${user ? t("Profile") : t("Login")}`,
+    },
+  ];
+
   return (
     <>
       <div className="absolute top-7 left-6 z-50 py-2">

@@ -11,6 +11,19 @@
     "Profile": "Profil",
     "Login": "Giriş"
   },
+  "login": {
+    "login": "Giriş Yap",
+    "Signup": "Kayıt Ol",
+    "Email": "E-posta",
+    "Password": "şifre",
+    "Uesrname": "Kullanıcı Adı",
+    "Placeholder-1": "xyz@learnU.com",
+    "Placeholder-2": "E-postanızı girin",
+    "Message-1": "Kayıt başarılı! Lütfen kimlik bilgilerinizle giriş yapın.",
+    "Message-2": "Hesabınız yok mu?",
+    "Message-3": "Zaten bir hesabınız var mı?",
+    "Message-4": "Lütfen geçerli bir e-posta adresi girin"
+  },
   "Home": {
     "title-1": "Öne Çıkan Dersler",
     "title-2": "Kategoriler",
@@ -40,11 +53,15 @@
     "Professional": "Profesyonel"
   },
   "Courses": {
-    "title": "Öğrenimim"
+    "title-1": "Öğrenimim",
+    "title-2": "Kaydedilmiş Dersler",
+    "Descripttion": "Ders Açıklaması",
+    "Button-1": "İncele",
+    "Button-2": "Devam Et",
+    "Message-1": "Merhaba!",
+    "Message-2": "Lütfen görüntülemek için bir ders seçin"
   },
-  "Saved": {
-    "title": "Kaydedilmiş Dersler"
-  },
+
   "Profile": {
     "title": "Toplam İstatistik",
     "title-2": "Başarılar",
