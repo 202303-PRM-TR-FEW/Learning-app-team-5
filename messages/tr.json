@@ -55,9 +55,13 @@
   "Courses": {
     "title-1": "Öğrenimim",
     "title-2": "Kaydedilmiş Dersler",
+    "hour": "sa",
+    "minute": "dk",
     "Descripttion": "Ders Açıklaması",
     "Button-1": "İncele",
-    "Button-2": "Devam Et",
+    "Button-2": "Önizleme",
+    "Button-3": "Devam Et",
+    "Button-4": "Kaydol",
     "Message-1": "Merhaba!",
     "Message-2": "Lütfen görüntülemek için bir ders seçin"
   },

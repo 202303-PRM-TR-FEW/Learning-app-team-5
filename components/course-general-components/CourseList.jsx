@@ -7,6 +7,7 @@ import CourseCard from "./CourseCard";
 import { Spinner } from "@material-tailwind/react";
 import NavigateNextOutlinedIcon from "@mui/icons-material/NavigateNextOutlined";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 function CourseList({
   onCourseClick,
@@ -17,6 +18,7 @@ function CourseList({
 }) {
   const [courses, setCourses] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const t =useTranslations("Courses")
 
   const coursesCollection = collection(db, "course-data");
 
@@ -46,9 +48,9 @@ function CourseList({
   }, []);
 
   const coursesToPull = courses.filter((course) => {
-    if (pageTitle === "My Courses") {
+    if (pageTitle === t("title-1")) {
       return course.isRegistered;
-    } else if (pageTitle === "Saved Courses") {
+    } else if (pageTitle === t("title-2")) {
       return course.isSaved;
     } else {
       return console.log("Error: No courses to pull");

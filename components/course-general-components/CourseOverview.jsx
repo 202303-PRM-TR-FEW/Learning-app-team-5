@@ -20,9 +20,11 @@ const LeaderboardOutlinedIcon = dynamic(() =>
 import "./CourseCard.css";
 import CourseButton from "./CourseButton";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 function CourseOverview({ selectedCourse }) {
   const [showArrowIcons, setShowArrowIcons] = useState(false);
+  const t = useTranslations("Courses");
 
   /* This delay for arrow icons is necessary due to the nature of React's initial render! */
   useEffect(() => {
@@ -37,13 +39,13 @@ function CourseOverview({ selectedCourse }) {
       <div className="flex flex-col bg-[rgba(251,_251,_251,_0.5)] p-4 m-4 rounded-2xl shadow-md justify-center items-center ">
         <div className="flex w-full justify-center items-center">
           <WavingHandOutlinedIcon className="text-[#56a0fe] text-6xl h-1/2 mr-2" />
-          <h1 className="text-2xl font-bold text-[#56a0fe]">Hey there!</h1>
+          <h1 className="text-2xl font-bold text-[#56a0fe]">{t("Message-1")}</h1>
         </div>
         {showArrowIcons && (
           <div className="flex w-full justify-center items-center">
             <ArrowBackIcon className="arrow-icon arrow-icon-lg" />
             <ArrowUpwardOutlinedIcon className="arrow-icon arrow-icon-sm" />
-            <p className="ml-2">Please select a course to view</p>
+            <p className="ml-2">{t("Message-2")}</p>
           </div>
         )}
       </div>
@@ -100,9 +102,9 @@ function CourseOverview({ selectedCourse }) {
               <AccessTimeIcon className="text-gray-600" />
               <p className="text-gray-600 text-base ml-2">
                 {Math.floor(selectedCourse.duration / 60) > 0
-                  ? `${Math.floor(selectedCourse.duration / 60)}h `
+                  ? `${Math.floor(selectedCourse.duration / 60)} ${t("hour")}`
                   : ""}
-                {selectedCourse.duration % 60}mins.
+                {selectedCourse.duration % 60} {t("minute")}
               </p>
             </div>
             {/* rating */}
@@ -122,7 +124,7 @@ function CourseOverview({ selectedCourse }) {
         {/* description title */}
         <div className="flex flex-col justify-center my-2 mt-8">
           <h2 className="text-[#373737] text-xl font-semibold mb-4">
-            Course Description
+            {t("Descripttion")}
           </h2>
           {/* description content */}
           <div className="max-h-14 overflow-y-auto lg:max-h-full">
@@ -136,13 +138,13 @@ function CourseOverview({ selectedCourse }) {
       {/* PREVIEW AND ENROLL BUTTONS */}
       <div className="flex justify-between my-4">
         <CourseButton
-          buttonName={selectedCourse.isRegistered ? "Review" : "Preview"}
+          buttonName={selectedCourse.isRegistered ? t("Button-1") : t("Button-2")}
           handleClick={() =>
             console.log("add preview page navigation to handleClick function")
           }
         />
         <CourseButton
-          buttonName={selectedCourse.isRegistered ? "Continue" : "Enroll"}
+          buttonName={selectedCourse.isRegistered ? t("Button-3"): t("Button-4")}
           handleClick={() =>
             console.log("add enroll page navigation to handleClick function")
           }

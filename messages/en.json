@@ -55,9 +55,13 @@
   "Courses":{
     "title-1":"My Learning",
     "title-2":"Saved Courses",
+    "hour" :"h",
+    "minute": "mins",
     "Descripttion":"Coures Descripttion",
     "Button-1":"Review",
-    "Button-2":"Continue",
+    "Button-2":"Preview",
+    "Button-3":"Continue",
+    "Button-4":"Enroll",
     "Message-1":"Hey there!",
     "Message-2":"Please select a course to view"
   },
