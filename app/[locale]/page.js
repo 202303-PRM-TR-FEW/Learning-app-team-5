@@ -2,7 +2,10 @@
 import Link from "next/link"
 import{useTranslations} from "next-intl"
 
-export default function Home() {
+
+import SelectLanguage from '@/components/SelectLanguage-component/SelectLanguage';
+
+export default function Home({ params }) {
   const t = useTranslations("Welcome")
   return (
     <main className="h-screen m-auto max-w-[80%] flex justify-center items-center ">
@@ -10,6 +13,7 @@ export default function Home() {
        shadow-2xl rounded-[50px] bg-slate-50 
        md:flex-row ">
         <div className=' flex flex-col items-start mx-auto  container px-4 md:pl-36 '>
+          <SelectLanguage lang = {params.locale}/>
           <div className=' flex flex-row py-4 mt-4 items-center md:py-10 '>
 
             <svg

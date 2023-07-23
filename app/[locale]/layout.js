@@ -3,6 +3,7 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 
 
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -27,6 +28,7 @@ export default async function RootLayout({ children, params: { locale } }) {
     <html lang={locale}>
       <body className={`${inter.className} bg-[#f5f5f5]`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
+
           {children}
         </NextIntlClientProvider>
       </body>

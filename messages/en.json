@@ -79,6 +79,7 @@
   "Find" : "FIND FRIENDS",
   "Invite": "INVITE FRIENDS",
   "View" : "VIEW ALL",
-  "Hide": "Hide"
+  "Hide": "Hide",
+  "Submit":"submit"
   }
 }

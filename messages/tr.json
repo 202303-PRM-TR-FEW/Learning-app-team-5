@@ -2,7 +2,7 @@
   "Welcome": {
     "title": "Tutkuyu Keşfedin",
     "paragraph": "Hangi konuların ilginizi çektiğini bulun, yeni bir beceri öğrenin ve benzer konularda tutkulu insanlarla bağlantı kurun.",
-    "button": "BAŞLAMAK İÇİN"
+    "button": "BAŞLA"
   },
   "Navbar": {
     "Home": "Ana Sayfa",
@@ -80,6 +80,7 @@
     "Find": "ARKADAŞLAR BUL",
     "Invite": "ARKADAŞLARI DAVET ET",
     "View": "TÜMÜNÜ GÖRÜNTÜLE",
-    "Hide": "Gizle"
+    "Hide": "Gizle",
+    "Submit":"göndermek"
   }
 }

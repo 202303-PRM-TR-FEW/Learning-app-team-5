@@ -108,7 +108,7 @@ function debounce(func, timeout = 300) {
       <div className="grid place-content-center sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 xl:gap-x-20">
         {categoriesToShow.map((category) => (
           <Link
-            href={`/main/search?category=${category.slug}`}
+            href={`/home/${category.slug}`}
             key={category.slug}
           >
             <button className="box-content border-2 p-3 drop-shadow-md leading-10 w-72 lg:w-64 3xl:w-80 h-44 bg-white rounded-xl mb-2 text-lg text-gray-500 hover:text-blue-500 hover:bg-blue-200 hover:border-blue-400 flex flex-col items-center justify-center">

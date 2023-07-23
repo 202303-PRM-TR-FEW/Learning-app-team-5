@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { UserAuth } from "@/app/context/AuthContext";
 
 import {
   HOME_ICON,
@@ -10,10 +11,11 @@ import {
   LEARNU_ICON,
 } from "../../public/assets/svgPath";
 
-// fake user status
-const user = false;
+
 
 function NavBar() {
+  //  user status
+  const { user } = UserAuth();
   const t = useTranslations("Navbar");
 
   // Define the navigation items as an array of objects
