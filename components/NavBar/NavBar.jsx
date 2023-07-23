@@ -21,22 +21,22 @@ function NavBar({locale}) {
   // Define the navigation items as an array of objects
   const navigationItems = [
     {
-      href: "/home",
+      href: `${locale}/home`,
       icon: HOME_ICON,
       text: `${t("Home")}`,
     },
     {
-      href: "/search",
+      href: `${locale}/search`,
       icon: SEARCH_ICON,
       text: `${t("Search")}`,
     },
     {
-      href: "/courses",
+      href: `${locale}/courses`,
       icon: COURSES_ICON,
       text: `${t("Courses")}`,
     },
     {
-      href: `${user ? `/profile` : `/login`}`,
+      href: `${user ? `${locale}/profile` : `${locale}/login`}`,
       icon: PROFILE_ICON,
       text: `${user ? t("Profile") : t("Login")}`,
     },
@@ -45,7 +45,7 @@ function NavBar({locale}) {
   return (
     <>
       <div className="absolute top-7 left-6 z-50 py-2">
-        <Link href="/">
+        <Link href={`${locale}/`}>
           <span>
             <svg
               className="w-[3em] h-[2em] px-[1em] py-[0.2em] lg:w-[4em] lg:h-[2m] lg:px-[1em] lg:py-[0.4em] bg-blue-500 rounded-[20px] overflow-visible z-[1] fill-white"
