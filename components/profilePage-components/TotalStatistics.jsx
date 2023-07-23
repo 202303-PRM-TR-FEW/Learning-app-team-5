@@ -1,7 +1,14 @@
+import Link from "next/link";
+import CourseButton from "../course-general-components/CourseButton";
 const TotalStatistics = () => {
   return (
     <div className="text-lightBlack w-full py-8 ">
+      <div className="flex justify-between">
       <h2 className="font-bold text-xl">Total Statistics</h2>
+      <Link href="/statistics">
+      <CourseButton buttonName={"Statistics"}/>
+      </Link>
+      </div>
       <div className="flex justify-between ">
         <div className=" mt-2 bg-[#FBFBFB] p-2 rounded-[20px] shadow-md">
           <div className=" bg-[#cbe1fa] rounded-[10px]  px-14 py-2">
