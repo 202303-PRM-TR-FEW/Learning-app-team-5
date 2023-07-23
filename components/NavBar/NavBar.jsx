@@ -13,7 +13,7 @@ import {
 
 
 
-function NavBar() {
+function NavBar({locale}) {
   //  user status
   const { user } = UserAuth();
   const t = useTranslations("Navbar");
@@ -36,7 +36,7 @@ function NavBar() {
       text: `${t("Courses")}`,
     },
     {
-      href: "/profile",
+      href: `${user ? `/profile` : `/login`}`,
       icon: PROFILE_ICON,
       text: `${user ? t("Profile") : t("Login")}`,
     },

@@ -28,7 +28,7 @@ export default function Home({ params }) {
 
           <h1 className='text-5xl font-bold text-[#413F42] py-6'>{t('title')}</h1>
           <p className='text-gray-600 max-w-full md:max-w-[70%]'>{t("paragraph")}</p>
-          <Link href="/home">
+          <Link href={`${params.locale}/home`}>
             <div className='py-10'>
               <button
                 className='bg-primaryBlue hover:bg-blue-500 text-white font-bold  py-2 px-8 rounded-xl'>
