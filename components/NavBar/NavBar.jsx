@@ -14,6 +14,8 @@ import {
 
 
 function NavBar({locale}) {
+
+  const EN = locale === 'en'? 'en': ''
   //  user status
   const { user } = UserAuth();
   const t = useTranslations("Navbar");
@@ -21,22 +23,22 @@ function NavBar({locale}) {
   // Define the navigation items as an array of objects
   const navigationItems = [
     {
-      href: `${locale}/home`,
+      href: `${EN}/home`,
       icon: HOME_ICON,
       text: `${t("Home")}`,
     },
     {
-      href: `${locale}/search`,
+      href: `${EN}/search`,
       icon: SEARCH_ICON,
       text: `${t("Search")}`,
     },
     {
-      href: `${locale}/courses`,
+      href: `${EN}/courses`,
       icon: COURSES_ICON,
       text: `${t("Courses")}`,
     },
     {
-      href: `${user ? `${locale}/profile` : `${locale}/login`}`,
+      href: `${user ? `${EN}/profile` : `${EN}/login`}`,
       icon: PROFILE_ICON,
       text: `${user ? t("Profile") : t("Login")}`,
     },
@@ -45,7 +47,7 @@ function NavBar({locale}) {
   return (
     <>
       <div className="absolute top-7 left-6 z-50 py-2">
-        <Link href={`${locale}/`}>
+        <Link href={`${EN}/`}>
           <span>
             <svg
               className="w-[3em] h-[2em] px-[1em] py-[0.2em] lg:w-[4em] lg:h-[2m] lg:px-[1em] lg:py-[0.4em] bg-blue-500 rounded-[20px] overflow-visible z-[1] fill-white"
