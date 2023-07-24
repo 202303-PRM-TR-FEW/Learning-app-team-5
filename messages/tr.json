@@ -1,6 +1,6 @@
 {
   "Welcome": {
-    "title": "Tutkuyu Keşfedin",
+    "title": "Tutkunuzu Keşfedin",
     "paragraph": "Hangi konuların ilginizi çektiğini bulun, yeni bir beceri öğrenin ve benzer konularda tutkulu insanlarla bağlantı kurun.",
     "button": "BAŞLA"
   },
@@ -53,7 +53,7 @@
     "Professional": "Profesyonel"
   },
   "Courses": {
-    "title-1": "Öğrenimim",
+    "title-1": "Öğrenim İçeriğim",
     "title-2": "Kaydedilmiş Dersler",
     "hour": "sa",
     "minute": "dk",
@@ -77,14 +77,14 @@
     "Finished": "TAMAMLANAN DERSLER",
     "Hours": "ÖĞRENİLEN SAAT",
     "Skills": "KAZANILAN BECERİLER",
-    "Committed": "Kararlı Öğrenci",
-    "Collection": "Puan Toplama",
+    "Committed": "Başarı Serüveni",
+    "Collection": "Kazanılan Puanlar",
     "Profile": "PROFİL",
-    "Log": "Çıkış Yap",
+    "Log": "Oturumu kapat",
     "Find": "ARKADAŞLAR BUL",
     "Invite": "ARKADAŞLARI DAVET ET",
     "View": "TÜMÜNÜ GÖRÜNTÜLE",
     "Hide": "Gizle",
-    "Submit":"göndermek"
+    "Submit":"gönder"
   }
 }
