@@ -12,7 +12,13 @@ function SearchPage() {
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const [originalData, setOriginalData] = useState([]);
-  const [levels, setLevels] = useState([]);
+
+  const [levels, setLevels] = useState([
+    { value: "beginner", label: "Beginner", checked: false },
+    { value: "intermediate", label: "Intermediate", checked: false },
+    { value: "advanced", label: "Advanced", checked: false },
+  ]);
+
   const [categories, setCategories] = useState([]);
 
   const coursesRef = collection(db, "course-data");
@@ -50,15 +56,6 @@ function SearchPage() {
     filterData(e.target.value);
   };
 
-  const handleLevelChange = (levelValue) => {
-    const updatedLevels = levels.map((level) =>
-      level.value === levelValue ? { ...level, checked: !level.checked } : level
-    );
-    setLevels(updatedLevels);
-    // Filter the search results based on the selected levels
-    filterData(search);
-  };
-
   const handleCategoryChange = (category) => {
     console.log("Selected category:", category);
     setCategories((prevCategories) =>
@@ -80,6 +77,13 @@ function SearchPage() {
     setSearchResult(filteredResults);
   };
 
+  const handleLevelChange = (levelValue) => {
+    const filteredResults = searchResult.filter(
+      (course) => course.level === levelValue
+    );
+    setSearchResult(filteredResults);
+  };
+
   const filterData = (searchTerm) => {
     // Filter based on the search term
     const courseSearchResults = originalData.filter((course) =>
@@ -89,16 +93,10 @@ function SearchPage() {
     );
 
     // Filter based on selected levels and categories
-    const selectedLevels = levels.filter((level) => level.checked);
+
     const selectedCategories = categories.filter((cat) => cat.checked);
 
     let filteredResults = courseSearchResults;
-
-    if (selectedLevels.length > 0) {
-      filteredResults = filteredResults.filter((course) =>
-        selectedLevels.some((level) => course.level === level.value)
-      );
-    }
 
     if (selectedCategories.length > 0) {
       filteredResults = filteredResults.filter((course) =>
@@ -118,16 +116,20 @@ function SearchPage() {
       <CategoriesFilter
         categories={categories}
         onCategoryChange={handleCategoryChange}
+        searchResult={searchResult}
+        setSearchResult={setSearchResult}
       />
       <LevelFilter
         levels={levels}
         onChange={handleLevelChange}
         searchResult={searchResult}
-        setSearchResult={setSearchResult} />
+        setSearchResult={setSearchResult}
+      />
       <RatingFilter
         onChange={handleRatingChange}
         searchResult={searchResult}
-        setSearchResult={setSearchResult} />
+        setSearchResult={setSearchResult}
+      />
       <div className="text-sm font-semibold text-gray-700 py-2 mb-8 mt-2">
         <h3>RECOMMENDED FOR YOU</h3>
         <SearchResults searchResult={searchResult} />

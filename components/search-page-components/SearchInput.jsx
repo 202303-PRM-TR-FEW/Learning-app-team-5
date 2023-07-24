@@ -6,6 +6,7 @@ function SearchInput({ value, onChange }) {
     e.preventDefault();
     onChange(e.target.value);
   };
+
   return (
     <form className="my-8">
       <input

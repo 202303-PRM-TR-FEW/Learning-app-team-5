@@ -1,30 +1,17 @@
 "use client";
 import React, { useState } from "react";
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 
-const Box = dynamic(() => import("@mui/material/Box"));
-const Rating = dynamic(() => import("@mui/material/Rating"));
+const Box = dynamic(() => import("@mui/icons-material/Box"));
+const Rating = dynamic(() => import("@mui/icons-material/Rating"));
 const StarIcon = dynamic(() => import("@mui/icons-material/Star"));
 
 function RatingFilter({ searchResult, setSearchResult }) {
   const [value, setValue] = useState(2);
   const [hover, setHover] = useState(-1);
 
-  const labels = {
-    0.5: "",
-    1: "",
-    1.5: "",
-    2: "",
-    2.5: "",
-    3: "",
-    3.5: "",
-    4: "",
-    4.5: "",
-    5: "",
-  };
-
   function getLabelText(value) {
-    return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
+    return `${value} Star${value !== 1}`;
   }
 
   const handleRatingChange = (newValue) => {
@@ -67,9 +54,6 @@ function RatingFilter({ searchResult, setSearchResult }) {
                 <StarIcon style={{ color: "#2196f3" }} fontSize="inherit" />
               }
             />
-            {value !== null && (
-              <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
-            )}
           </Box>
         </div>
       </div>
