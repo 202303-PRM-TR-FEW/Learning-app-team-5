@@ -1,9 +1,11 @@
-import React from 'react'
+import LoginSignupCard from "@/components/login/LoginCard.jsx";
 
-const page = () => {
+function Page() {
   return (
-    <div>login</div>
-  )
+    <div>
+      <LoginSignupCard />
+    </div>
+  );
 }
 
-export default page
+export default Page;
