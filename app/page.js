@@ -3,7 +3,7 @@ import Link from "next/link"
 
 export default function Home() {
   return (
-    <main className="h-screen m-auto max-w-[80%] flex justify-center items-center ">
+    <main className="h-screen m-auto max-w-[80%] flex justify-center items-center">
       <div className="flex flex-col justify-center items-center 
        shadow-2xl rounded-[50px] bg-slate-50 
        md:flex-row ">
@@ -31,7 +31,7 @@ export default function Home() {
             </div>
           </Link>
         </div>
-        <div className='bg-white rounded-[50px] shadow-xl max-w-full order-first md:order-last'>
+        <div className='bg-white dark:bg-[#183460] rounded-[50px] shadow-xl max-w-full order-first md:order-last'>
           <img src="https://assets.api.uizard.io/api/cdn/stream/a8ce660d-47da-404a-b3b3-63ca6970ddcf.png" alt="Learn U logo " />
         </div>
       </div>

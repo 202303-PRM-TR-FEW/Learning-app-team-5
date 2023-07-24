@@ -1,3 +1,5 @@
+import ThemeButton from '@/components/Theme/ThemeButton'
+import Providers from './context/Providers'
 import './globals.css'
 import { Inter } from 'next/font/google'
 
@@ -10,10 +12,15 @@ export const metadata = {
 
 export default function RootLayout({ children, params: { locale } }) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} bg-[#f5f5f5]`}>
-        {children}
-        </body>
+    <html lang="en" >
+      <body className={`${inter.className} bg-bodyWhite dark:bg-[#193251]`}>
+        <Providers>
+          <main >
+            <ThemeButton />
+            {children}
+          </main>
+        </Providers>
+      </body>
     </html>
   )
 }
