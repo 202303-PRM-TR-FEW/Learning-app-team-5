@@ -8,7 +8,7 @@ function ThisWeek() {
         <div className="flex flex-col justify-center items-start py-2 font-medium h-full">
             <h2 className="font-semibold text-md">TIME SPENT</h2>
             <p className="text-2xl font-bold">AMOUNT OF COURSE  HOUR STUDIED HERE</p>
-            <TimeSpentBar height={50} />
+            <TimeSpentBar hoursPerDay={50} />
             </div>
       </div>
     </div>
