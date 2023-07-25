@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
 
-const Box = dynamic(() => import("@mui/icons-material/Box"));
-const Rating = dynamic(() => import("@mui/icons-material/Rating"));
+const Box = dynamic(() => import("@mui/material/Box"));
+const Rating = dynamic(() => import("@mui/material/Rating"));
 const StarIcon = dynamic(() => import("@mui/icons-material/Star"));
 
 function RatingFilter({ searchResult, setSearchResult }) {
