@@ -66,7 +66,7 @@ const SuggestionsFriends = () => {
     <section>
       <h2 className="font-bold text-xl py-4">Friend Suggestions</h2>
       <div
-        className={`bg-white rounded-xl shadow-lg ${
+        className={`bg-white dark:bg-indigoDay rounded-xl shadow-lg ${
           showAll ? `overflow-auto h-60` : ``
         }`}
       >
@@ -119,7 +119,11 @@ const FriendSugCard = ({ user, click }) => {
             onClick={() => click(user.id)}
             className="flex justify-center items-center cursor-pointer"
           >
-            <svg viewBox="0 0 24 20" className="w-[24px] h-[24px]">
+            <svg
+              viewBox="0 0 24 20"
+              className="w-[24px] h-[24px] svg-hover"
+              // style={{ fill: "#FE9E23" }}
+            >
               <path d="M0 0h24v24H0z" fill="none"></path>
               <path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
             </svg>

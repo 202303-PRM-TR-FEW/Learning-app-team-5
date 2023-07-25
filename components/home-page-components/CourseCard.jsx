@@ -74,7 +74,7 @@ function Course({
   // };
 
   return (
-    <div className="rounded-xl bg-white p-2 course-item flex-col w-full my-6 relative">
+    <div className="rounded-xl bg-white p-2 course-item flex-col w-full my-6 relative dark:bg-indigoDay ">
       <div>
         <div className="relative ">
           <img
@@ -95,7 +95,7 @@ function Course({
             </label>
           </div>
         </div>
-        <div className="justify-around rounded-full bg-white shadow-xl flex w-[55%] py-1 absolute mt-[-25px]">
+        <div className="justify-around rounded-full bg-white shadow-2xl flex w-[55%] py-1 absolute mt-[-25px] dark:bg-purssianBlue">
           <img
             className="rounded-full h-12 w-12"
             src={authorImage}

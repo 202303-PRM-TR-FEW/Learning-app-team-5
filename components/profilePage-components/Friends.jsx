@@ -38,7 +38,7 @@ const SuggestionsFriends = () => {
     <section>
       <h2 className="font-bold text-xl py-4">Friends </h2>
       <div
-        className={`bg-white rounded-xl shadow-lg ${
+        className={`bg-white dark:bg-indigoDay rounded-xl shadow-lg ${
           showAll ? `overflow-auto h-60` : ``
         }`}
       >

@@ -47,7 +47,7 @@ function NavBar() {
           </span>
         </Link>
       </div>
-      <div className="flex justify-center md:flex-col md:mt-[4em] md:w-20 ">
+      <div className="flex justify-center md:flex-col md:mt-[2em] md:w-20 ">
         <nav className="fixed bottom-2 md:absolute top-auto md:top-2 z-50">
           <ul className="flex justify-evenly mt-20 md:justify-evenly w-[86vw] list-none md:bg-transparent bg-black/80 backdrop-blur-l p-[1em] rounded-[20px] md:flex-col md:items-center md:h-[25em] md:w-[7em] z-50">
             {/* Render the navigation items dynamically */}

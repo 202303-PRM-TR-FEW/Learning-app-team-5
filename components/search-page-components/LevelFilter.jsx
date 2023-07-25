@@ -4,12 +4,12 @@ import CheckIcon from "@mui/icons-material/Check";
 
 function LevelFilter({ levels, onChange }) {
   return (
-    <div>
-      <h3 className="text-sm font-semibold text-gray-700 py-2">LEVEL</h3>
+    <div className="text-gray-700 dark:text-bodyWhite">
+      <h3 className="text-sm font-semibold  py-2">LEVEL</h3>
 
-      <div className="grid grid-flow-col auto-cols-max gap-6">
+      <div className="grid grid-flow-col auto-cols-max gap-6 py-6">
         {levels.map((level) => (
-          <div key={level}>
+          <div key={level} className="flex items-center gap-2">
             <CheckIcon
               className={`w-5 h-5 absolute ${
                 level.checked ? "opacity-100" : "opacity-0"

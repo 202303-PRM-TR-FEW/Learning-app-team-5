@@ -13,7 +13,8 @@ export const metadata = {
 export default function RootLayout({ children, params: { locale } }) {
   return (
     <html lang="en" >
-      <body className={`${inter.className} bg-bodyWhite dark:bg-[#193251]`}>
+      <body className={`${inter.className} bg-bodyWhite 
+      dark:bg-gradient-to-t dark:from-[#0f192c] via-[#1a2544] dark:to-[#1c2e50]`}>
         <Providers>
           <main >
             <ThemeButton />

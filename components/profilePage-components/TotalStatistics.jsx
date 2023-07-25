@@ -1,9 +1,9 @@
 const TotalStatistics = () => {
   return (
-    <div className="text-lightBlack w-full py-8 ">
+    <div className=" w-full py-8 ">
       <h2 className="font-bold text-xl">Total Statistics</h2>
       <div className="flex justify-between ">
-        <div className=" mt-2 bg-[#FBFBFB] p-2 rounded-[20px] shadow-md">
+        <div className=" mt-2 bg-white dark:bg-indigoDay p-2 rounded-[20px] shadow-md">
           <div className=" bg-[#cbe1fa] rounded-[10px]  px-14 py-2">
             <svg
               viewBox="0 0 24 24"
@@ -19,7 +19,7 @@ const TotalStatistics = () => {
             <p className="text-lg">0</p>
           </div>
         </div>
-        <div className=" mt-2 bg-[#FBFBFB] p-2 rounded-[20px] shadow-md">
+        <div className=" mt-2 bg-white dark:bg-indigoDay p-2 rounded-[20px] shadow-md">
           <div className=" bg-lightOrange rounded-[10px]  px-14 py-2">
             <svg
               viewBox="0 0 24 24"
@@ -35,7 +35,7 @@ const TotalStatistics = () => {
             <p className="text-lg">0</p>
           </div>
         </div>
-        <div className=" mt-2 bg-[#FBFBFB] p-2 rounded-[20px] shadow-md">
+        <div className=" mt-2 bg-white dark:bg-indigoDay p-2 rounded-[20px] shadow-md">
           <div className=" bg-lightGreen rounded-[10px]  px-14 py-2">
             <svg
               viewBox="0 0 576 512"

@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const Header = ({ setShowForm }) => {
   return (
-    <div className="flex w-full text-lightBlack gap-2 items-center">
+    <div className="flex w-full  gap-2 items-center">
       <div className="flex justify-center self-center w-1/3">
         <Image
           onClick={() => setShowForm(true)}
@@ -16,11 +16,12 @@ const Header = ({ setShowForm }) => {
       <div className="flex flex-col gap-2 shadow-sm w-full">
         <div className="flex justify-between">
           <h1 className="font-extrabold text-2xl">Sally Robins</h1>
-          <button className="bg-primaryBlue text-white py-2 px-6 rounded-[10px] hover:bg-white hover:text-primaryBlue hover:ring hover:ring-primaryBlue">
+          <button className="bg-primaryBlue text-white py-2 px-6 rounded-[10px] hover:bg-white hover:text-primaryBlue hover:border hover:border-primaryBlue dark:hover:bg-[#1c2e50]">
             Log Out
           </button>
         </div>
-        <div className="flex justify-start items-center text-[#616161]">
+        <div className="flex justify-start items-center text-[#616161] dark:text-bodyWhite">
+          {"  "}
           <svg
             viewBox="0 0 288 512"
             className="w-[16px] h-[16px]"
@@ -30,8 +31,8 @@ const Header = ({ setShowForm }) => {
           </svg>
           <h3 className="font-medium ">NEW YORK</h3>
         </div>
-        <div className="bg-[#FBFBFB] rounded-[20px]  p-2 ">
-          <div className="bg-[#f5f5f5] rounded-[20px] flex justify-between p-4">
+        <div className="bg-white dark:bg-indigoDay rounded-[20px]  p-2 ">
+          <div className="bg-bodyWhite dark:bg-[#1c2e50] rounded-[20px] flex justify-between p-4">
             <div className="flex flex-col ">
               <h3 className="text-center font-bold">0</h3>
               <p className="text-center mx-2 font-bold">MY COURSES</p>

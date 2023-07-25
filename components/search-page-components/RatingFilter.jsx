@@ -30,7 +30,9 @@ function RatingFilter() {
       <hr />
       <div className="grid grid-flow-col text-gray-700 mb-8 mt-2">
         <div>
-          <h3 className="text-sm font-semibold text-gray-700 py-2">RATING</h3>
+          <h3 className="text-sm font-semibold text-gray-700 dark:text-bodyWhite py-2">
+            RATING
+          </h3>
 
           <Box
             sx={{
@@ -51,7 +53,7 @@ function RatingFilter() {
                 setHover(newHover);
               }}
               emptyIcon={
-                <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+                <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" className="dark:text-white"/>
               }
               icon={
                 <StarIcon style={{ color: "#2196f3" }} fontSize="inherit" />
