@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 // import { collection, query, onSnapshot } from "firebase/firestore";
 // import { db } from "@/firebase";
-// import { useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { Spinner } from "@material-tailwind/react";
 import { GetRandomNumbers } from "../../app/context/RandomNumbers";
 import { GetAllCourses } from "../../app/context/FetchAllCourses";
@@ -43,6 +43,7 @@ function FeaturedCourse() {
                 rating={course.rating}
                 saved={course.isSaved}
                 registered={course.registered}
+                t={t}
               />
             );
           })}

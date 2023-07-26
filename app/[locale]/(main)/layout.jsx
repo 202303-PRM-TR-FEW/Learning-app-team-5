@@ -1,13 +1,16 @@
 import NavBar from "@/components/NavBar/NavBar";
 import { AuthContextProvider } from "../../context/AuthContext";
 import { RandomContextProvider } from "../../context/RandomNumbers";
+import { CoursesContextProvider } from "../../context/FetchAllCourses";
 
-export default function Layout({ children,params }) {
+export default function Layout({ children }) {
   return (
     <AuthContextProvider>
       <RandomContextProvider>
-        <NavBar locale={params.locale} />
-        {children}
+        <CoursesContextProvider>
+          <NavBar />
+          {children}
+        </CoursesContextProvider>
       </RandomContextProvider>
     </AuthContextProvider>
   );
