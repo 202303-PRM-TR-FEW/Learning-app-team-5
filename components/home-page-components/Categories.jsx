@@ -63,12 +63,7 @@ function Categories() {
   const [showAllCategories, setShowAllCategories] = useState(false);
   const [windowWidth, setWindowWidth] = useState(0);
 
-//   useEffect(() => {
-//     setWindowWidth(window.innerWidth);
-//     const handleResize = () => setWindowWidth(window.innerWidth);
-//     window.addEventListener("resize", handleResize);
-//     return () => window.removeEventListener("resize", handleResize);
-//   }, []);
+
 
 function debounce(func, timeout = 300) {
   let timer;
