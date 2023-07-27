@@ -1,110 +1,77 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import SearchInput from "./SearchInput";
 import SearchResults from "./SearchResults";
 import CategoriesFilter from "./CategoriesFilter";
 import RatingFilter from "./RatingFilter";
 import LevelFilter from "./LevelFilter";
-import { collection, query, where, getDocs } from "firebase/firestore";
-import { db } from "../../firebase";
+import TopSearches from "./TopSearches";
+import { GetAllCourses } from "../../app/context/FetchAllCourses";
 
 function SearchPage() {
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
-  const [originalData, setOriginalData] = useState([]);
+  const { Allcourses } = GetAllCourses();
 
-  const [levels, setLevels] = useState([
-    { value: "beginner", label: "Beginner", checked: false },
-    { value: "intermediate", label: "Intermediate", checked: false },
-    { value: "advanced", label: "Advanced", checked: false },
-  ]);
-
-  const [categories, setCategories] = useState([]);
-
-  const coursesRef = collection(db, "course-data");
-
-  // Fetch all courses from Firebase and store them in the "originalData" state
-  const fetchCourses = async () => {
-    try {
-      const querySnapshot = await getDocs(coursesRef);
-      const courses = querySnapshot.docs.map((doc) => doc.data());
-      setOriginalData(courses);
-    } catch (error) {
-      console.error("Error fetching courses:", error);
-    }
-  };
-
-  // Fetch courses based on the category
-  const fetchCoursesByCategory = async (category) => {
-    try {
-      const q = query(coursesRef, where("category", "==", category));
-      const querySnapshot = await getDocs(q);
-      const courses = querySnapshot.docs.map((doc) => doc.data());
-      setSearchResult(courses);
-    } catch (error) {
-      console.error("Error fetching courses:", error);
-    }
-  };
-
-  useEffect(() => {
-    // Fetch all courses when the component mounts
-    fetchCourses();
-  }, []);
-
-  const handleChange = (e) => {
-    setSearch(e.target.value);
-    filterData(e.target.value);
-  };
-
-  const handleCategoryChange = (category) => {
-    console.log("Selected category:", category);
-    setCategories((prevCategories) =>
-      prevCategories.map((cat) =>
-        cat.value === category
-          ? { ...cat, checked: !cat.checked }
-          : { ...cat, checked: false }
-      )
-    );
-    // Fetch courses based on the selected category
-    fetchCoursesByCategory(category);
-  };
-
-  const handleRatingChange = (newValue) => {
-    // Filter the search results based on the selected rating value
-    const filteredResults = originalData.filter(
-      (course) => course.rating >= newValue
-    );
-    setSearchResult(filteredResults);
-  };
-
-  const handleLevelChange = (levelValue) => {
-    const filteredResults = searchResult.filter(
-      (course) => course.level === levelValue
-    );
-    setSearchResult(filteredResults);
-  };
+  const [recentSearches, setRecentSearches] = useState([]);
 
   const filterData = (searchTerm) => {
-    // Filter based on the search term
-    const courseSearchResults = originalData.filter((course) =>
+    console.log("Original data:", Allcourses);
+    const courseSearchResults = Allcourses.filter((course) =>
       Object.values(course).some((value) =>
         value.toString().toLowerCase().includes(searchTerm.toLowerCase())
       )
     );
+    console.log("Filtered results:", courseSearchResults);
+    setSearchResult(courseSearchResults);
+    setRecentSearches([searchTerm, ...recentSearches.slice(0, 4)]);
+  };
 
-    // Filter based on selected levels and categories
+  const handleSearchChange = (searchTerm) => {
+    setSearch(searchTerm);
+  };
 
-    const selectedCategories = categories.filter((cat) => cat.checked);
+  const handleSearchSubmit = (searchTerm) => {
+    setSearch(searchTerm);
+    filterData(searchTerm);
+  };
 
-    let filteredResults = courseSearchResults;
-
-    if (selectedCategories.length > 0) {
-      filteredResults = filteredResults.filter((course) =>
-        selectedCategories.some((cat) => course.category === cat.value)
+  const handleCategoryChange = (categoryValue, isChecked) => {
+    // Filter the search result based on the selected category
+    if (isChecked) {
+      const filteredResults = searchResult.filter(
+        (course) => course.category === categoryValue
       );
+      setSearchResult(filteredResults);
+    } else {
+      const filteredResults = searchResult.filter(
+        (course) => course.category !== categoryValue
+      );
+      setSearchResult(filteredResults);
     }
+  };
 
-    setSearchResult(filteredResults); // Update the search result state
+  const handleLevelChange = (levelValue, isChecked) => {
+    // Filter the search result based on the selected category
+    if (isChecked) {
+      const filteredResults = searchResult.filter(
+        (course) => course.level === levelValue
+      );
+      setSearchResult(filteredResults);
+    } else {
+      const filteredResults = searchResult.filter(
+        (course) => course.level !== levelValue
+      );
+      setSearchResult(filteredResults);
+    }
+  };
+
+  const handleRatingChange = (newValue) => {
+    // Filter the search results based on the selected rating value
+    const filteredResults = Allcourses.filter(
+      (course) => course.rating >= newValue
+    );
+    setSearchResult(filteredResults);
   };
 
   return (
@@ -112,26 +79,21 @@ function SearchPage() {
       <h2 className="text-xl text-gray-900 font-semibold">
         Find your favourites
       </h2>
-      <SearchInput value={search} onChange={handleChange} />
-      <CategoriesFilter
-        categories={categories}
-        onCategoryChange={handleCategoryChange}
-        searchResult={searchResult}
-        setSearchResult={setSearchResult}
+      <SearchInput
+        value={search}
+        onChange={handleSearchChange}
+        onSubmit={handleSearchSubmit}
       />
-      <LevelFilter
-        levels={levels}
-        onChange={handleLevelChange}
-        searchResult={searchResult}
-        setSearchResult={setSearchResult}
-      />
+      <TopSearches recentSearches={recentSearches} onSearchClick={handleSearchSubmit} />
+      <CategoriesFilter handleCategoryChange={handleCategoryChange} />
+      <LevelFilter handleLevelChange={handleLevelChange} />
       <RatingFilter
         onChange={handleRatingChange}
         searchResult={searchResult}
         setSearchResult={setSearchResult}
       />
       <div className="text-sm font-semibold text-gray-700 py-2 mb-8 mt-2">
-        <h3>RECOMMENDED FOR YOU</h3>
+        <h3>Search Results</h3>
         <SearchResults searchResult={searchResult} />
       </div>
     </>

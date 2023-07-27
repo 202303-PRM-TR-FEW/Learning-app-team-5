@@ -1,33 +1,45 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
+import { GetAllCourses } from "../../app/context/FetchAllCourses";
 
 const CheckIcon = dynamic(() => import("@mui/icons-material/Check"));
 
-function LevelFilter({ searchResult, setSearchResult }) {
-  const [levels, setLevels] = useState([
-    { value: "beginner", label: "Beginner", checked: false },
-    { value: "intermediate", label: "Intermediate", checked: false },
-    { value: "advanced", label: "Advanced", checked: false },
-  ]);
+function LevelFilter({ handleLevelChange }) {
+  const { Allcourses } = GetAllCourses();
 
-  const handleLevelChange = (levelValue) => {
-    const updatedLevels = levels.map((level) =>
-      level.value === levelValue ? { ...level, checked: !level.checked } : level
-    );
-    setLevels(updatedLevels);
+  const [levels, setLevels] = useState([]);
 
-    const selectedLevels = updatedLevels.filter((level) => level.checked);
-
-    let filteredResults = searchResult;
-
-    if (selectedLevels.length > 0) {
-      filteredResults = searchResult.filter((course) =>
-        selectedLevels.some((level) => course.level === level.value)
+  useEffect(() => {
+    if (Allcourses && Allcourses.length > 0) {
+      const allLevels = Array.from(
+        new Set(Allcourses.map((course) => capitalizeFirstLetter(course.level)))
+      );
+      setLevels(
+        allLevels.map((level) => ({
+          value: level,
+          label: level,
+          checked: false,
+        }))
       );
     }
+  }, [Allcourses]);
 
-    setSearchResult(filteredResults);
+  // Function to capitalize the first letter of a string
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+  // Function to handle category change
+  const handleChange = (event) => {
+    const { value, checked } = event.target;
+
+    setLevels((prevLevels) =>
+      prevLevels.map((level) =>
+        level.value === value ? { ...level, checked } : level
+      )
+    );
+
+    handleLevelChange(value, checked);
   };
 
   return (
@@ -44,7 +56,7 @@ function LevelFilter({ searchResult, setSearchResult }) {
               type="checkbox"
               value={level.value}
               className="w-6 h-6 appearance-none border-2 rounded-lg border-gray-300 relative"
-              onChange={() => handleLevelChange(level.value)}
+              onChange={handleChange}
               checked={level.checked}
             />
             <label className="px-2.5 text-xl" htmlFor={level.value}>
