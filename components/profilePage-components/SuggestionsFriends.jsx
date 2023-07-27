@@ -37,7 +37,7 @@ const users = [
   },
 ];
 
-const SuggestionsFriends = () => {
+const SuggestionsFriends = ({t}) => {
   const { getRandomNumbers } = GetRandomNumbers();
 
   const [newUsers, setNewUsers] = useState([]);
@@ -64,7 +64,7 @@ const SuggestionsFriends = () => {
 
   return (
     <section>
-      <h2 className="font-bold text-xl py-4">Friend Suggestions</h2>
+      <h2 className="font-bold text-xl py-4">{t("title-3")}</h2>
       <div
         className={`bg-white dark:bg-indigoDay rounded-xl shadow-lg ${
           showAll ? `overflow-auto h-60` : ``
@@ -92,7 +92,7 @@ const SuggestionsFriends = () => {
           onClick={() => setShowAll((pre) => !pre)}
           className="py-4 px-6 font-bold text-primaryBlue cursor-pointer"
         >
-          {showAll ? "Hide" : "VIEW ALL"}
+          {showAll ? t("Hide") : t("View")}
         </p>
       </div>
     </section>

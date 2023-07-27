@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 import Achievemntes from "./Achievemntes";
 import Header from "./Header";
@@ -8,6 +9,7 @@ import TotalStatistics from "@/components/profilePage-components/TotalStatistics
 const InfoComp = () => {
   const [showForm, setShowForm] = useState(false);
   const [image, setImage] = useState("");
+  const t = useTranslations("Profile");
 
   const handleSubmitImage = (e) => {
     e.preventDefault();
@@ -46,12 +48,12 @@ const InfoComp = () => {
              shadow-lg shadow-blue-600/50
              "
           >
-            submit
+           {t("Submit")}
           </button>
         </form>
       )}
-      <TotalStatistics />
-      <Achievemntes />
+      <TotalStatistics t={t} />
+      <Achievemntes t={t}/>
     </div>
   );
 };

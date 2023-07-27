@@ -1,0 +1,90 @@
+{
+  "Welcome": {
+    "title": "Tutkunuzu Keşfedin",
+    "paragraph": "Hangi konuların ilginizi çektiğini bulun, yeni bir beceri öğrenin ve benzer konularda tutkulu insanlarla bağlantı kurun.",
+    "button": "BAŞLA"
+  },
+  "Navbar": {
+    "Home": "Ana Sayfa",
+    "Search": "Arama",
+    "Courses": "Dersler",
+    "Profile": "Profil",
+    "Login": "Giriş"
+  },
+  "login": {
+    "login": "Giriş Yap",
+    "Signup": "Kayıt Ol",
+    "Email": "E-posta",
+    "Password": "şifre",
+    "Uesrname": "Kullanıcı Adı",
+    "Placeholder-1": "xyz@learnU.com",
+    "Placeholder-2": "E-postanızı girin",
+    "Message-1": "Kayıt başarılı! Lütfen kimlik bilgilerinizle giriş yapın.",
+    "Message-2": "Hesabınız yok mu?",
+    "Message-3": "Zaten bir hesabınız var mı?",
+    "Message-4": "Lütfen geçerli bir e-posta adresi girin"
+  },
+  "Home": {
+    "title-1": "Öne Çıkan Dersler",
+    "title-2": "Kategoriler",
+    "button": "Al",
+    "hour": "sa",
+    "minute": "dk",
+    "more": "Daha Fazla Göster",
+    "less": "Daha Az Göster",
+    "Sales": "Satış",
+    "HR": "İnsan Kaynakları",
+    "Drawing": "Çizim",
+    "Big Data": "Büyük Veri",
+    "Design": "Tasarım",
+    "Marketing": "Pazarlama",
+    "Astronomy": "Astronomi",
+    "Web Development": "Web Geliştirme"
+  },
+  "Search": {
+    "title": "Favorilerinizi Bulun",
+    "button": "Ara",
+    "title-2": "KATEGORİLER",
+    "title-3": "SEVİYE",
+    "title-4": "DEĞERLENDİRME",
+    "title-5": "SONUÇLAR",
+    "Beginner": "Başlangıç Seviyesi",
+    "Intermediate": "Orta Seviye",
+    "Professional": "Profesyonel"
+  },
+  "Courses": {
+    "title-1": "Öğrenim İçeriğim",
+    "title-2": "Kaydedilmiş Dersler",
+    "hour": "sa",
+    "minute": "dk",
+    "Descripttion": "Ders Açıklaması",
+    "Button-1": "İncele",
+    "Button-2": "Önizleme",
+    "Button-3": "Devam Et",
+    "Button-4": "Kaydol",
+    "Message-1": "Merhaba!",
+    "Message-2": "Lütfen görüntülemek için bir ders seçin"
+  },
+
+  "Profile": {
+    "title": "Toplam İstatistik",
+    "title-2": "Başarılar",
+    "title-3": "Arkadaş Önerileri",
+    "title-4": "Arkadaşlar",
+    "Courses": "DERSLERİM",
+    "Followers": "TAKİPÇİLER",
+    "Following": "TAKİP EDİLENLER",
+    "Finished": "TAMAMLANAN DERSLER",
+    "Hours": "ÖĞRENİLEN SAAT",
+    "Skills": "KAZANILAN BECERİLER",
+    "Committed": "Başarı Serüveni",
+    "Collection": "Kazanılan Puanlar",
+    "Profile": "PROFİL",
+    "Log": "Oturumu kapat",
+    "Find": "ARKADAŞLAR BUL",
+    "Invite": "ARKADAŞLARI DAVET ET",
+    "View": "TÜMÜNÜ GÖRÜNTÜLE",
+    "Hide": "Gizle",
+    "Submit":"gönder"
+  }
+}

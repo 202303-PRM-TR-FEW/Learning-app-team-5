@@ -1,26 +1,32 @@
 "use client";
 import React, { useState } from "react";
-import AccessTimeFilledOutlinedIcon from "@mui/icons-material/AccessTimeFilledOutlined";
-import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
+import dynamic from "next/dynamic";
 import { UserAuth } from "../../app/context/AuthContext";
 import { doc, arrayUnion, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase";
 import "./Bookmark.css";
 // import { useTranslations } from "next-intl";
 
+const AccessTimeFilledOutlinedIcon = dynamic(() =>
+  import("@mui/icons-material/AccessTimeFilledOutlined")
+);
+
+const StarBorderOutlinedIcon = dynamic(() =>
+  import("@mui/icons-material/StarBorderOutlined")
+);
+
 function Course({
-  id,
   title,
   authorName,
   authorImage,
   courseImage,
   rating,
   duration,
-  saved,
-  registered,
+  t,
 }) {
   const hours = Math.floor(duration / 60);
   const minutes = duration % 60;
+
   const [isSaved, setIsSaved] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
   //  return the state of user is sign in or not
@@ -109,18 +115,20 @@ function Course({
           className="flex flex-row justify-between items-center py-2 "
           style={{ color: "#b1b1b1" }}
         >
-          <span>
-            <AccessTimeFilledOutlinedIcon />{" "}
-            {`${hours != 0 ? `${hours} h` : ""}  ${minutes} m`}
+          <span className="flex items-center">
+            <AccessTimeFilledOutlinedIcon />
+            {`${hours != 0 ? `${hours} ${t("hour")}` : ""}  ${minutes} ${t(
+              "minute"
+            )}`}
           </span>
-          <span className="">
+          <span className="flex items-center">
             <StarBorderOutlinedIcon /> {rating} /5
           </span>
           <span
             // onClick={handleGetCourse}
             className="cursor-pointer bg-primaryBlue  px-4 py-2 text-white rounded-full mx-[2px]"
           >
-            Get
+            {t("button")}
           </span>
         </div>
         <span></span>

@@ -1,7 +1,7 @@
-const TotalStatistics = () => {
+const TotalStatistics = ({t}) => {
   return (
     <div className=" w-full py-8 ">
-      <h2 className="font-bold text-xl">Total Statistics</h2>
+      <h2 className="font-bold text-xl">{t("title")}</h2>
       <div className="flex justify-between ">
         <div className=" mt-2 bg-white dark:bg-indigoDay p-2 rounded-[20px] shadow-md">
           <div className=" bg-[#cbe1fa] rounded-[10px]  px-14 py-2">
@@ -15,7 +15,7 @@ const TotalStatistics = () => {
             </svg>
           </div>
           <div className="flex flex-col justify-center items-center py-2 font-medium">
-            <p>FINISHED COURSES</p>
+            <p>{t("Finished")}</p>
             <p className="text-lg">0</p>
           </div>
         </div>
@@ -31,7 +31,7 @@ const TotalStatistics = () => {
             </svg>
           </div>
           <div className="flex flex-col justify-center items-center py-2 font-medium">
-            <p>HOURS LEAREND</p>
+            <p>{t("Hours")}</p>
             <p className="text-lg">0</p>
           </div>
         </div>
@@ -47,7 +47,7 @@ const TotalStatistics = () => {
             </svg>
           </div>
           <div className="flex flex-col justify-center items-center py-2 font-medium">
-            <p>SKILES ACHIEVED</p>
+            <p>{t("Skills")}</p>
             <p className="text-lg">0</p>
           </div>
         </div>
