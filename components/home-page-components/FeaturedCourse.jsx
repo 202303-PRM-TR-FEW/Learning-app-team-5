@@ -2,14 +2,14 @@
 import { useEffect, useState } from "react";
 // import { collection, query, onSnapshot } from "firebase/firestore";
 // import { db } from "@/firebase";
-// import { useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { Spinner } from "@material-tailwind/react";
 import { GetRandomNumbers } from "../../app/context/RandomNumbers";
 import { GetAllCourses } from "../../app/context/FetchAllCourses";
 import Course from "./CourseCard";
 
 function FeaturedCourse() {
-  // const t = useTranslations("Home");
+  const t = useTranslations("Home");
   const { getRandomNumbers } = GetRandomNumbers();
   const { Allcourses, isLoading } = GetAllCourses();
   const [courses, setCourses] = useState([]);
@@ -23,7 +23,7 @@ function FeaturedCourse() {
   return (
     <div>
       <div>
-        <h1 className="text-3xl font-bold pb-2">Featured Courses </h1>
+        <h1 className="text-3xl font-bold pb-2">{t("title-1")}</h1>
       </div>
       {isLoading ? (
         <div className="flex justify-center items-center">
@@ -43,6 +43,7 @@ function FeaturedCourse() {
                 rating={course.rating}
                 saved={course.isSaved}
                 registered={course.registered}
+                t={t}
               />
             );
           })}

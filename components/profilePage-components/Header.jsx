@@ -1,6 +1,10 @@
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 const Header = ({ setShowForm }) => {
+
+  const t = useTranslations("Profile");
+
   return (
     <div className="flex w-full text-lightBlack gap-2 items-center">
       <div className="flex justify-center self-center w-1/3">
@@ -16,8 +20,8 @@ const Header = ({ setShowForm }) => {
       <div className="flex flex-col gap-2 shadow-sm w-full">
         <div className="flex justify-between">
           <h1 className="font-extrabold text-2xl">Sally Robins</h1>
-          <button className="bg-primaryBlue text-white py-2 px-6 rounded-[10px] hover:bg-white hover:text-primaryBlue hover:ring hover:ring-primaryBlue">
-            Log Out
+          <button className="bg-primaryBlue text-white py-2 px-6 rounded-[10px] hover:bg-white hover:text-primaryBlue hover:border hover:border-primaryBlue">
+            {t("Log")}
           </button>
         </div>
         <div className="flex justify-start items-center text-[#616161]">
@@ -34,15 +38,15 @@ const Header = ({ setShowForm }) => {
           <div className="bg-[#f5f5f5] rounded-[20px] flex justify-between p-4">
             <div className="flex flex-col ">
               <h3 className="text-center font-bold">0</h3>
-              <p className="text-center mx-2 font-bold">MY COURSES</p>
+              <p className="text-center mx-2 font-bold">{t("Courses")}</p>
             </div>
             <div className="flex flex-col ">
               <h3 className="text-center font-bold">0</h3>
-              <p className="text-center mx-2 font-bold">FOLLOWERS</p>
+              <p className="text-center mx-2 font-bold">{t("Followers")}</p>
             </div>
             <div className="flex flex-col ">
               <h3 className="text-center font-bold">0</h3>
-              <p className="text-center mx-2 font-bold">FOLLOWING</p>
+              <p className="text-center mx-2 font-bold">{t("Following")}</p>
             </div>
           </div>
         </div>

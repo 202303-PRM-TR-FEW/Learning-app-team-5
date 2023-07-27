@@ -1,13 +1,19 @@
-
+'use client';
 import Link from "next/link"
+import{useTranslations} from "next-intl"
 
-export default function Home() {
+
+import SelectLanguage from '@/components/SelectLanguage-component/SelectLanguage';
+
+export default function Home({ params }) {
+  const t = useTranslations("Welcome")
   return (
     <main className="h-screen m-auto max-w-[80%] flex justify-center items-center ">
       <div className="flex flex-col justify-center items-center 
        shadow-2xl rounded-[50px] bg-slate-50 
        md:flex-row ">
         <div className=' flex flex-col items-start mx-auto  container px-4 md:pl-36 '>
+          <SelectLanguage lang = {params.locale}/>
           <div className=' flex flex-row py-4 mt-4 items-center md:py-10 '>
 
             <svg
@@ -20,13 +26,13 @@ export default function Home() {
             <p className='text-primaryBlue py-3 px-4 font-bold'>LearnU</p>
           </div>
 
-          <h1 className='text-5xl font-bold text-[#413F42] py-6'>Discover passion</h1>
-          <p className='text-gray-600 max-w-full md:max-w-[70%]'>Find out what topics you find interesting, learn a new skill & connect with people that are passionate about similar topics.</p>
-          <Link href="/home">
+          <h1 className='text-5xl font-bold text-[#413F42] py-6'>{t('title')}</h1>
+          <p className='text-gray-600 max-w-full md:max-w-[70%]'>{t("paragraph")}</p>
+          <Link href={`${params.locale}/home`}>
             <div className='py-10'>
               <button
                 className='bg-primaryBlue hover:bg-blue-500 text-white font-bold  py-2 px-8 rounded-xl'>
-                GET STARTED
+                {t('button')}
               </button>
             </div>
           </Link>

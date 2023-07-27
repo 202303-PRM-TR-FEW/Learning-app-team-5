@@ -1,26 +1,38 @@
 "use client";
-import React, { useState } from 'react';
-import { UserAuth } from 'app/context/AuthContext.js';
-import { IconButton, InputAdornment, TextField, Typography } from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { useRouter } from 'next/navigation';
+import React, { useState } from "react";
+import dynamic from "next/dynamic";
+import { UserAuth } from "app/context/AuthContext.js";
+import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+
+const IconButton = dynamic(() => import("@mui/material/IconButton"));
+const InputAdornment = dynamic(() => import("@mui/material/InputAdornment"));
+const TextField = dynamic(() => import("@mui/material/TextField"));
+const Typography = dynamic(() => import("@mui/material/Typography"));
+const Visibility = dynamic(() => import("@mui/icons-material/Visibility"));
+const VisibilityOff = dynamic(() =>
+  import("@mui/icons-material/VisibilityOff")
+);
+// import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const LoginPage = () => {
+  const t = useTranslations("login");
+
   const { signIn, signUp } = UserAuth();
   const router = useRouter(); // Get the router object using useRouter hook
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const [isRegistered, setIsRegistered] = useState(true);
-  const [emailError, setEmailError] = useState('');
+  const [emailError, setEmailError] = useState("");
   const [signupSuccess, setSignupSuccess] = useState(false); // New state for signup success
   const [showPassword, setShowPassword] = useState(false);
 
   const handleEmailChange = (e) => {
     const { value } = e.target;
     setEmail(value);
-    setEmailError(validateEmail(value) ? '' : 'Please enter a valid email address');
+    setEmailError(validateEmail(value) ? "" : t("Message-4"));
   };
 
   const handlePasswordChange = (e) => {
@@ -37,16 +49,16 @@ const LoginPage = () => {
       try {
         await signIn(email, password);
         // Redirect to home page after successful login
-        router.push('/main/home');
+        router.push("/home");
       } catch (error) {
-        console.error('Error signing in:', error);
+        console.error("Error signing in:", error);
       }
     } else {
       try {
         await signUp(email, password);
         setSignupSuccess(true);
       } catch (error) {
-        console.error('Error signing up:', error);
+        console.error("Error signing up:", error);
       }
     }
   };
@@ -69,17 +81,22 @@ const LoginPage = () => {
     <div className="min-h-screen flex items-center justify-center bg-primary-gray">
       <div className="max-w-md w-full p-6 bg-primary-white rounded-md shadow-md">
         <Typography variant="h4" align="center" gutterBottom>
-          {isRegistered ? 'Login' : 'Sign Up'}
+          {isRegistered ? "Login" : "Sign Up"}
         </Typography>
         {signupSuccess && (
-          <Typography variant="body1" color="success" align="center" gutterBottom>
-            Signup is successful! Please login with your credentials.
+          <Typography
+            variant="body1"
+            color="success"
+            align="center"
+            gutterBottom
+          >
+            {t("Message-1")}
           </Typography>
         )}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="email" className="block mb-2 font-semibold">
-              Email:
+              {t("Email")}:
             </label>
             <TextField
               type="email"
@@ -90,13 +107,13 @@ const LoginPage = () => {
               helperText={emailError}
               className="w-full"
               required
-              placeholder={isRegistered ? 'xyz@learnU.com' : 'Enter your email'}
+              placeholder={isRegistered ? "xyz@learnU.com" : t("Placeholder-2")}
             />
           </div>
           {!isRegistered && (
             <div className="mb-4">
               <label htmlFor="username" className="block mb-2 font-semibold">
-                Username:
+                {t("Uesrname")}:
               </label>
               <TextField
                 type="text"
@@ -111,10 +128,10 @@ const LoginPage = () => {
           )}
           <div className="mb-4">
             <label htmlFor="password" className="block mb-2 font-semibold">
-              Password:
+              {t("Password")}:
             </label>
             <TextField
-              type={showPassword ? 'text' : 'password'}
+              type={showPassword ? "text" : "password"}
               id="password"
               value={password}
               onChange={handlePasswordChange}
@@ -136,16 +153,16 @@ const LoginPage = () => {
             type="submit"
             className="w-full py-2 px-4 bg-primary-blue hover:bg-blue-600 text-white font-semibold rounded-md focus:outline-none"
           >
-            {isRegistered ? 'Login' : 'Sign up'}
+            {isRegistered ? t("login") : t("Signup")}
           </button>
           <p className="mt-2 text-center">
-            {isRegistered ? "Don't have an account?" : 'Already have an account?'}{' '}
+            {isRegistered ? t("Message-2") : t("Message-3")}{" "}
             <button
               type="button"
               className="text-blue-500 font-semibold"
               onClick={handleToggleForm}
             >
-              {isRegistered ? 'Sign up' : 'Login'}
+              {isRegistered ? t("login") : t("Signup")}
             </button>
           </p>
         </form>

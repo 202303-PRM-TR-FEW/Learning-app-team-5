@@ -31,7 +31,7 @@ export const AuthContextProvider = ({ children }) => {
       })
       .then(() => {
         // Redirect to home page after successful signup
-        router.push('/main/home');
+        router.push('/home');
       })
       .catch((error) => {
         console.error('Error signing up:', error);
@@ -51,7 +51,7 @@ export const AuthContextProvider = ({ children }) => {
       })
       .then(() => {
         // Redirect to home page after successful login
-        router.push('/main/home');
+        router.push('/home');
       })
       .catch((error) => {
         console.error('Error signing in:', error);
@@ -62,7 +62,7 @@ export const AuthContextProvider = ({ children }) => {
     signOut(auth)
       .then(() => {
         // Redirect to login page after logout
-        router.push('/main/home');
+        router.push('/home');
       })
       .catch((error) => {
         console.error('Error logging out:', error);
@@ -73,7 +73,7 @@ export const AuthContextProvider = ({ children }) => {
       setUser(currentUser);
       if (currentUser) {
         // Redirect logged-in user to home page
-        router.push('/main/home');
+        router.push('/home');
       }
     });
 
