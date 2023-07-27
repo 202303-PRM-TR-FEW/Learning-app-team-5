@@ -36,9 +36,9 @@ const SuggestionsFriends = ({ t }) => {
 
   return (
     <section>
-      <h2 className="font-bold text-xl py-4">{t("tilte-4")}</h2>
+      <h2 className="font-bold text-xl py-4">{t("title-4")}</h2>
       <div
-        className={`bg-white rounded-xl shadow-lg ${
+        className={`bg-white dark:bg-indigoDay rounded-xl shadow-lg ${
           showAll ? `overflow-auto h-60` : ``
         }`}
       >

@@ -16,13 +16,13 @@ function CategoriesFilter({ categories, onCategoryChange }) {
   };
 
   return (
-    <>
+    <div className=" text-gray-700 dark:text-bodyWhite">
       <hr />
-      <h3 className="text-sm font-semibold text-gray-700 py-2">CATEGORIES</h3>
+      <h3 className="text-sm font-semibold py-2">CATEGORIES</h3>
 
-      <div className="grid grid-flow-col auto-cols-max gap-4 text-gray-700 mb-8 mt-2">
+      <div className="grid grid-flow-col auto-cols-max gap-4  mb-8 mt-2">
         {categories.map((category) => (
-          <div key={category}>
+          <div key={category} className="flex items-center gap-2">
             <CheckIcon
               className={`w-5 h-5 absolute ${
                 selectedCategories[category] ? "opacity-100" : "opacity-0"
@@ -40,7 +40,7 @@ function CategoriesFilter({ categories, onCategoryChange }) {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 }
 

@@ -67,13 +67,13 @@ function CourseList({
 
   return (
     <div className="flex flex-col overflow-y-auto m-4">
-      <div className="flex justify-between items-center m-4 p-4 bg-[#56a0fe] opacity-80 rounded lg:sticky top-0 z-50">
-        <h1 className="text-white md:text-2xl text-xl font-semibold">
+      <div className="flex justify-between items-center m-4 p-4 bg-primaryBlue opacity-80 rounded lg:sticky top-0 z-50">
+        <h1 className="text-white dark:text-white md:text-2xl text-xl font-semibold">
           {pageTitle}
         </h1>
         <Link
           href={navigationPath || "./home"}
-          className="text-[#efefef] md:text-base text-sm"
+          className="text-[#efefef] dark:text-white md:text-base text-sm"
         >
           {navigationName || "Navigate to"}
           <NavigateNextOutlinedIcon className="text-white" />

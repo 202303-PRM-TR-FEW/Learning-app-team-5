@@ -1,3 +1,5 @@
+import ThemeButton from '@/components/Theme/ThemeButton';
+import Providers from '../context/Providers';
 import { NextIntlClientProvider } from 'next-intl';
 import './globals.css'
 import { Inter } from 'next/font/google'
@@ -26,10 +28,14 @@ export default async function RootLayout({ children, params: { locale } }) {
 
   return (
     <html lang={locale}>
-      <body className={`${inter.className} bg-[#f5f5f5]`}>
+      <body className={`${inter.className} bg-bodyWhite dark:bg-gradient-to-t dark:from-[#0f192c] via-[#1a2544] dark:to-[#1c2e50]`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-
-          {children}
+          <Providers>
+            <main>
+              <ThemeButton />
+              {children}
+            </main>
+          </Providers>
         </NextIntlClientProvider>
       </body>
     </html>

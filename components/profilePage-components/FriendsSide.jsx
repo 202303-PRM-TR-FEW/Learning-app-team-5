@@ -11,7 +11,7 @@ const FriendsComp = ({ lang }) => {
   const t = useTranslations("Profile");
 
   return (
-    <div className="flex flex-col text-lightBlack w-full lg:w-1/2 ">
+    <div className="flex flex-col  w-full lg:w-1/2 ">
       {/* Each section has its own componentes which they are inside profilePage component folder */}
       <SuggestionsFriends t={t} />
       <Friends t={t} />

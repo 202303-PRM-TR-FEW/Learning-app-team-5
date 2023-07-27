@@ -78,8 +78,8 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-primary-gray">
-      <div className="max-w-md w-full p-6 bg-primary-white rounded-md shadow-md">
+    <div className="min-h-screen flex items-center justify-center ">
+      <div className="max-w-md w-full p-6 bg-white dark:bg-indigoDay rounded-md shadow-md">
         <Typography variant="h4" align="center" gutterBottom>
           {isRegistered ? "Login" : "Sign Up"}
         </Typography>
@@ -105,7 +105,7 @@ const LoginPage = () => {
               onChange={handleEmailChange}
               error={!!emailError}
               helperText={emailError}
-              className="w-full"
+              className="w-full dark:bg-bodyWhite rounded-xl"
               required
               placeholder={isRegistered ? "xyz@learnU.com" : t("Placeholder-2")}
             />
@@ -120,7 +120,7 @@ const LoginPage = () => {
                 id="username"
                 value={username}
                 onChange={handleUsernameChange}
-                className="w-full"
+                className="w-full dark:bg-bodyWhite rounded-xl"
                 required
                 placeholder="learnU"
               />
@@ -135,7 +135,7 @@ const LoginPage = () => {
               id="password"
               value={password}
               onChange={handlePasswordChange}
-              className="w-full"
+              className="w-full dark:bg-bodyWhite rounded-xl"
               required
               placeholder="********"
               InputProps={{

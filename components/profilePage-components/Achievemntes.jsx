@@ -2,10 +2,10 @@ import React from "react";
 
 const Achievemntes = ({t}) => {
   return (
-    <div className="w-full text-lightBlack lg:mt-6">
-      <h2 className="font-bold text-xl py-4">{t("title-2")}</h2>
+    <div className="w-full text-lightBlack dark:text-bodyWhite lg:mt-6">
+      <h2 className="font-bold text-xl py-4 ">{t("title-2")}</h2>
       <section className="flex flex-col">
-        <div className="m-2 p-2 bg-[#fbfbfb] rounded-2xl shadow-md flex">
+        <div className="m-2 p-2 bg-white dark:bg-indigoDay rounded-2xl shadow-md flex">
           <div className="flex justify-center items-center">
             <div className="bg-lightOrange p-8 rounded-[20px]">
               <svg
@@ -42,7 +42,7 @@ const Achievemntes = ({t}) => {
           </div>
         </div>
 
-        <div className="m-2 p-2 bg-[#fbfbfb] rounded-2xl shadow-md flex">
+        <div className="m-2 p-2 bg-white dark:bg-indigoDay rounded-2xl shadow-md flex">
           <div className="flex justify-center items-center">
             <div className="bg-lightGreen p-8 rounded-[20px]">
               <svg

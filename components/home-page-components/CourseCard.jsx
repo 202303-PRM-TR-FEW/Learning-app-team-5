@@ -4,8 +4,8 @@ import dynamic from "next/dynamic";
 import { UserAuth } from "../../app/context/AuthContext";
 import { doc, arrayUnion, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase";
+import { Spinner } from "@material-tailwind/react";
 import "./Bookmark.css";
-// import { useTranslations } from "next-intl";
 
 const AccessTimeFilledOutlinedIcon = dynamic(() =>
   import("@mui/icons-material/AccessTimeFilledOutlined")
@@ -27,7 +27,7 @@ function Course({
   const hours = Math.floor(duration / 60);
   const minutes = duration % 60;
 
-  const [isSaved, setIsSaved] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isBookmarked, setIsBookmarked] = useState(false);
   //  return the state of user is sign in or not
   const { user } = UserAuth();
@@ -36,6 +36,10 @@ function Course({
 
   const handleBookmarkToggle = () => {
     setIsBookmarked(!isBookmarked);
+  };
+
+  const handleOnLoad = () => {
+    setIsLoading(false);
   };
 
   //set the saved course to user saved courses in firebase
@@ -80,13 +84,20 @@ function Course({
   // };
 
   return (
-    <div className="rounded-xl bg-white p-2 course-item flex-col w-full my-6 relative">
+    <div className="rounded-xl bg-white p-2 course-item flex-col w-full my-6 relative dark:bg-indigoDay ">
       <div>
         <div className="relative ">
+          {isLoading && (
+            <div className="flex justify-center items-center h-32">
+              <Spinner className="h-8 w-8" />
+            </div>
+          )}
           <img
             className="rounded-lg h-32 w-[100%] "
             src={courseImage}
             alt="courseImage"
+            onLoad={handleOnLoad}
+            style={isLoading ? { display: "none" } : { display: "block" }}
           />
           <div className="absolute top-1 right-1">
             <label className={`ui-bookmark ${isBookmarked ? "active" : ""}`}>
@@ -101,7 +112,7 @@ function Course({
             </label>
           </div>
         </div>
-        <div className="justify-around rounded-full bg-white shadow-xl flex w-[55%] py-1 absolute mt-[-25px]">
+        <div className="justify-around rounded-full bg-white shadow-2xl flex w-[55%] py-1 absolute mt-[-25px] dark:bg-purssianBlue">
           <img
             className="rounded-full h-12 w-12"
             src={authorImage}
