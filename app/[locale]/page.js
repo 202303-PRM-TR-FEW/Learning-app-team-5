@@ -11,10 +11,10 @@ export default function Home({ params }) {
     <main className="h-screen m-auto max-w-[80%] flex justify-center items-center ">
       <div className="flex flex-col justify-center items-center 
        shadow-2xl rounded-[50px] bg-slate-50 
-       md:flex-row ">
+       md:flex-row dark:border-2 dark:border-indigoDay">
         <div className=' flex flex-col items-start mx-auto  container px-4 md:pl-36 '>
           <SelectLanguage lang = {params.locale}/>
-          <div className=' flex flex-row py-4 mt-4 items-center md:py-10 '>
+          <div className=' flex flex-row py-4 md:mt-4 items-center md:py-10 '>
 
             <svg
               className="w-[3em] h-[2em] px-[1em] py-[0.3em] lg:w-[4em] lg:h-[2m] lg:px-[1em] lg:py-[0.4em] bg-blue-500 rounded-[20px] overflow-visible z-[1] fill-white"
@@ -26,8 +26,8 @@ export default function Home({ params }) {
             <p className='text-primaryBlue py-3 px-4 font-bold'>LearnU</p>
           </div>
 
-          <h1 className='text-5xl font-bold text-[#413F42] py-6'>{t('title')}</h1>
-          <p className='text-gray-600 max-w-full md:max-w-[70%]'>{t("paragraph")}</p>
+          <h1 className='text-5xl font-bold text-[#413F42] dark:text-bodyWhite py-6'>{t('title')}</h1>
+          <p className='text-gray-600 dark:text-bodyWhite  max-w-full md:max-w-[70%]'>{t("paragraph")}</p>
           <Link href={`${params.locale}/home`}>
             <div className='py-10'>
               <button
@@ -37,7 +37,7 @@ export default function Home({ params }) {
             </div>
           </Link>
         </div>
-        <div className='bg-white rounded-[50px] shadow-xl max-w-full order-first md:order-last'>
+        <div className='bg-white dark:bg-indigoDay  rounded-[50px] shadow-2xl max-w-full order-first md:order-last'>
           <img src="https://assets.api.uizard.io/api/cdn/stream/a8ce660d-47da-404a-b3b3-63ca6970ddcf.png" alt="Learn U logo " />
         </div>
       </div>
