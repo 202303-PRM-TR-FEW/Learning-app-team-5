@@ -2,7 +2,6 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 const Header = ({ setShowForm }) => {
-
   const t = useTranslations("Profile");
 
   return (

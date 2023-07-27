@@ -1,7 +1,7 @@
 const TotalStatistics = ({t}) => {
   return (
     <div className=" w-full py-8 ">
-      <h2 className="font-bold text-xl">{t("title")}</h2>
+      <h2 className="font-bold text-xl dark:text-bodyWhite">{t("title")}</h2>
       <div className="flex justify-between ">
         <div className=" mt-2 bg-white dark:bg-indigoDay p-2 rounded-[20px] shadow-md">
           <div className=" bg-[#cbe1fa] rounded-[10px]  px-14 py-2">

@@ -1,9 +1,10 @@
 'use client';
 import Link from "next/link"
-import{useTranslations} from "next-intl"
+import { useTranslations } from "next-intl"
 
 
 import SelectLanguage from '@/components/SelectLanguage-component/SelectLanguage';
+
 
 export default function Home({ params }) {
   const t = useTranslations("Welcome")
@@ -13,7 +14,7 @@ export default function Home({ params }) {
        shadow-2xl rounded-[50px] bg-slate-50 
        md:flex-row dark:border-2 dark:border-indigoDay">
         <div className=' flex flex-col items-start mx-auto  container px-4 md:pl-36 '>
-          <SelectLanguage lang = {params.locale}/>
+          <SelectLanguage lang={params.locale} />
           <div className=' flex flex-row py-4 md:mt-4 items-center md:py-10 '>
 
             <svg
