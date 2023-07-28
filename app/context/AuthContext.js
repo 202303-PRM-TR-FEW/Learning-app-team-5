@@ -21,17 +21,18 @@ export const AuthContextProvider = ({ children }) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+        console.log('User data:', userCredential.user);
         return setDoc(doc(db, 'users', user.uid), {
           email: user.email,
-          password: user.password,
-          username: user.username,
+          /* password: user.password, */
+          /* username: user.username, */
           savedCourses: [],
           registeredCourses: []
         });
       })
       .then(() => {
         // Redirect to home page after successful signup
-        router.push('/main/home');
+       /*  router.push('/main/home'); */
       })
       .catch((error) => {
         console.error('Error signing up:', error);
@@ -51,7 +52,7 @@ export const AuthContextProvider = ({ children }) => {
       })
       .then(() => {
         // Redirect to home page after successful login
-        router.push('/main/home');
+        /* router.push('/main/home'); */
       })
       .catch((error) => {
         console.error('Error signing in:', error);
@@ -62,7 +63,7 @@ export const AuthContextProvider = ({ children }) => {
     signOut(auth)
       .then(() => {
         // Redirect to login page after logout
-        router.push('/main/home');
+        /* router.push('/main/home'); */
       })
       .catch((error) => {
         console.error('Error logging out:', error);
@@ -73,7 +74,7 @@ export const AuthContextProvider = ({ children }) => {
       setUser(currentUser);
       if (currentUser) {
         // Redirect logged-in user to home page
-        router.push('/main/home');
+        /* router.push('/main/home'); */
       }
     });
 

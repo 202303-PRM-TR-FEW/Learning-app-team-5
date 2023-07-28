@@ -7,19 +7,22 @@ import CourseButton from "./CourseButton";
 import { Spinner } from "@material-tailwind/react";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
+import { UserAuth } from "app/context/AuthContext.js";
+import { collection } from "firebase/firestore";
 
 function CourseCard({ course, mockProgress, onClick, selectedStyle }) {
   const [width, setWidth] = useState(0);
   const [isSaved, setisSaved] = useState(false);
   const [isClicked, setisClicked] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(true);
+  const { user } = UserAuth();
 
   useEffect(() => {
     setWidth(mockProgress);
     setisSaved(course.isSaved);
   }, []);
 
-  const handleBookmarkToggle = async () => {
+/*   const handleBookmarkToggle = async () => {
     try {
       const courseID = course.docID;
       const courseRef = doc(db, "course-data", `${courseID}`);
@@ -30,7 +33,27 @@ function CourseCard({ course, mockProgress, onClick, selectedStyle }) {
     } catch (error) {
       console.log("Error updating document: ", error);
     }
+  }; */
+
+  const handleBookmarkToggle = async () => {
+    if (!user) console.log("Error: No user logged in");
+    try {
+      const userID = user.uid;
+      console.log(userID);
+      const userRef = doc(db, "users", `${userID}`);
+      const courseProgressRef = userRef.collection("courseProgress");
+      await updateDoc(courseProgressRef, {
+        courseID: course.docID
+      });
+      courseProgressRef.doc(course.docID).set({
+        completedLessons: 15,
+        isSaved: !isSaved,
+      });
+    } catch (error) {
+      console.log("Error updating document: ", error);
+    }
   };
+
 
   function handleCardClick() {
     onClick(course);

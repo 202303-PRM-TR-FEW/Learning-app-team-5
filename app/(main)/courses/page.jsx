@@ -3,7 +3,7 @@ import CourseDisplayPage from "@/components/course-general-components/CourseDisp
 function MyCourses() {
   return (
     <CourseDisplayPage
-      pageTitle={"My Courses"}
+      pageTitle={"marketing"}
       navigationPath={"./saved"}
       navigationName={"Saved Courses"}
     />

@@ -1,9 +1,7 @@
-import { UserAuth } from "@/app/context/AuthContext";
 
 function TimeSpentBar({ hoursPerDay }) {
     /* If height prop is not passed, the barheight will be zero */
     const barHeight = hoursPerDay || 0;
-
   return (
     <div className="mt-4 w-full h-full">
       <div className="bg-gray-200 rounded-full overflow-hidden w-[3%] h-[80%] relative">
