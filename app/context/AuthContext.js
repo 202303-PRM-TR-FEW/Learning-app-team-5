@@ -2,10 +2,11 @@
 import { useState, useContext, createContext, useEffect } from "react";
 import { auth, db } from "../../firebase";
 import {
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    signOut,
-    onAuthStateChanged
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  fetchSignInMethodsForEmail
 } from 'firebase/auth'
 import { setDoc, doc } from "firebase/firestore"
 
@@ -14,49 +15,79 @@ const AuthContext = createContext()
 
 //  the Authentication Provider
 export const AuthContextProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
 
-    const [user, setUser] = useState({})
+  function signUp(email, password) {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        return setDoc(doc(db, 'users', user.uid), {
+          email: user.email,
+          password: user.password,
+          username: user.username,
+          savedCourses: [],
+          registeredCourses: []
+        });
+      })
+      // .then(() => {
+      //   // Redirect to home page after successful signup
+      //   router.push('/home');
+      // })
+      .catch((error) => {
+        console.error('Error signing up:', error);
+      });
+  }
 
+  function signIn(email, password) {
+    // Check if the email address exists in Firebase Authentication
+    fetchSignInMethodsForEmail(auth, email, password)
+      .then((signInMethods) => {
+        // If the email exists in Firebase Authentication, try to sign in with the provided email and password
+        if (signInMethods.length > 0) {
+          return signInWithEmailAndPassword(auth, email, password);
+        } else {
+          throw new Error('Email not found. Please sign up first.');
+        }
+      })
+      // .then(() => {
+      //   // Redirect to home page after successful login
+      //   router.push('/home');
+      // })
+      .catch((error) => {
+        console.error('Error signing in:', error);
+      });
+  }
 
-    function signUp(email, password) {
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                return setDoc(doc(db, 'users', email), {
-                    savedCourses: [],
-                    registeredCourses: []
-                });
-            })
-            .catch((error) => {
+  function logOut() {
+    signOut(auth)
+      // .then(() => {
+      //   // Redirect to login page after logout
+      //   router.push('/home');
+      // })
+      .catch((error) => {
+        console.error('Error logging out:', error);
+      });
+  }
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      // if (currentUser) {
+      //   // Redirect logged-in user to home page
+      //   router.push('/home');
+      // }
+    });
 
-                console.error('Error signing up:', error);
-            });
-    }
+    return () => unsubscribe();
+  }, []);
 
-    function signIn() {
-        return signInWithEmailAndPassword(auth, email, password)
-    }
-
-    function logOut() {
-        return signOut(auth)
-    }
-
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser)
-        })
-        return () => unsubscribe()
-    }, [])
-
-
-    return (
-        // pass all the functions as props so we can use them in our app components
-        <AuthContext.Provider value={{ signIn, logOut, signUp, user }}>
-            {children}
-        </AuthContext.Provider>
-    )
+  return (
+    // pass all the functions as props so we can use them in our app components
+    <AuthContext.Provider value={{ signIn, logOut, signUp, user }}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
 
 export const UserAuth = () => {
-    return useContext(AuthContext)
+  return useContext(AuthContext)
 }

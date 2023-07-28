@@ -17,7 +17,7 @@ function SearchInput({ value, onChange, onSubmit }) {
         placeholder="Search..."
         value={value}
         onChange={handleChange}
-        className="font-medium rounded-lg pl-px pr-8 py-1.5 mr-2 mb-2 border border-gray-300"
+        className="font-medium rounded-lg pl-px pr-8 py-1.5 mr-2 mb-2 border border-gray-300 dark:bg-bodyWhite"
       />
       <button
         type="submit"

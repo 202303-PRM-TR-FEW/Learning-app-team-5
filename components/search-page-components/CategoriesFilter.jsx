@@ -44,15 +44,17 @@ function CategoriesFilter({ handleCategoryChange }) {
   };
 
   return (
-    <>
+    <div className=" text-gray-700 dark:text-bodyWhite">
+      <hr />
       <h3 className="text-sm font-semibold text-gray-700 py-2">CATEGORIES</h3>
 
-      <div className="grid grid-flow-col auto-cols-max gap-4 text-gray-700 mb-8 mt-2">
+      <div className="grid grid-flow-col auto-cols-max gap-4  mb-8 mt-2">
         {categories.map((category) => (
           <div key={category.value} className="flex items-start">
             <CheckIcon
-              className={`w-5 h-5 absolute ${category.checked ? "opacity-100" : "opacity-0"
-                }`}
+              className={`w-5 h-5 absolute ${
+                category.checked ? "opacity-100" : "opacity-0"
+              }`}
             />
             <input
               type="checkbox"
@@ -61,11 +63,13 @@ function CategoriesFilter({ handleCategoryChange }) {
               onChange={handleChange}
               checked={category.checked}
             />
-            <label className="px-2.5" htmlFor={category.value}>{category.label}</label>
+            <label className="px-2.5" htmlFor={category.value}>
+              {category.label}
+            </label>
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 }
 

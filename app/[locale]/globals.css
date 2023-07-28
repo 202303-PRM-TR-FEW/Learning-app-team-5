@@ -9,3 +9,8 @@
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
 }
+.svg-hover:hover{
+fill: red;
+  width: 20px; 
+  height: 30px;
+}

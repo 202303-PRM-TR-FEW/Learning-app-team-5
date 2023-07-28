@@ -76,7 +76,7 @@ function SearchPage() {
 
   return (
     <>
-      <h2 className="text-xl text-gray-900 font-semibold">
+      <h2 className="text-xl text-gray-900 dark:text-white font-semibold">
         Find your favourites
       </h2>
       <SearchInput
@@ -92,7 +92,7 @@ function SearchPage() {
         searchResult={searchResult}
         setSearchResult={setSearchResult}
       />
-      <div className="text-sm font-semibold text-gray-700 py-2 mb-8 mt-2">
+      <div className="text-sm font-semibold text-gray-700 dark:text-bodyWhite py-2 mb-8 mt-2">
         <h3>Search Results</h3>
         <SearchResults searchResult={searchResult} />
       </div>

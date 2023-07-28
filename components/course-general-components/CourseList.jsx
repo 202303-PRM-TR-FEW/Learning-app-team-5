@@ -7,6 +7,7 @@ import CourseCard from "./CourseCard";
 import { Spinner } from "@material-tailwind/react";
 import NavigateNextOutlinedIcon from "@mui/icons-material/NavigateNextOutlined";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 function CourseList({
   onCourseClick,
@@ -17,6 +18,7 @@ function CourseList({
 }) {
   const [courses, setCourses] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const t =useTranslations("Courses")
 
   const coursesCollection = collection(db, "course-data");
 
@@ -46,9 +48,9 @@ function CourseList({
   }, []);
 
   const coursesToPull = courses.filter((course) => {
-    if (pageTitle === "My Courses") {
+    if (pageTitle === t("title-1")) {
       return course.isRegistered;
-    } else if (pageTitle === "Saved Courses") {
+    } else if (pageTitle === t("title-2")) {
       return course.isSaved;
     } else {
       return console.log("Error: No courses to pull");
@@ -65,13 +67,13 @@ function CourseList({
 
   return (
     <div className="flex flex-col overflow-y-auto m-4">
-      <div className="flex justify-between items-center m-4 p-4 bg-[#56a0fe] opacity-80 rounded lg:sticky top-0 z-50">
-        <h1 className="text-white md:text-2xl text-xl font-semibold">
+      <div className="flex justify-between items-center m-4 p-4 bg-primaryBlue opacity-80 rounded lg:sticky top-0 z-50">
+        <h1 className="text-white dark:text-white md:text-2xl text-xl font-semibold">
           {pageTitle}
         </h1>
         <Link
           href={navigationPath || "./home"}
-          className="text-[#efefef] md:text-base text-sm"
+          className="text-[#efefef] dark:text-white md:text-base text-sm"
         >
           {navigationName || "Navigate to"}
           <NavigateNextOutlinedIcon className="text-white" />
