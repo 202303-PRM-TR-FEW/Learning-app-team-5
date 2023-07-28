@@ -25,7 +25,10 @@ function Profile({ params }) {
             {language === "en" ? (
               <p className="px-4 py-2 md:p-8">
                 Please{" "}
-                <Link href="./login" className="text-primaryBlue">
+                <Link
+                  href="./login"
+                  className="text-primaryBlue underline underline-offset-3 hover:text-blue-700"
+                >
                   Sign In
                 </Link>{" "}
                 first to see your profile
@@ -33,7 +36,10 @@ function Profile({ params }) {
             ) : (
               <p className="px-4 py-2 md:p-8">
                 Profilinizi görmek için lütfen önce{" "}
-                <Link href="./login" className="text-primaryBlue">
+                <Link
+                  href="./login"
+                  className="text-primaryBlue underline underline-offset-3 hover:text-blue-700"
+                >
                   Giriş
                 </Link>{" "}
                 Yapın
