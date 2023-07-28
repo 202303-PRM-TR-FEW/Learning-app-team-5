@@ -17,14 +17,16 @@ function SearchPage() {
 
   const filterData = (searchTerm) => {
     console.log("Original data:", Allcourses);
+    console.log("Search term:", searchTerm);
+
     const courseSearchResults = Allcourses.filter((course) =>
       Object.values(course).some((value) =>
         value.toString().toLowerCase().includes(searchTerm.toLowerCase())
       )
     );
 
+    console.log("Filtered results:", courseSearchResults);
     setSearchResult(courseSearchResults);
-    setRecentSearches([searchTerm, ...recentSearches.slice(0, 4)]);
   };
 
   const handleSearchChange = (searchTerm) => {
@@ -34,6 +36,7 @@ function SearchPage() {
   const handleSearchSubmit = (searchTerm) => {
     setSearch(searchTerm);
     filterData(searchTerm);
+    setRecentSearches([searchTerm, ...recentSearches.slice(0, 4)]);
   };
 
   const handleCategoryChange = (categoryValue, isChecked) => {

@@ -7,7 +7,7 @@ function SearchInput({ value, onChange, onSubmit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit();
+    onSubmit(value);
   };
 
   return (
