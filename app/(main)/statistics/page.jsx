@@ -7,6 +7,7 @@ import ThisWeek from "@/components/statistics-page-components/ThisWeek";
 import { UserAuth } from "app/context/AuthContext.js";
 import { db } from "../../../firebase";
 import { doc, updateDoc } from "firebase/firestore";
+import Achievements from "@/components/statistics-page-components/Achievements";
 
 function Statistics() {
   const { user } = UserAuth();
