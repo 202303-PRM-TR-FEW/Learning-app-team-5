@@ -22,7 +22,7 @@ function SearchPage() {
         value.toString().toLowerCase().includes(searchTerm.toLowerCase())
       )
     );
-    console.log("Filtered results:", courseSearchResults);
+
     setSearchResult(courseSearchResults);
     setRecentSearches([searchTerm, ...recentSearches.slice(0, 4)]);
   };
