@@ -6,7 +6,7 @@ const Box = dynamic(() => import("@mui/material/Box"));
 const Rating = dynamic(() => import("@mui/material/Rating"));
 const StarIcon = dynamic(() => import("@mui/icons-material/Star"));
 
-function RatingFilter({ searchResult, setSearchResult }) {
+function RatingFilter({ searchResult, setSearchResult,t }) {
   const [value, setValue] = useState(2);
   const [hover, setHover] = useState(-1);
 
@@ -19,9 +19,7 @@ function RatingFilter({ searchResult, setSearchResult }) {
     const filteredResults = searchResult.filter(
       (course) => course.rating <= newValue
     );
-    if (filteredResults.length !== 0) {
       setSearchResult(filteredResults);
-    }
   };
 
   return (
@@ -30,7 +28,7 @@ function RatingFilter({ searchResult, setSearchResult }) {
       <div className="grid grid-flow-col text-gray-700 mb-8 mt-2">
         <div>
           <h3 className="text-md font-semibold text-gray-700 dark:text-bodyWhite py-4">
-            RATING
+            {t("title-4")}
           </h3>
 
           <Box

@@ -5,7 +5,7 @@ import { GetAllCourses } from "../../app/context/FetchAllCourses";
 
 const CheckIcon = dynamic(() => import("@mui/icons-material/Check"));
 
-function LevelFilter({ handleLevelChange }) {
+function LevelFilter({ handleLevelChange, t }) {
   const { Allcourses } = GetAllCourses();
 
   const [levels, setLevels] = useState([]);
@@ -40,18 +40,18 @@ function LevelFilter({ handleLevelChange }) {
     );
 
     handleLevelChange(value, checked);
-    
   };
 
   return (
     <div className="text-gray-700 dark:text-bodyWhite">
-      <h3 className="text-md font-semibold  py-4">LEVEL</h3>
+      <h3 className="text-md font-semibold  py-4">{t("title-3")}</h3>
       <div className="grid grid-flow-col auto-cols-max gap-6 py-6">
         {levels.map((level) => (
           <div key={level.value} className="flex items-start">
             <CheckIcon
-              className={`w-4.5 h-4.5 absolute ${level.checked ? "opacity-100" : "opacity-0"
-                }`}
+              className={`w-4.5 h-4.5 absolute ${
+                level.checked ? "opacity-100" : "opacity-0"
+              }`}
             />
             <input
               type="checkbox"

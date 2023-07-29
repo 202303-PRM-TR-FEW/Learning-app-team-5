@@ -5,7 +5,7 @@ import { GetAllCourses } from "../../app/context/FetchAllCourses";
 
 const CheckIcon = dynamic(() => import("@mui/icons-material/Check"));
 
-function CategoriesFilter({ handleCategoryChange }) {
+function CategoriesFilter({ handleCategoryChange,t }) {
   const { Allcourses } = GetAllCourses();
 
   const [categories, setCategories] = useState([]);
@@ -48,7 +48,7 @@ function CategoriesFilter({ handleCategoryChange }) {
   return (
     <div className=" text-gray-700 dark:text-bodyWhite">
       <hr />
-      <h3 className="text-md font-semibold py-4">CATEGORIES</h3>
+      <h3 className="text-md font-semibold py-4">{t("title-2")}</h3>
 
       <div className="grid grid-flow-col auto-cols-max gap-4  mb-8 mt-2">
         {categories.map((category) => (
