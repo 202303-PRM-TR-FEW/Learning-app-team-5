@@ -17,9 +17,11 @@ function RatingFilter({ searchResult, setSearchResult }) {
   const handleRatingChange = (newValue) => {
     setValue(newValue);
     const filteredResults = searchResult.filter(
-      (course) => course.rating >= newValue
+      (course) => course.rating <= newValue
     );
-    setSearchResult(filteredResults);
+    if (filteredResults.length !== 0) {
+      setSearchResult(filteredResults);
+    }
   };
 
   return (
@@ -27,7 +29,7 @@ function RatingFilter({ searchResult, setSearchResult }) {
       <hr />
       <div className="grid grid-flow-col text-gray-700 mb-8 mt-2">
         <div>
-          <h3 className="text-sm font-semibold text-gray-700 dark:text-bodyWhite py-2">
+          <h3 className="text-md font-semibold text-gray-700 dark:text-bodyWhite py-4">
             RATING
           </h3>
 
@@ -50,7 +52,11 @@ function RatingFilter({ searchResult, setSearchResult }) {
                 setHover(newHover);
               }}
               emptyIcon={
-                <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" className="dark:text-white"/>
+                <StarIcon
+                  style={{ opacity: 0.55 }}
+                  fontSize="inherit"
+                  className="dark:text-white"
+                />
               }
               icon={
                 <StarIcon style={{ color: "#2196f3" }} fontSize="inherit" />

@@ -16,7 +16,6 @@ function SearchPage() {
   const [recentSearches, setRecentSearches] = useState([]);
 
   const filterData = (searchTerm) => {
-    console.log("Original data:", Allcourses);
     console.log("Search term:", searchTerm);
 
     const courseSearchResults = Allcourses.filter((course) =>
@@ -55,12 +54,14 @@ function SearchPage() {
   };
 
   const handleLevelChange = (levelValue, isChecked) => {
-    // Filter the search result based on the selected category
+    // Filter the search result based on the selected level
     if (isChecked) {
       const filteredResults = searchResult.filter(
         (course) => course.level === levelValue
       );
-      setSearchResult(filteredResults);
+      if (filteredResults.length > 1) {
+        setSearchResult(filteredResults);
+      }
     } else {
       const filteredResults = searchResult.filter(
         (course) => course.level !== levelValue
@@ -69,13 +70,14 @@ function SearchPage() {
     }
   };
 
-  const handleRatingChange = (newValue) => {
-    // Filter the search results based on the selected rating value
-    const filteredResults = Allcourses.filter(
-      (course) => course.rating >= newValue
-    );
-    setSearchResult(filteredResults);
-  };
+  // const handleRatingChange = (newValue) => {
+  //   // Filter the search results based on the selected rating value
+  //   const filteredResults = Allcourses.filter(
+  //     (course) => course.rating >= newValue
+  //   );
+  //   console.log(filteredResults);
+  //   setSearchResult(filteredResults);
+  // };
 
   return (
     <>
@@ -84,14 +86,18 @@ function SearchPage() {
       </h2>
       <SearchInput
         value={search}
+        setSearch={setSearch}
         onChange={handleSearchChange}
         onSubmit={handleSearchSubmit}
       />
-      <TopSearches recentSearches={recentSearches} onSearchClick={handleSearchSubmit} />
+      <TopSearches
+        recentSearches={recentSearches}
+        onSearchClick={handleSearchSubmit}
+      />
       <CategoriesFilter handleCategoryChange={handleCategoryChange} />
       <LevelFilter handleLevelChange={handleLevelChange} />
       <RatingFilter
-        onChange={handleRatingChange}
+        // onChange={handleRatingChange}
         searchResult={searchResult}
         setSearchResult={setSearchResult}
       />

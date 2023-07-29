@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-
-function SearchInput({ value, onChange, onSubmit }) {
+function SearchInput({ value, onChange, onSubmit, setSearch }) {
   const handleChange = (e) => {
     onChange(e.target.value);
   };
@@ -8,6 +6,7 @@ function SearchInput({ value, onChange, onSubmit }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(value);
+    setSearch("");
   };
 
   return (
@@ -17,7 +16,7 @@ function SearchInput({ value, onChange, onSubmit }) {
         placeholder="Search..."
         value={value}
         onChange={handleChange}
-        className="font-medium rounded-lg pl-px pr-8 py-1.5 mr-2 mb-2 border border-gray-300 dark:bg-bodyWhite"
+        className="font-medium rounded-lg pl-2 pr-8 py-1.5 mr-2 mb-2 border border-gray-300 dark:bg-bodyWhite dark:text-lightBlack"
       />
       <button
         type="submit"

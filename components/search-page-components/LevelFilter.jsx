@@ -40,11 +40,12 @@ function LevelFilter({ handleLevelChange }) {
     );
 
     handleLevelChange(value, checked);
+    
   };
 
   return (
     <div className="text-gray-700 dark:text-bodyWhite">
-      <h3 className="text-sm font-semibold  py-2">LEVEL</h3>
+      <h3 className="text-md font-semibold  py-4">LEVEL</h3>
       <div className="grid grid-flow-col auto-cols-max gap-6 py-6">
         {levels.map((level) => (
           <div key={level.value} className="flex items-start">

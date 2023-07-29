@@ -14,7 +14,9 @@ function CategoriesFilter({ handleCategoryChange }) {
   useEffect(() => {
     if (Allcourses && Allcourses.length > 0) {
       const allCategories = Array.from(
-        new Set(Allcourses.map((course) => capitalizeFirstLetter(course.category)))
+        new Set(
+          Allcourses.map((course) => capitalizeFirstLetter(course.category))
+        )
       );
       setCategories(
         allCategories.map((category) => ({
@@ -46,7 +48,7 @@ function CategoriesFilter({ handleCategoryChange }) {
   return (
     <div className=" text-gray-700 dark:text-bodyWhite">
       <hr />
-      <h3 className="text-sm font-semibold text-gray-700 py-2">CATEGORIES</h3>
+      <h3 className="text-md font-semibold py-4">CATEGORIES</h3>
 
       <div className="grid grid-flow-col auto-cols-max gap-4  mb-8 mt-2">
         {categories.map((category) => (
