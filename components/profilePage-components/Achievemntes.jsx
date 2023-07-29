@@ -1,11 +1,11 @@
 import React from "react";
 
-const Achievemntes = () => {
+const Achievemntes = ({t}) => {
   return (
-    <div className="w-full text-lightBlack lg:mt-6">
-      <h2 className="font-bold text-xl py-4">Achievemntes</h2>
+    <div className="w-full text-lightBlack dark:text-bodyWhite lg:mt-6">
+      <h2 className="font-bold text-xl py-4 ">{t("title-2")}</h2>
       <section className="flex flex-col">
-        <div className="m-2 p-2 bg-[#fbfbfb] rounded-2xl shadow-md flex">
+        <div className="m-2 p-2 bg-white dark:bg-indigoDay rounded-2xl shadow-md flex">
           <div className="flex justify-center items-center">
             <div className="bg-lightOrange p-8 rounded-[20px]">
               <svg
@@ -25,7 +25,7 @@ const Achievemntes = () => {
                 className="text-xl font-bold"
                 style={{ fontFamily: "Dela Gothic One, sans-serif" }}
               >
-                Committed Learner
+                {t("Committed")}
               </h1>
               <h3 className="text-gray-500 mt-1 text-sm">2/3</h3>
             </div>
@@ -42,7 +42,7 @@ const Achievemntes = () => {
           </div>
         </div>
 
-        <div className="m-2 p-2 bg-[#fbfbfb] rounded-2xl shadow-md flex">
+        <div className="m-2 p-2 bg-white dark:bg-indigoDay rounded-2xl shadow-md flex">
           <div className="flex justify-center items-center">
             <div className="bg-lightGreen p-8 rounded-[20px]">
               <svg
@@ -62,7 +62,7 @@ const Achievemntes = () => {
                 className="text-xl font-bold"
                 style={{ fontFamily: "Dela Gothic One, sans-serif" }}
               >
-                Point Collection
+                {t("Collection")}
               </h1>
               <h3 className="text-gray-500 mt-1 text-sm">1200/3000</h3>
             </div>

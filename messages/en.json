@@ -1,0 +1,89 @@
+{
+  "Welcome": {
+    "title": "Discover passion",
+    "paragraph": "Find out what topics you find interesting, learn a new skill & connect with people that are passionate about similar topics.",
+    "button":"GET STARTED"
+  },
+  "Navbar":{
+  "Home": "Home",
+  "Search": "Search",
+  "Courses": "Courses",
+  "Profile": "Profile",
+  "Login": "Login"
+  },
+  "login":{
+    "login":"Login",
+    "Signup":"Sign Up",
+    "Email":"Email",
+    "Password":"password",
+    "Uesrname":"Username",
+    "Placeholder-1":"xyz@learnU.com",
+    "Placeholder-2":"Enter your email",
+    "Message-1": "Signup is successful! Please login with your credentials.",
+    "Message-2": "Don't have an account?",
+    "Message-3": "Already have an account?",
+    "Message-4":"Please enter a valid email address"
+  },
+  "Home":{
+    "title-1":"Featured Courses",
+    "title-2":"Categories",
+    "button" :"Get",
+    "hour" :"h",
+    "minute": "m",
+    "more" : "Show More",
+    "less" : "Show Less",
+    "Sales": "Sales",
+    "HR": "HR",
+    "Drawing": "Drawing",
+    "Big Data": "Big Data",
+    "Design": "Design",
+    "Marketing": "Marketing",
+    "Astronomy": "Astronomy",
+    "Web Development": "Web Development"
+  },
+  "Search":{
+    "title":"Find your favourites",
+    "button":"Search",
+    "title-2":"CATEGORIES",
+    "title-3":"LEVEL",
+    "title-4":"RATING",
+    "title-5":"RESULTS",
+    "Beginner" : "Beginner",
+    "Intermediate" : "Intermediate",
+    "Professional": "Profeessionl"
+  },
+  "Courses":{
+    "title-1":"My Learning",
+    "title-2":"Saved Courses",
+    "hour" :"h",
+    "minute": "mins",
+    "Descripttion":"Coures Descripttion",
+    "Button-1":"Review",
+    "Button-2":"Preview",
+    "Button-3":"Continue",
+    "Button-4":"Enroll",
+    "Message-1":"Hey there!",
+    "Message-2":"Please select a course to view"
+  },
+  "Profile":{
+  "title": "Total Statistic",
+  "title-2": "Achievements",
+  "title-3": "Friend Suggestions",
+  "title-4": "Friends",
+  "Courses": "MY COURSES",
+  "Followers": "FOLLOWERS",
+  "Following": "FOLLOWING",
+  "Finished": "FINISHED COURSES",
+  "Hours": "HOURS LEARNED",
+  "Skills": "SKILLS ACHIEVED",
+  "Committed": "Committed Learner",
+  "Collection": "Point Collection",
+  "Profile" : "PROFILE",
+  "Log": "Log Out",
+  "Find" : "FIND FRIENDS",
+  "Invite": "INVITE FRIENDS",
+  "View" : "VIEW ALL",
+  "Hide": "Hide",
+  "Submit":"submit"
+  }
+}

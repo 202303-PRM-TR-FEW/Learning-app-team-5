@@ -1,4 +1,4 @@
-import LoginSignupCard from '@/components/login/LoginCard.jsx';
+import LoginSignupCard from "@/components/login/LoginCard.jsx";
 
 function Page() {
   return (

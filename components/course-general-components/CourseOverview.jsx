@@ -20,9 +20,11 @@ const LeaderboardOutlinedIcon = dynamic(() =>
 import "./CourseCard.css";
 import CourseButton from "./CourseButton";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 function CourseOverview({ selectedCourse }) {
   const [showArrowIcons, setShowArrowIcons] = useState(false);
+  const t = useTranslations("Courses");
 
   /* This delay for arrow icons is necessary due to the nature of React's initial render! */
   useEffect(() => {
@@ -34,29 +36,30 @@ function CourseOverview({ selectedCourse }) {
 
   if (!selectedCourse) {
     return (
-      <div className="flex flex-col bg-[rgba(251,_251,_251,_0.5)] p-4 m-4 rounded-2xl shadow-md justify-center items-center ">
+      <div className="flex flex-col bg-[rgba(251,_251,_251,_0.5)] dark:bg-indigoDay p-4 m-4 rounded-2xl shadow-md justify-center items-center ">
         <div className="flex w-full justify-center items-center">
           <WavingHandOutlinedIcon className="text-[#56a0fe] text-6xl h-1/2 mr-2" />
-          <h1 className="text-2xl font-bold text-[#56a0fe]">Hey there!</h1>
+          <h1 className="text-2xl font-bold text-[#56a0fe]">{t("Message-1")}</h1>
         </div>
         {showArrowIcons && (
           <div className="flex w-full justify-center items-center">
             <ArrowBackIcon className="arrow-icon arrow-icon-lg" />
             <ArrowUpwardOutlinedIcon className="arrow-icon arrow-icon-sm" />
-            <p className="ml-2">Please select a course to view</p>
+            <p className="ml-2">{t("Message-2")}</p>
           </div>
         )}
       </div>
     );
   }
   return (
-    <div className="flex flex-col bg-[#fbfbfb] p-4 m-4 rounded-2xl shadow-md justify-between">
+    <div className="flex flex-col bg-white dark:bg-indigoDay p-4 m-4 rounded-2xl shadow-md justify-between ">
       {/* IDENTITY */}
       <div className="lg:h-2/3 w-auto lg:flex lg:flex-col lg:justify-between grid grid-cols-2 lg:mb-2 mb-6 h-full">
         {/* IMAGE OR VIDEO  */}
         <div
-          className="hidden sm:block h-full p-4 rounded-2xl w-full lg:w-full"
+          className="hidden sm:block h-[300px] p-4 rounded-2xl w-full lg:w-full"
           style={{
+
             backgroundImage: `url(${selectedCourse.courseImage})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
@@ -66,11 +69,11 @@ function CourseOverview({ selectedCourse }) {
         {/* INFO */}
         <div className="ml-2 w-full">
           {/* title */}
-          <h1 className="text-[#373737] text-2xl font-semibold my-4">
+          <h1 className="text-[#373737] dark:text-white text-2xl font-semibold my-4">
             {selectedCourse.title}
           </h1>
           {/* tutor name */}
-          <div className="rounded-3xl bg-[#fbfbfb] drop-shadow-[0_0_6px_rgba(0,0,0,0.15)] h-12 w-max flex items-center pr-4 my-8">
+          <div className="rounded-3xl bg-[#fbfbfb] dark:bg-purssianBlue drop-shadow-[0_0_6px_rgba(0,0,0,0.15)] h-12 w-max flex items-center pr-4 my-8">
             <img
               src={selectedCourse.instructorImage}
               alt="instructor"
@@ -80,37 +83,40 @@ function CourseOverview({ selectedCourse }) {
           </div>
 
           {/* sub-info */}
-          <div className="flex flex-col justify-end">
+          <div className="flex flex-col justify-end text-gray-600 dark:text-bodyWhite">
             {/* category */}
             <div className="flex items-center my-2">
-              <CategoryOutlinedIcon className="text-gray-600" />
-              <p className="text-gray-600 text-base ml-2 capitalize">
+              <CategoryOutlinedIcon className="" />
+              <p className=" text-base ml-2 capitalize">
                 {selectedCourse.category}
               </p>
             </div>
             {/* level */}
             <div className="flex items-center my-2">
-              <LeaderboardOutlinedIcon className="text-gray-600" />
-              <p className="text-gray-600 text-base ml-2 capitalize">
+              <LeaderboardOutlinedIcon className="" />
+              <p className=" text-base ml-2 capitalize">
                 {selectedCourse.level}
               </p>
             </div>
             {/* duration */}
             <div className="flex items-center my-2">
-              <AccessTimeIcon className="text-gray-600" />
-              <p className="text-gray-600 text-base ml-2">
+              <AccessTimeIcon className="" />
+              <p className=" text-base ml-2">
                 {Math.floor(selectedCourse.duration / 60) > 0
-                  ? `${Math.floor(selectedCourse.duration / 60)}h `
+                  ? `${Math.floor(selectedCourse.duration / 60)} ${t("hour")}`
                   : ""}
-                {selectedCourse.duration % 60}mins.
+                {selectedCourse.duration % 60} {t("minute")}
               </p>
             </div>
             {/* rating */}
             <div className="flex items-center my-2">
-              <StarBorderIcon className="text-gray-600" />
-              <p className="text-gray-600 text-base ml-2">
+              <StarBorderIcon className="" />
+              <p className="text-base ml-2">
                 {selectedCourse.rating}
-                <span className="text-sm text-gray-500"> / 5.0</span>
+                <span className="text-sm text-gray-500 dark:text-white">
+                  {" "}
+                  / 5.0
+                </span>
               </p>
             </div>
           </div>
@@ -122,11 +128,11 @@ function CourseOverview({ selectedCourse }) {
         {/* description title */}
         <div className="flex flex-col justify-center my-2 mt-8">
           <h2 className="text-[#373737] text-xl font-semibold mb-4">
-            Course Description
+            {t("Descripttion")}
           </h2>
           {/* description content */}
           <div className="max-h-14 overflow-y-auto lg:max-h-full">
-            <p className="text-gray-700 text-justify">
+            <p className="text-gray-700 text-justify dark:text-bodyWhite">
               {selectedCourse.description}
             </p>
           </div>
@@ -136,13 +142,13 @@ function CourseOverview({ selectedCourse }) {
       {/* PREVIEW AND ENROLL BUTTONS */}
       <div className="flex justify-between my-4">
         <CourseButton
-          buttonName={selectedCourse.isRegistered ? "Review" : "Preview"}
+          buttonName={selectedCourse.isRegistered ? t("Button-1") : t("Button-2")}
           handleClick={() =>
             console.log("add preview page navigation to handleClick function")
           }
         />
         <CourseButton
-          buttonName={selectedCourse.isRegistered ? "Continue" : "Enroll"}
+          buttonName={selectedCourse.isRegistered ? t("Button-3"): t("Button-4")}
           handleClick={() =>
             console.log("add enroll page navigation to handleClick function")
           }
