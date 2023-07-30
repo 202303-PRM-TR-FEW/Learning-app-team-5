@@ -45,9 +45,9 @@ function LevelFilter({ handleLevelChange, t }) {
   return (
     <div className="text-gray-700 dark:text-bodyWhite">
       <h3 className="text-md font-semibold  py-4">{t("title-3")}</h3>
-      <div className="grid grid-flow-col auto-cols-max gap-6 py-6">
+      <div className="flex flex-wrap gap-6 py-6">
         {levels.map((level) => (
-          <div key={level.value} className="flex items-start">
+          <div key={level.value} className="flex items-center">
             <CheckIcon
               className={`w-4.5 h-4.5 absolute ${
                 level.checked ? "opacity-100" : "opacity-0"

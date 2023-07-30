@@ -50,9 +50,9 @@ function CategoriesFilter({ handleCategoryChange,t }) {
       <hr />
       <h3 className="text-md font-semibold py-4">{t("title-2")}</h3>
 
-      <div className="grid grid-flow-col auto-cols-max gap-4  mb-8 mt-2">
+      <div className="flex flex-wrap justify-between gap-2 md:gap-4  mb-8 mt-2">
         {categories.map((category) => (
-          <div key={category.value} className="flex items-start">
+          <div key={category.value} className="flex items-center">
             <CheckIcon
               className={`w-5 h-5 absolute ${
                 category.checked ? "opacity-100" : "opacity-0"
