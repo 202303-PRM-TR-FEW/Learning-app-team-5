@@ -48,8 +48,8 @@ const LoginPage = () => {
     if (isRegistered) {
       try {
         await signIn(email, password);
-        // Redirect to home page after successful login
-        router.push("/home");
+        // Redirect to profile page after successful login
+        router.push("/profile");
       } catch (error) {
         console.error("Error signing in:", error);
       }
@@ -57,6 +57,8 @@ const LoginPage = () => {
       try {
         await signUp(email, password);
         setSignupSuccess(true);
+        // Redirect to profile page after successful Sign Up
+        router.push("/profile");
       } catch (error) {
         console.error("Error signing up:", error);
       }
@@ -162,7 +164,7 @@ const LoginPage = () => {
               className="text-blue-500 font-semibold"
               onClick={handleToggleForm}
             >
-              {isRegistered ? t("login") : t("Signup")}
+              {isRegistered ? t("Signup") : t("login")}
             </button>
           </p>
         </form>
