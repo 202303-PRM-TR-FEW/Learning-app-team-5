@@ -1,11 +1,24 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { UserAuth } from "../../app/context/AuthContext";
+import { useRouter } from "next/navigation";
 
 const Header = ({ setShowForm }) => {
   const t = useTranslations("Profile");
+  const { logOut } = UserAuth();
+  const router = useRouter();
+
+  const handleLogOut = async () => {
+    try {
+      await logOut();
+      router.push("/home");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
-    <div className="flex w-full  gap-2 items-center">
+    <div className="flex flex-col md:flex-row w-full  gap-2 items-center">
       <div className="flex justify-center self-center w-1/3">
         <Image
           onClick={() => setShowForm(true)}
@@ -19,7 +32,10 @@ const Header = ({ setShowForm }) => {
       <div className="flex flex-col gap-2 shadow-sm w-full">
         <div className="flex justify-between">
           <h1 className="font-extrabold text-2xl">Sally Robins</h1>
-          <button className="bg-primaryBlue text-white py-2 px-6 rounded-[10px] hover:bg-white hover:text-primaryBlue hover:border hover:border-primaryBlue dark:hover:bg-[#1c2e50]">
+          <button
+            className="bg-primaryBlue text-white py-2 px-6 rounded-[10px] hover:bg-white hover:text-primaryBlue hover:border hover:border-primaryBlue dark:hover:bg-[#1c2e50]"
+            onClick={handleLogOut}
+          >
             {t("Log")}
           </button>
         </div>

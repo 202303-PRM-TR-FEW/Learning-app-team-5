@@ -29,10 +29,7 @@ export const AuthContextProvider = ({ children }) => {
           registeredCourses: []
         });
       })
-      // .then(() => {
-      //   // Redirect to home page after successful signup
-      //   router.push('/home');
-      // })
+
       .catch((error) => {
         console.error('Error signing up:', error);
       });
@@ -49,10 +46,7 @@ export const AuthContextProvider = ({ children }) => {
           throw new Error('Email not found. Please sign up first.');
         }
       })
-      // .then(() => {
-      //   // Redirect to home page after successful login
-      //   router.push('/home');
-      // })
+
       .catch((error) => {
         console.error('Error signing in:', error);
       });
@@ -60,10 +54,7 @@ export const AuthContextProvider = ({ children }) => {
 
   function logOut() {
     signOut(auth)
-      // .then(() => {
-      //   // Redirect to login page after logout
-      //   router.push('/home');
-      // })
+
       .catch((error) => {
         console.error('Error logging out:', error);
       });
@@ -71,10 +62,7 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      // if (currentUser) {
-      //   // Redirect logged-in user to home page
-      //   router.push('/home');
-      // }
+
     });
 
     return () => unsubscribe();

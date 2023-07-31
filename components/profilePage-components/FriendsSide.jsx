@@ -15,18 +15,18 @@ const FriendsComp = ({ lang }) => {
       {/* Each section has its own componentes which they are inside profilePage component folder */}
       <SuggestionsFriends t={t} />
       <Friends t={t} />
-      <div className="flex w-full py-8 justify-between">
+      <div className="flex flex-col md:flex-row w-full pt-8 pb-20 md:py-8 justify-between">
         <button
           className={`font-bold text-primaryBlue border border-primaryBlue rounded-[15px] hover:bg-primaryBlue hover:text-white hover:border-2 hover:border-primaryBlue ${
             isEnglish ? "px-20" : "px-16"
-          } py-3 `}
+          } py-3 my-5 md:my-0`}
         >
           {t("Find")}
         </button>
         <button
           className={`font-bold text-white bg-primaryBlue border border-primaryBlue rounded-[15px] hover:text-primaryBlue hover:border-2 hover:bg-[#F5F5F5] ${
             isEnglish ? "px-20" : "px-10"
-          }`}
+          } py-3`}
         >
           {t("Invite")}
         </button>
