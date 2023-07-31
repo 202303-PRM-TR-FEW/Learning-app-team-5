@@ -23,8 +23,8 @@ const InfoComp = () => {
         <form
           onSubmit={handleSubmitImage}
           className=" py-4 flex flex-col justify-center items-center gap-4 
-            absolute top-[35%] left-[25%] md:top-[30%] md:left-[90%] z-1
-           bg-white rounded-[20px] shadow-xl"
+            absolute top-[30%] left-[5%] md:top-[30%] md:left-[80%] z-1
+           bg-white dark:bg-indigoDay rounded-[25px] shadow-2xl"
         >
           <input
             type="file"
