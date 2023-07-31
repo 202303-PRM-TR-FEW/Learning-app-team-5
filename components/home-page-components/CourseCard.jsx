@@ -5,6 +5,7 @@ import { UserAuth } from "../../app/context/AuthContext";
 import { doc, arrayUnion, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase";
 import { Spinner } from "@material-tailwind/react";
+import { useTranslations } from "next-intl";
 import "./Bookmark.css";
 
 const AccessTimeFilledOutlinedIcon = dynamic(() =>
@@ -22,8 +23,9 @@ function Course({
   courseImage,
   rating,
   duration,
-  t,
+ 
 }) {
+  const t = useTranslations("Home")
   const hours = Math.floor(duration / 60);
   const minutes = duration % 60;
 

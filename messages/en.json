@@ -48,9 +48,8 @@
     "title-3":"LEVEL",
     "title-4":"RATING",
     "title-5":"RESULTS",
-    "Beginner" : "Beginner",
-    "Intermediate" : "Intermediate",
-    "Professional": "Profeessionl"
+    "title-6" : "Recent Searches"
+
   },
   "Courses":{
     "title-1":"My Learning",
