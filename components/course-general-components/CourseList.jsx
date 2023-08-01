@@ -8,6 +8,7 @@ import { Spinner } from "@material-tailwind/react";
 import NavigateNextOutlinedIcon from "@mui/icons-material/NavigateNextOutlined";
 import Link from "next/link";
 import { GetAllCourses } from "../../app/context/FetchAllCourses";
+import { useTranslations } from "next-intl";
 
 function CourseList({
   onCourseClick,
@@ -18,6 +19,7 @@ function CourseList({
 }) {
   const [courses, setCourses] = useState([]);
   const { Allcourses, isLoading } = GetAllCourses();
+  const t =useTranslations("Courses")
 
   useEffect(() => {
     const getCourses = () => { 
@@ -27,9 +29,9 @@ function CourseList({
   }, [Allcourses]);
 
   const coursesToPull = courses.filter((course) => {
-    if (pageTitle === "My Courses") {
+    if (pageTitle === t("title-1")) {
       return course.isRegistered;
-    } else if (pageTitle === "Saved Courses") {
+    } else if (pageTitle === t("title-2")) {
       return course.isSaved;
     } else if (pageTitle === course.category) {
       return course.category;
@@ -64,7 +66,7 @@ function CourseList({
         </h1>
         <Link
           href={navigationPath || "./home"}
-          className="text-[#efefef] md:text-base text-sm"
+          className="text-[#efefef] dark:text-white md:text-base text-sm"
         >
           {navigationName || "Navigate to"}
           <NavigateNextOutlinedIcon className="text-white" />

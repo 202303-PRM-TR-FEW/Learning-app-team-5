@@ -19,42 +19,48 @@ const AutoAwesomeIcon = dynamic(() =>
 );
 const CodeIcon = dynamic(() => import("@mui/icons-material/Code"));
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 function Categories() {
+ const t = useTranslations('Home')
   const categories = [
     {
-      name: "Sales",
+      name: `${t("Sales")}`,
       icon: <TrendingUpIcon style={{ fontSize: 45 }} />,
       slug: "sales",
     },
-    { name: "HR", icon: <GroupsIcon style={{ fontSize: 45 }} />, slug: "hr" },
     {
-      name: "Drawing",
+      name: `${t("HR")}`,
+      icon: <GroupsIcon style={{ fontSize: 45 }} />,
+      slug: "hr",
+    },
+    {
+      name: `${t("Drawing")}`,
       icon: <GestureIcon style={{ fontSize: 45 }} />,
       slug: "drawing",
     },
     {
-      name: "Big Data",
+      name: `${t("Big Data")}`,
       icon: <StorageOutlinedIcon style={{ fontSize: 45 }} />,
       slug: "big-data",
     },
     {
-      name: "Design",
+      name: `${t("Design")}`,
       icon: <DesignServicesOutlinedIcon style={{ fontSize: 45 }} />,
       slug: "design",
     },
     {
-      name: "Marketing",
+      name: `${t("Marketing")}`,
       icon: <TipsAndUpdatesIcon style={{ fontSize: 45 }} />,
       slug: "marketing",
     },
     {
-      name: "Astronomy",
+      name: `${t("Astronomy")}`,
       icon: <AutoAwesomeIcon style={{ fontSize: 45 }} />,
       slug: "astronomy",
     },
     {
-      name: "Web Development",
+      name: `${t("Web Development")}`,
       icon: <CodeIcon style={{ fontSize: 45 }} />,
       slug: "web-development",
     },
@@ -98,14 +104,14 @@ function debounce(func, timeout = 300) {
 
   return (
     <div className="font-sans">
-      <h2 className="text-4xl font-bold py-6">Categories</h2>
+      <h2 className="text-4xl font-bold py-6">{t("title-2")}</h2>
       <div className="grid place-content-center sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 xl:gap-x-20">
-        {categoriesToShow.map((category, index) => (
+        {categoriesToShow.map((category) => (
           <Link
-            href={`/main/search?category=${category.slug}`}
+            href={`/home/${category.slug}`}
             key={category.slug}
           >
-            <button className="box-content border-2 p-3 drop-shadow-md leading-10 w-72 lg:w-64 3xl:w-80 h-44 bg-white rounded-xl mb-2 text-lg text-gray-500 hover:text-blue-500 hover:bg-blue-200 hover:border-blue-400 flex flex-col items-center justify-center">
+            <button className="box-content border-2 p-3 drop-shadow-md leading-10 w-72 lg:w-64 3xl:w-80 h-44 bg-white rounded-xl mb-2 text-lg text-gray-500 hover:text-blue-500 hover:bg-blue-200 hover:border-blue-400 flex flex-col items-center justify-center dark:bg-indigoDay dark:border-purssianBlue dark:hover:border-blue-400">
               {category.icon}
               <span className="mt-2">{category.name}</span>
             </button>
@@ -113,18 +119,18 @@ function debounce(func, timeout = 300) {
         ))}
         {!showAllCategories && windowWidth < 640 && (
           <button
-            className="box-content border-2 p-3 drop-shadow-md leading-10 sm:w-72 lg:w-64 3xl:w-80 h-44 bg-white rounded-xl mb-2 text-lg text-gray-500 hover:text-blue-500 hover:bg-blue-200 hover:border-blue-400 flex flex-col items-center justify-center"
+            className="box-content border-2 p-3 drop-shadow-md leading-10 sm:w-72 lg:w-64 3xl:w-80 h-44 bg-white rounded-xl mb-2 text-lg text-gray-500 hover:text-blue-500 hover:bg-blue-200 hover:border-blue-400 flex flex-col items-center justify-center dark:bg-indigoDay dark:border-purssianBlue dark:hover:border-blue-400"
             onClick={handleShowMore}
           >
-            <span className="mt-2">More</span>
+            <span className="mt-2">{t("more")}</span>
           </button>
         )}
         {showAllCategories && windowWidth < 640 && (
           <button
-            className="box-content border-2 p-3 drop-shadow-md leading-10 sm:w-72 lg:w-64 3xl:w-80 h-44 bg-white rounded-xl mb-2 text-lg text-gray-500 hover:text-blue-500 hover:bg-blue-200 hover:border-blue-400 flex flex-col items-center justify-center"
+            className="box-content border-2 p-3 drop-shadow-md leading-10 sm:w-72 lg:w-64 3xl:w-80 h-44 bg-white rounded-xl mb-2 text-lg text-gray-500 hover:text-blue-500 hover:bg-blue-200 hover:border-blue-400 flex flex-col items-center justify-center dark:bg-indigoDay dark:border-purssianBlue dark:hover:border-blue-400"
             onClick={handleShowLess}
           >
-            <span className="mt-2">Show Less</span>
+            <span className="mt-2">{t("less")}</span>
           </button>
         )}
       </div>

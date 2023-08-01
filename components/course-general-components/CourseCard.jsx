@@ -67,7 +67,7 @@ function CourseCard({ course, mockProgress, onClick, selectedStyle }) {
   return (
     <div
       onClick={handleCardClick}
-      className={`course-card m-4 p-2 bg-[#fbfbfb] rounded-2xl shadow-md flex cursor-pointer ${selectedStyle}`}
+      className={`course-card m-4 p-2 bg-white dark:bg-indigoDay rounded-2xl shadow-md flex cursor-pointer ${selectedStyle}`}
     >
       {/* Course Image */}
       <div id="course-img" className="hidden sm:block rounded-xl w-1/2">
@@ -91,7 +91,7 @@ function CourseCard({ course, mockProgress, onClick, selectedStyle }) {
           {/* Course Title and Instructor Name */}
           <div>
             <h1
-              className="text-[#373737] text-lg flex-wrap font-bold"
+              className="text-[#373737] dark:text-white text-lg flex-wrap font-bold"
               style={{ fontFamily: "Dela Gothic One, sans-serif" }}
             >
               {course.title}
@@ -124,7 +124,7 @@ function CourseCard({ course, mockProgress, onClick, selectedStyle }) {
               ></div>
             </div>
             {/* Progress Text */}
-            <div className="pt-1 text-gray-500 text-xs font-bold mt-1">
+            <div className="pt-1 text-gray-500 dark:text-bodyWhite text-xs font-bold mt-1">
               {width}% complete
             </div>
           </div>

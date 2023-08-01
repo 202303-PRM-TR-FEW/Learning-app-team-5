@@ -1,16 +1,16 @@
 import Link from "next/link";
 import CourseButton from "../course-general-components/CourseButton";
-const TotalStatistics = () => {
+const TotalStatistics = ({t}) => {
   return (
-    <div className="text-lightBlack w-full py-8 ">
+    <div className=" w-full py-8 ">
       <div className="flex justify-between">
-      <h2 className="font-bold text-xl">Total Statistics</h2>
+      <h2 className="font-bold text-xl dark:text-bodyWhite">{t("title")}</h2>
       <Link href="/statistics">
       <CourseButton buttonName={"Statistics"}/>
       </Link>
       </div>
       <div className="flex justify-between ">
-        <div className=" mt-2 bg-[#FBFBFB] p-2 rounded-[20px] shadow-md">
+        <div className=" mt-2 bg-white dark:bg-indigoDay p-2 rounded-[20px] shadow-md">
           <div className=" bg-[#cbe1fa] rounded-[10px]  px-14 py-2">
             <svg
               viewBox="0 0 24 24"
@@ -22,11 +22,11 @@ const TotalStatistics = () => {
             </svg>
           </div>
           <div className="flex flex-col justify-center items-center py-2 font-medium">
-            <p>FINISHED COURSES</p>
+            <p>{t("Finished")}</p>
             <p className="text-lg">0</p>
           </div>
         </div>
-        <div className=" mt-2 bg-[#FBFBFB] p-2 rounded-[20px] shadow-md">
+        <div className=" mt-2 bg-white dark:bg-indigoDay p-2 rounded-[20px] shadow-md">
           <div className=" bg-lightOrange rounded-[10px]  px-14 py-2">
             <svg
               viewBox="0 0 24 24"
@@ -38,11 +38,11 @@ const TotalStatistics = () => {
             </svg>
           </div>
           <div className="flex flex-col justify-center items-center py-2 font-medium">
-            <p>HOURS LEAREND</p>
+            <p>{t("Hours")}</p>
             <p className="text-lg">0</p>
           </div>
         </div>
-        <div className=" mt-2 bg-[#FBFBFB] p-2 rounded-[20px] shadow-md">
+        <div className=" mt-2 bg-white dark:bg-indigoDay p-2 rounded-[20px] shadow-md">
           <div className=" bg-lightGreen rounded-[10px]  px-14 py-2">
             <svg
               viewBox="0 0 576 512"
@@ -54,7 +54,7 @@ const TotalStatistics = () => {
             </svg>
           </div>
           <div className="flex flex-col justify-center items-center py-2 font-medium">
-            <p>SKILES ACHIEVED</p>
+            <p>{t("Skills")}</p>
             <p className="text-lg">0</p>
           </div>
         </div>

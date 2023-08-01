@@ -1,11 +1,15 @@
+'use client';
 import CourseDisplayPage from "@/components/course-general-components/CourseDisplayPage";
+import { useTranslations } from "next-intl";
 
 function MyCourses() {
+  const t = useTranslations("Courses")
+  
   return (
     <CourseDisplayPage
-      pageTitle={"marketing"}
+      pageTitle={t("title-1")}
       navigationPath={"./saved"}
-      navigationName={"Saved Courses"}
+      navigationName={t("title-2")}
     />
   );
 }
