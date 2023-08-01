@@ -84,5 +84,12 @@
     "View": "TÜMÜNÜ GÖRÜNTÜLE",
     "Hide": "Gizle",
     "Submit":"gönder"
+  },
+  "Discussion":{
+    "title":"Topluluktan tavsiye alın.",
+    "Placeholder":"Sorunuzu buraya yazın...",
+    "Ask":"Sordu",
+    "Answer":"Cevap veren:",
+    "Date": "Yaratılış Tarihi"
   }
 }

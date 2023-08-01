@@ -18,8 +18,11 @@ const DeleteRoundedIcon = dynamic(() =>
   import("@mui/icons-material/DeleteRounded")
 );
 import { Spinner } from "@material-tailwind/react";
+import { useTranslations } from "next-intl";
 
 const Questions = () => {
+  const t = useTranslations("Discussion");
+
   const [questions, setQuestions] = useState([]);
   const [answer, setAnswer] = useState("");
   const [currentQuestionId, setCurrentQuestionId] = useState(null);
@@ -62,6 +65,11 @@ const Questions = () => {
   }, []);
 
   const handleAnswer = async (e, questionId) => {
+    if (!user) {
+      alert("You need to login first");
+      return;
+    }
+
     let date = new Date();
     let dateWithoutHours = date.toLocaleDateString();
     e.preventDefault();
@@ -124,7 +132,7 @@ const Questions = () => {
             >
               <div className="flex justify-between">
                 <span className="text-md text-gray-400 dark:text-gray-700 font-medium">
-                  Asked by: {question.data.email}
+                  {t("Ask")}: {question.data.email}
                 </span>
                 <DeleteRoundedIcon
                   onClick={() =>
@@ -170,10 +178,10 @@ const Questions = () => {
                       />
                     </div>
                     <span className="text-md text-gray-400 dark:text-gray-700 font-medium">
-                      Answered by: {data.email}
+                      {t("Answer")}: {data.email}
                     </span>
                     <span className="text-md text-gray-400 dark:text-gray-700 font-medium">
-                      Created Date: {data.createDate}
+                      {t("Date")}: {data.createDate}
                     </span>
                   </div>
                 ))}

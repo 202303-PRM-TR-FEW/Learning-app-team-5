@@ -4,9 +4,12 @@ import { UserAuth } from "@/app/context/AuthContext";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase";
 import QuestionAnswerRoundedIcon from "@mui/icons-material/QuestionAnswerRounded";
+import { useTranslations } from "next-intl";
 
 // Text input component that is protected
 const TextInput = () => {
+
+  const t = useTranslations("Discussion");
   const [question, setQuestion] = useState("");
 
   // Check for user authentication status
@@ -34,7 +37,7 @@ const TextInput = () => {
 
   return (
     <div className="flex flex-col justify-center items-center ">
-      <h1 className="font-bold text-3xl self-start ">Ask our community</h1>
+      <h1 className="font-bold text-3xl self-start ">{t("title")}</h1>
       <form className="flex  gap-2 py-6" onSubmit={handleSubmit}>
         <textarea
           className="p-2 rounded-2xl bg-bodyWhite  dark:text-lightBlack w-72 lg:w-96 h-full shadow-xl focus:border-none leading-relaxed"
@@ -42,7 +45,7 @@ const TextInput = () => {
           name="question"
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
-          placeholder="Type your question here..."
+          placeholder={t("Placeholder")}
           required
         />
         <button type="submit">

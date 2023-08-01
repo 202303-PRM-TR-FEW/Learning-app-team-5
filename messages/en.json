@@ -84,5 +84,12 @@
   "View" : "VIEW ALL",
   "Hide": "Hide",
   "Submit":"submit"
+  },
+  "Discussion":{
+    "title": "Seek advice from the community.",
+    "Placeholder":"Type your question here...",
+    "Ask":"Asked by",
+    "Answer":"Answer provided by",
+    "Date": "Date of Creation"
   }
 }
