@@ -9,7 +9,8 @@
     "Search": "Arama",
     "Courses": "Dersler",
     "Profile": "Profil",
-    "Login": "Giriş"
+    "Login": "Giriş",
+    "Discussions":"S ve C"
   },
   "login": {
     "login": "Giriş Yap",

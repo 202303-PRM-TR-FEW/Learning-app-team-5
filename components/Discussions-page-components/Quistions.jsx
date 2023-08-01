@@ -20,7 +20,7 @@ const DeleteRoundedIcon = dynamic(() =>
 import { Spinner } from "@material-tailwind/react";
 import { useTranslations } from "next-intl";
 
-const Questions = () => {
+const Questions = ({ Error, setError }) => {
   const t = useTranslations("Discussion");
 
   const [questions, setQuestions] = useState([]);
@@ -65,14 +65,19 @@ const Questions = () => {
   }, []);
 
   const handleAnswer = async (e, questionId) => {
+    e.preventDefault();
     if (!user) {
-      alert("You need to login first");
+      setError("You need to login first");
+
+      setTimeout(() => {
+        setError(null);
+      }, 5000);
       return;
     }
 
     let date = new Date();
     let dateWithoutHours = date.toLocaleDateString();
-    e.preventDefault();
+
     const docData = {
       questionId,
       answer,
@@ -83,8 +88,17 @@ const Questions = () => {
     await addDoc(collection(db, "answers"), docData);
     setAnswer("");
   };
+
   const handleDeleteQuestion = async (questionId, questionEmail) => {
-    if (user && user.email === questionEmail) {
+    if (!user) {
+      setError("You need to login first");
+
+      setTimeout(() => {
+        setError(null);
+      }, 5000);
+      return;
+    }
+    if (user.email === questionEmail) {
       const docRef = doc(db, "questions", questionId);
       await deleteDoc(docRef)
         .then(() => {
@@ -94,11 +108,24 @@ const Questions = () => {
           console.error("Error deleting document: ", error);
         });
     } else {
-      console.error("Unauthorized deletion attempt");
+      setError("You don't have permission to delete this question !!!");
+
+      setTimeout(() => {
+        setError(null);
+      }, 5000);
+      return;
     }
   };
   const handleDeleteAnswer = async (questionId, answerId, answerEmail) => {
-    if (user && user.email === answerEmail) {
+    if (!user) {
+      setError("You need to login first");
+
+      setTimeout(() => {
+        setError(null);
+      }, 5000);
+      return;
+    }
+    if (user.email === answerEmail) {
       const docRef = doc(db, "answers", answerId);
       await deleteDoc(docRef)
         .then(() => {
@@ -113,7 +140,12 @@ const Questions = () => {
           console.error("Error deleting document: ", error);
         });
     } else {
-      console.error("Unauthorized deletion attempt");
+      setError("You don't have permission to delete this answer !!!");
+
+      setTimeout(() => {
+        setError(null);
+      }, 5000);
+      return;
     }
   };
 

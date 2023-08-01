@@ -9,7 +9,8 @@
   "Search": "Search",
   "Courses": "Courses",
   "Profile": "Profile",
-  "Login": "Login"
+  "Login": "Login",
+  "Discussions":"Q & A"
   },
   "login":{
     "login":"Login",

@@ -7,10 +7,10 @@ import QuestionAnswerRoundedIcon from "@mui/icons-material/QuestionAnswerRounded
 import { useTranslations } from "next-intl";
 
 // Text input component that is protected
-const TextInput = () => {
-
+const TextInput = ({ Error, setError }) => {
   const t = useTranslations("Discussion");
   const [question, setQuestion] = useState("");
+
 
   // Check for user authentication status
   const { user } = UserAuth();
@@ -20,7 +20,11 @@ const TextInput = () => {
     e.preventDefault();
 
     if (!user) {
-      alert("You need to login first");
+      setError("You need to login first");
+
+      setTimeout(() => {
+        setError(null);
+      }, 5000);
       return;
     }
 
@@ -38,6 +42,11 @@ const TextInput = () => {
   return (
     <div className="flex flex-col justify-center items-center ">
       <h1 className="font-bold text-3xl self-start ">{t("title")}</h1>
+      {Error && (
+        <div className="text-center text-red-400 text-xl font-bold bg-red-100 my-2 py-4 w-1/2 rounded-xl border-2 border-red-500">
+          {Error}
+        </div>
+      )}
       <form className="flex  gap-2 py-6" onSubmit={handleSubmit}>
         <textarea
           className="p-2 rounded-2xl bg-bodyWhite  dark:text-lightBlack w-72 lg:w-96 h-full shadow-xl focus:border-none leading-relaxed"
