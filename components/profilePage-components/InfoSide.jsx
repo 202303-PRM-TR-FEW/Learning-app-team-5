@@ -6,7 +6,7 @@ import Achievemntes from "./Achievemntes";
 import Header from "./Header";
 import TotalStatistics from "@/components/profilePage-components/TotalStatistics";
 
-const InfoComp = () => {
+const InfoComp = ({user}) => {
   const [showForm, setShowForm] = useState(false);
   const [image, setImage] = useState("");
   const t = useTranslations("Profile");
@@ -18,7 +18,7 @@ const InfoComp = () => {
 
   return (
     <div className="w-full lg:w-1/2 relative ">
-      <Header setShowForm={setShowForm} />
+      <Header setShowForm={setShowForm} user = {user}/>
       {showForm && (
         <form
           onSubmit={handleSubmitImage}

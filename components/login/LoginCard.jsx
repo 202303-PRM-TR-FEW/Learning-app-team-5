@@ -18,7 +18,7 @@ const VisibilityOff = dynamic(() =>
 const LoginPage = () => {
   const t = useTranslations("login");
 
-  const { signIn, signUp } = UserAuth();
+  const { signIn, signUp, Error } = UserAuth();
   const router = useRouter(); // Get the router object using useRouter hook
 
   const [email, setEmail] = useState("");
@@ -48,20 +48,14 @@ const LoginPage = () => {
     if (isRegistered) {
       try {
         await signIn(email, password);
-        // Redirect to profile page after successful login
-        router.push("/profile");
-      } catch (error) {
-        console.error("Error signing in:", error);
-      }
+      } catch (error) {}
     } else {
       try {
-        await signUp(email, password);
+        await signUp(email, password, username);
         setSignupSuccess(true);
         // Redirect to profile page after successful Sign Up
         router.push("/profile");
-      } catch (error) {
-        console.error("Error signing up:", error);
-      }
+      } catch (error) {}
     }
   };
 
@@ -151,6 +145,11 @@ const LoginPage = () => {
               }}
             />
           </div>
+          {Error && (
+            <p className="text-red-400 text-center text-md font-medium pb-2">
+              {Error}
+            </p>
+          )}
           <button
             type="submit"
             className="w-full py-2 px-4 bg-primary-blue hover:bg-blue-600 text-white font-semibold rounded-md focus:outline-none"

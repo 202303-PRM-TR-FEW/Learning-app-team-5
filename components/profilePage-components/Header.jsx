@@ -3,7 +3,8 @@ import { useTranslations } from "next-intl";
 import { UserAuth } from "../../app/context/AuthContext";
 import { useRouter } from "next/navigation";
 
-const Header = ({ setShowForm }) => {
+const Header = ({ setShowForm, user }) => {
+  console.log(user)
   const t = useTranslations("Profile");
   const { logOut } = UserAuth();
   const router = useRouter();
@@ -23,7 +24,7 @@ const Header = ({ setShowForm }) => {
         <Image
           onClick={() => setShowForm(true)}
           className="rounded-full  m-2 cursor-pointer"
-          src="https://icon-library.com/images/new-account-icon/new-account-icon-14.jpg"
+          src={user.photoURL}
           alt="profile image"
           height={150}
           width={150}
@@ -31,7 +32,7 @@ const Header = ({ setShowForm }) => {
       </div>
       <div className="flex flex-col gap-2 shadow-sm w-full">
         <div className="flex justify-between">
-          <h1 className="font-extrabold text-2xl">Sally Robins</h1>
+          <h1 className="font-extrabold text-2xl">{user.displayName}</h1>
           <button
             className="bg-primaryBlue text-white py-2 px-6 rounded-[10px] hover:bg-white hover:text-primaryBlue hover:border hover:border-primaryBlue dark:hover:bg-[#1c2e50]"
             onClick={handleLogOut}
