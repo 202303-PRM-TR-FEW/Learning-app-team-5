@@ -45,7 +45,11 @@ const Header = ({ user, userData, setShowForm }) => {
         <Image
           onClick={() => setShowForm(true)}
           className="rounded-full  m-2 cursor-pointer"
-          src={user.photoURL}
+          src={
+            user.photoURL
+              ? user.photoURL
+              : "https://icon-library.com/images/new-account-icon/new-account-icon-14.jpg"
+          }
           alt="profile image"
           height={150}
           width={150}

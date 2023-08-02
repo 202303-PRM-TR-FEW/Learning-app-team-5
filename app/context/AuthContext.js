@@ -33,7 +33,6 @@ export const AuthContextProvider = ({ children }) => {
         // Update displayName
         return updateProfile(user, {
           displayName: displayName,
-          photoURL: "https://icon-library.com/images/new-account-icon/new-account-icon-14.jpg",
         }).then(() => {
           // Update successful, set Firestore document
           return setDoc(doc(db, 'users', user.uid), {
