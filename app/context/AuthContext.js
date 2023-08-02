@@ -9,7 +9,7 @@ import {
   fetchSignInMethodsForEmail,
   updateProfile
 } from 'firebase/auth'
-import { setDoc, doc } from "firebase/firestore"
+import { setDoc, doc, onSnapshot } from "firebase/firestore"
 import { useRouter } from "next/navigation";
 
 // create the context
@@ -18,11 +18,12 @@ const AuthContext = createContext()
 //  the Authentication Provider
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [userData, setUserData] = useState(null);
   const [Error, setError] = useState(null);
   const router = useRouter()
 
 
-  function signUp(email, password, displayName) {
+  function signUp(email, password, displayName, city) {
     console.log(displayName)
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -38,6 +39,7 @@ export const AuthContextProvider = ({ children }) => {
           return setDoc(doc(db, 'users', user.uid), {
             email: user.email,
             password: password,
+            city: city
           });
         })
 
@@ -77,7 +79,20 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      if (currentUser) {
+        const userDoc = doc(db, "users", currentUser.uid);
 
+        const unsubscribe = onSnapshot(userDoc, (docSnapshot) => {
+          if (docSnapshot.exists()) {
+            setUserData(docSnapshot.data());
+          } else {
+            console.log("No such user!");
+          }
+        });
+
+        // Cleanup subscription on unmount
+        return () => unsubscribe();
+      }
     });
 
     return () => unsubscribe();
@@ -85,7 +100,7 @@ export const AuthContextProvider = ({ children }) => {
 
   return (
     // pass all the functions as props so we can use them in our app components
-    <AuthContext.Provider value={{ signIn, logOut, signUp, user, Error }}>
+    <AuthContext.Provider value={{ signIn, logOut, signUp, user, Error, userData }}>
       {children}
     </AuthContext.Provider>
   );

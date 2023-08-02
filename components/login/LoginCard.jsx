@@ -24,6 +24,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const [city, setCity] = useState("");
   const [isRegistered, setIsRegistered] = useState(true);
   const [emailError, setEmailError] = useState("");
   const [signupSuccess, setSignupSuccess] = useState(false); // New state for signup success
@@ -42,6 +43,9 @@ const LoginPage = () => {
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
+  const handleCityChange = (e) => {
+    setCity(e.target.value);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,7 +55,7 @@ const LoginPage = () => {
       } catch (error) {}
     } else {
       try {
-        await signUp(email, password, username);
+        await signUp(email, password, username, city);
         setSignupSuccess(true);
         // Redirect to profile page after successful Sign Up
         router.push("/profile");
@@ -107,20 +111,36 @@ const LoginPage = () => {
             />
           </div>
           {!isRegistered && (
-            <div className="mb-4">
-              <label htmlFor="username" className="block mb-2 font-semibold">
-                {t("Uesrname")}:
-              </label>
-              <TextField
-                type="text"
-                id="username"
-                value={username}
-                onChange={handleUsernameChange}
-                className="w-full dark:bg-bodyWhite rounded-xl"
-                required
-                placeholder="learnU"
-              />
-            </div>
+            <>
+              <div className="mb-4">
+                <label htmlFor="username" className="block mb-2 font-semibold">
+                  {t("Uesrname")}:
+                </label>
+                <TextField
+                  type="text"
+                  id="username"
+                  value={username}
+                  onChange={handleUsernameChange}
+                  className="w-full dark:bg-bodyWhite rounded-xl"
+                  required
+                  placeholder="learnU"
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="username" className="block mb-2 font-semibold">
+                  {t("City")}:
+                </label>
+                <TextField
+                  type="text"
+                  id="cityInput"
+                  value={city}
+                  onChange={handleCityChange}
+                  className="w-full dark:bg-bodyWhite rounded-xl"
+                  required
+                  placeholder={t("Placeholder-3")}
+                />
+              </div>
+            </>
           )}
           <div className="mb-4">
             <label htmlFor="password" className="block mb-2 font-semibold">

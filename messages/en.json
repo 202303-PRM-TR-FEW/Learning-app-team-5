@@ -17,8 +17,10 @@
     "Email":"Email",
     "Password":"password",
     "Uesrname":"Username",
+    "City":"City",
     "Placeholder-1":"xyz@learnU.com",
     "Placeholder-2":"Enter your email",
+    "Placeholder-3":"New York",
     "Message-1": "Signup is successful! Please login with your credentials.",
     "Message-2": "Don't have an account?",
     "Message-3": "Already have an account?",
@@ -83,6 +85,7 @@
   "Invite": "INVITE FRIENDS",
   "View" : "VIEW ALL",
   "Hide": "Hide",
-  "Submit":"submit"
+  "Submit":"submit",
+  "Input":"Please enter your current city."
   }
 }
