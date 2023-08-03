@@ -91,7 +91,7 @@ const Questions = ({ Error, setError }) => {
 
   const handleDeleteQuestion = async (questionId, questionEmail) => {
     if (!user) {
-      setError("You need to login first");
+      setError(t("Error-1"));
 
       setTimeout(() => {
         setError(null);
@@ -99,16 +99,19 @@ const Questions = ({ Error, setError }) => {
       return;
     }
     if (user.email === questionEmail) {
-      const docRef = doc(db, "questions", questionId);
-      await deleteDoc(docRef)
-        .then(() => {
-          console.log("Successfully deleted question with id ");
-        })
-        .catch((error) => {
-          console.error("Error deleting document: ", error);
-        });
+      const hasConfirmed = confirm(`${t("Alert")}`);
+      if (hasConfirmed) {
+        const docRef = doc(db, "questions", questionId);
+        await deleteDoc(docRef)
+          .then(() => {
+            console.log("Successfully deleted question with id ");
+          })
+          .catch((error) => {
+            console.error("Error deleting document: ", error);
+          });
+      }
     } else {
-      setError("You don't have permission to delete this question !!!");
+      setError(t("Error-2"));
 
       setTimeout(() => {
         setError(null);
@@ -118,7 +121,7 @@ const Questions = ({ Error, setError }) => {
   };
   const handleDeleteAnswer = async (questionId, answerId, answerEmail) => {
     if (!user) {
-      setError("You need to login first");
+      setError(t("Error-1"));
 
       setTimeout(() => {
         setError(null);
@@ -126,21 +129,24 @@ const Questions = ({ Error, setError }) => {
       return;
     }
     if (user.email === answerEmail) {
-      const docRef = doc(db, "answers", answerId);
-      await deleteDoc(docRef)
-        .then(() => {
-          console.log(
-            "Successfully deleted answer with id " +
-              answerId +
-              " from question with id " +
-              questionId
-          );
-        })
-        .catch((error) => {
-          console.error("Error deleting document: ", error);
-        });
+      const hasConfirmed = confirm(`${t("Alert")}`);
+      if (hasConfirmed) {
+        const docRef = doc(db, "answers", answerId);
+        await deleteDoc(docRef)
+          .then(() => {
+            console.log(
+              "Successfully deleted answer with id " +
+                answerId +
+                " from question with id " +
+                questionId
+            );
+          })
+          .catch((error) => {
+            console.error("Error deleting document: ", error);
+          });
+      }
     } else {
-      setError("You don't have permission to delete this answer !!!");
+      setError(t("Error-3"));
 
       setTimeout(() => {
         setError(null);

@@ -92,6 +92,11 @@
     "Placeholder-2":"Cevabınızı buraya yazın...",
     "Ask":"Sordu",
     "Answer":"Cevap veren:",
-    "Date": "Yaratılış Tarihi"
+    "Date": "Yaratılış Tarihi",
+    "Alert" : "Bu yanıtı silmek istediğinizden emin misiniz?",
+    "Alert-2" : "Bu soruyu silmek istediğinizden emin misiniz?",
+    "Error-1":"Önce giriş yapmalısınız",
+    "Error-2":"Bu soruyu silme izniniz yok!!!",
+    "Error-3":"Bu yanıtı silme izniniz yok!!!"
   }
 }
