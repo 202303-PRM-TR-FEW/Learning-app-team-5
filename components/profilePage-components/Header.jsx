@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const Header = ({ user, userData, setShowForm }) => {
-  console.log(user);
   const [Form, setForm] = useState(null);
   const [newCity, setNewCity] = useState("");
   const t = useTranslations("Profile");
@@ -90,6 +89,12 @@ const Header = ({ user, userData, setShowForm }) => {
             absolute top-[30%] left-[21%] md:top-[30%] md:left-[80%] z-1
            bg-white dark:bg-indigoDay rounded-[25px] shadow-2xl w-60"
           >
+            <p
+              className="self-end px-3 hover:text-red-200 cursor-pointer"
+              onClick={() => setForm(false)}
+            >
+              X
+            </p>
             <label>{t("Input")}</label>
             <input
               type="text"
