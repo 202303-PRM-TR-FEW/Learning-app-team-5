@@ -187,7 +187,8 @@ const Questions = ({ Error, setError }) => {
                   value={currentQuestionId === question.id ? answer : ""}
                   onClick={() => setCurrentQuestionId(question.id)}
                   onChange={(e) => setAnswer(e.target.value)}
-                  placeholder="Type your answer here..."
+                  placeholder={t("Placeholder-2")}
+                  required
                 />
                 <button type="submit">
                   <QuestionAnswerRoundedIcon
