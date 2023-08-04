@@ -7,7 +7,8 @@ import ThisWeek from "@/components/statistics-page-components/ThisWeek";
 import { UserAuth } from "app/context/AuthContext.js";
 import { db } from "../../../../firebase";
 import { doc, updateDoc } from "firebase/firestore";
-import Achievements from "@/components/statistics-page-components/Achievements";
+
+import CourseModules from "@/components/statistics-page-components/CourseModules";
 
 
 function Statistics() {
@@ -36,7 +37,7 @@ function Statistics() {
       <div className="w-full lg:w-1/2 h-screen m-4">
         <ThisWeek />
         <MyPerformance />
-        <Achievements />
+        <CourseModules />
       </div>
     </>
   );

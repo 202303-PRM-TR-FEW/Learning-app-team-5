@@ -1,8 +1,6 @@
 "use client";
 import React from "react";
 import { useEffect, useState } from "react";
-import { db } from "../../firebase";
-import { getDocs, collection } from "firebase/firestore";
 import CourseCard from "./CourseCard";
 import { Spinner } from "@material-tailwind/react";
 import NavigateNextOutlinedIcon from "@mui/icons-material/NavigateNextOutlined";
