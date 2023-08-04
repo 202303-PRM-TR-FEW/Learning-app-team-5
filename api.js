@@ -31,8 +31,4 @@ const makeAuthenticatedRequest = async (endpoint, method = 'GET', data = null) =
   }
 };
 
-const getLeaderboard = async () => {
-    return makeAuthenticatedRequest('/leaderboards');
-  };
-
-export default { makeAuthenticatedRequest, getLeaderboard };
+export default { makeAuthenticatedRequest };
