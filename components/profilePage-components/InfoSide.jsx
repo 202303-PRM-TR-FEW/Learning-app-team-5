@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { updateProfile } from "firebase/auth";
+import { doc, updateDoc } from "firebase/firestore";
 import {
   getStorage,
   ref,
@@ -9,7 +9,7 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 
-import { app } from "@/firebase";
+import { app, db } from "@/firebase";
 import Achievemntes from "./Achievemntes";
 import Header from "./Header";
 import TotalStatistics from "@/components/profilePage-components/TotalStatistics";
@@ -54,12 +54,13 @@ const InfoComp = ({ user, userData }) => {
       setImage(URL.createObjectURL(e.target.files[0]));
     }
   };
-
+  console.log(user.uid);
   const handleSubmitImage = async (e) => {
     e.preventDefault();
     if (selectedFile) {
       const photoURL = await uploadFileAndGetURL(selectedFile);
-      await updateProfile(user, { photoURL });
+      const userRef = doc(db, "users", user.uid);
+      await updateDoc(userRef, { photoURL: photoURL });
     }
     setShowForm(false);
     setProgress(null);

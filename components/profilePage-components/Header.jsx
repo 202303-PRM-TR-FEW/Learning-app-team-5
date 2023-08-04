@@ -45,8 +45,8 @@ const Header = ({ user, userData, setShowForm }) => {
           onClick={() => setShowForm(true)}
           className="rounded-full  m-2 cursor-pointer"
           src={
-            user.photoURL
-              ? user.photoURL
+            userData.photoURL
+              ? userData.photoURL
               : "https://icon-library.com/images/new-account-icon/new-account-icon-14.jpg"
           }
           alt="profile image"
@@ -56,7 +56,7 @@ const Header = ({ user, userData, setShowForm }) => {
       </div>
       <div className="flex flex-col gap-2 shadow-sm w-full">
         <div className="flex justify-between">
-          <h1 className="font-extrabold text-2xl">{user.displayName}</h1>
+          <h1 className="font-extrabold text-2xl">{userData.username}</h1>
           <button
             className="bg-primaryBlue text-white py-2 px-6 rounded-[10px] hover:bg-white hover:text-primaryBlue hover:border hover:border-primaryBlue dark:hover:bg-[#1c2e50]"
             onClick={handleLogOut}

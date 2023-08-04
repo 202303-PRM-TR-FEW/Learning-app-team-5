@@ -7,7 +7,6 @@ import {
   signOut,
   onAuthStateChanged,
   fetchSignInMethodsForEmail,
-  updateProfile
 } from 'firebase/auth'
 import { setDoc, doc, onSnapshot } from "firebase/firestore"
 import { useRouter } from "next/navigation";
@@ -30,17 +29,14 @@ export const AuthContextProvider = ({ children }) => {
         // Signed in 
         const user = userCredential.user;
 
-        // Update displayName
-        return updateProfile(user, {
-          displayName: displayName,
-        }).then(() => {
-          // Update successful, set Firestore document
-          return setDoc(doc(db, 'users', user.uid), {
-            email: user.email,
-            password: password,
-            city: city
-          });
-        })
+        //  set Firestore document
+        return setDoc(doc(db, 'users', user.uid), {
+          email: user.email,
+          password: password,
+          city: city,
+          username: displayName,
+          photoURL: "https://icon-library.com/images/new-account-icon/new-account-icon-14.jpg"
+        });
 
       })
       .catch((error) => {
