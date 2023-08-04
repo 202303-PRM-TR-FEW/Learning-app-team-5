@@ -15,4 +15,10 @@ function CourseButton({
   );
 }
 
+CourseButton.defaultProps = {
+  buttonName: "Button",
+  handleClick: () => {},
+  widthPercentage: "w-[45%]",
+};
+
 export default CourseButton;
