@@ -9,7 +9,8 @@
     "Search": "Arama",
     "Courses": "Dersler",
     "Profile": "Profil",
-    "Login": "Giriş"
+    "Login": "Giriş",
+    "Discussions":"S ve C"
   },
   "login": {
     "login": "Giriş Yap",
@@ -17,8 +18,10 @@
     "Email": "E-posta",
     "Password": "şifre",
     "Uesrname": "Kullanıcı Adı",
+    "City": "şehir",
     "Placeholder-1": "xyz@learnU.com",
     "Placeholder-2": "E-postanızı girin",
+    "Placeholder-3":"Istanbul",
     "Message-1": "Kayıt başarılı! Lütfen kimlik bilgilerinizle giriş yapın.",
     "Message-2": "Hesabınız yok mu?",
     "Message-3": "Zaten bir hesabınız var mı?",
@@ -48,9 +51,7 @@
     "title-3": "SEVİYE",
     "title-4": "DEĞERLENDİRME",
     "title-5": "SONUÇLAR",
-    "Beginner": "Başlangıç Seviyesi",
-    "Intermediate": "Orta Seviye",
-    "Professional": "Profesyonel"
+    "title-6": "Son Aramalar"
   },
   "Courses": {
     "title-1": "Öğrenim İçeriğim",
@@ -85,6 +86,20 @@
     "Invite": "ARKADAŞLARI DAVET ET",
     "View": "TÜMÜNÜ GÖRÜNTÜLE",
     "Hide": "Gizle",
-    "Submit":"gönder"
+    "Submit":"gönder",
+    "Input":"Lütfen bulunduğunuz şehri giriniz."
+  },
+  "Discussion":{
+    "title":"Topluluktan tavsiye alın.",
+    "Placeholder":"Sorunuzu buraya yazın...",
+    "Placeholder-2":"Cevabınızı buraya yazın...",
+    "Ask":"Sordu",
+    "Answer":"Cevap veren:",
+    "Date": "Yaratılış Tarihi",
+    "Alert" : "Bu yanıtı silmek istediğinizden emin misiniz?",
+    "Alert-2" : "Bu soruyu silmek istediğinizden emin misiniz?",
+    "Error-1":"Önce giriş yapmalısınız",
+    "Error-2":"Bu soruyu silme izniniz yok!!!",
+    "Error-3":"Bu yanıtı silme izniniz yok!!!"
   }
 }

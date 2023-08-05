@@ -6,9 +6,10 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
-  fetchSignInMethodsForEmail
+  fetchSignInMethodsForEmail,
 } from 'firebase/auth'
-import { setDoc, doc } from "firebase/firestore"
+import { setDoc, doc, onSnapshot } from "firebase/firestore"
+import { useRouter } from "next/navigation";
 
 // create the context
 const AuthContext = createContext()
@@ -16,26 +17,31 @@ const AuthContext = createContext()
 //  the Authentication Provider
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [userData, setUserData] = useState(null);
+  const [Error, setError] = useState(null);
+  const router = useRouter()
 
-  function signUp(email, password) {
+
+  function signUp(email, password, displayName, city) {
+    console.log(displayName)
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
+        // Signed in 
         const user = userCredential.user;
-        console.log('User data:', userCredential.user);
+
+        //  set Firestore document
         return setDoc(doc(db, 'users', user.uid), {
           email: user.email,
-          /* password: user.password, */
-          /* username: user.username, */
-          savedCourses: [],
-          registeredCourses: []
+          password: password,
+          city: city,
+          username: displayName,
+          photoURL: "https://icon-library.com/images/new-account-icon/new-account-icon-14.jpg"
         });
+
       })
-      // .then(() => {
-      //   // Redirect to home page after successful signup
-      //   router.push('/home');
-      // })
       .catch((error) => {
-        console.error('Error signing up:', error);
+        console.log(error)
+
       });
   }
 
@@ -45,26 +51,22 @@ export const AuthContextProvider = ({ children }) => {
       .then((signInMethods) => {
         // If the email exists in Firebase Authentication, try to sign in with the provided email and password
         if (signInMethods.length > 0) {
-          return signInWithEmailAndPassword(auth, email, password);
+          signInWithEmailAndPassword(auth, email, password)
+          router.push("/profile")
         } else {
           throw new Error('Email not found. Please sign up first.');
         }
       })
-      // .then(() => {
-      //   // Redirect to home page after successful login
-      //   router.push('/home');
-      // })
-      .catch((error) => {
-        console.error('Error signing in:', error);
+
+      .catch(() => {
+        setError("Email not found. Please sign up first");
+        setTimeout(() => { setError(null) }, 4000)
       });
   }
 
   function logOut() {
     signOut(auth)
-      // .then(() => {
-      //   // Redirect to login page after logout
-      //   router.push('/home');
-      // })
+
       .catch((error) => {
         console.error('Error logging out:', error);
       });
@@ -72,10 +74,20 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      // if (currentUser) {
-      //   // Redirect logged-in user to home page
-      //   router.push('/home');
-      // }
+      if (currentUser) {
+        const userDoc = doc(db, "users", currentUser.uid);
+
+        const unsubscribe = onSnapshot(userDoc, (docSnapshot) => {
+          if (docSnapshot.exists()) {
+            setUserData(docSnapshot.data());
+          } else {
+            console.log("No such user!");
+          }
+        });
+
+        // Cleanup subscription on unmount
+        return () => unsubscribe();
+      }
     });
 
     return () => unsubscribe();
@@ -83,7 +95,7 @@ export const AuthContextProvider = ({ children }) => {
 
   return (
     // pass all the functions as props so we can use them in our app components
-    <AuthContext.Provider value={{ signIn, logOut, signUp, user }}>
+    <AuthContext.Provider value={{ signIn, logOut, signUp, user, Error, userData }}>
       {children}
     </AuthContext.Provider>
   );

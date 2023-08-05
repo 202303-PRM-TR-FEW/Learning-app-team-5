@@ -9,10 +9,9 @@ function SearchResults({ searchResult }) {
         <Course
           key={course.id}
           title={course.title}
-          authorName={course.authorName}
-          authorImage={course.authorImage}
+          authorName={course.instructorName}
+          authorImage={course.instructorImage}
           courseImage={course.courseImage}
-          price={course.price}
           duration={course.duration}
           rating={course.rating}
         />

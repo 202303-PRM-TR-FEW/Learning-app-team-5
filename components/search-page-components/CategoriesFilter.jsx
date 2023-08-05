@@ -1,42 +1,73 @@
 "use client";
-import React, { useState } from "react";
-import CheckIcon from "@mui/icons-material/Check";
+import React, { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
+import { GetAllCourses } from "../../app/context/FetchAllCourses";
 
-function CategoriesFilter({ categories, onCategoryChange }) {
-  const [selectedCategories, setSelectedCategories] = useState(
-    categories.reduce((acc, category) => ({ ...acc, [category]: false }), {})
-  );
+const CheckIcon = dynamic(() => import("@mui/icons-material/Check"));
 
-  const handleCategoryChange = (category) => {
-    setSelectedCategories((prevCategories) => ({
-      ...prevCategories,
-      [category]: !prevCategories[category],
-    }));
-    onCategoryChange(category);
+function CategoriesFilter({ handleCategoryChange,t }) {
+  const { Allcourses } = GetAllCourses();
+
+  const [categories, setCategories] = useState([]);
+
+  // Fetch all categories when Allcourses data is available
+  useEffect(() => {
+    if (Allcourses && Allcourses.length > 0) {
+      const allCategories = Array.from(
+        new Set(
+          Allcourses.map((course) => capitalizeFirstLetter(course.category))
+        )
+      );
+      setCategories(
+        allCategories.map((category) => ({
+          value: category,
+          label: category,
+          checked: false,
+        }))
+      );
+    }
+  }, [Allcourses]);
+
+  // Function to capitalize the first letter of a string
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+  // Function to handle category change
+  const handleChange = (event) => {
+    const { value, checked } = event.target;
+
+    setCategories((prevCategories) =>
+      prevCategories.map((category) =>
+        category.value === value ? { ...category, checked } : category
+      )
+    );
+
+    handleCategoryChange(value, checked);
   };
 
   return (
     <div className=" text-gray-700 dark:text-bodyWhite">
       <hr />
-      <h3 className="text-sm font-semibold py-2">CATEGORIES</h3>
+      <h3 className="text-md font-semibold py-4">{t("title-2")}</h3>
 
-      <div className="grid grid-flow-col auto-cols-max gap-4  mb-8 mt-2">
+      <div className="flex flex-wrap justify-between gap-2 md:gap-4  mb-8 mt-2">
         {categories.map((category) => (
-          <div key={category} className="flex items-center gap-2">
+          <div key={category.value} className="flex items-center">
             <CheckIcon
               className={`w-5 h-5 absolute ${
-                selectedCategories[category] ? "opacity-100" : "opacity-0"
+                category.checked ? "opacity-100" : "opacity-0"
               }`}
             />
             <input
               type="checkbox"
-              id={category}
-              value={category}
+              value={category.value}
               className="w-5 h-5 appearance-none border-2 rounded-lg border-gray-300 relative"
-              onChange={() => handleCategoryChange(category)}
-              checked={selectedCategories[category]}
+              onChange={handleChange}
+              checked={category.checked}
             />
-            <label htmlFor={category}>{category}</label>
+            <label className="px-2.5" htmlFor={category.value}>
+              {category.label}
+            </label>
           </div>
         ))}
       </div>

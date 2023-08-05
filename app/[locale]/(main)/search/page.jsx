@@ -2,7 +2,10 @@ import SearchPage from "@/components/search-page-components/SearchPage";
 
 function Search() {
   return (
-    <div className="container mx-auto px-4 max-w-screen-2xl h-screen ">
+    <div
+      className="container mx-auto px-4 min-h-screen pt-8 md:pt-0
+    max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-[1370px] 3xl:w-[1650px]"
+    >
       <SearchPage />
     </div>
   );
