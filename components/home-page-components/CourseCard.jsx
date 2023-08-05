@@ -60,7 +60,7 @@ function Course({
       // Check if the user's ID is already in the 'isSaved' array
       const courseSnapshot = await getDoc(courseDoc);
       const isUserSaved = courseSnapshot.data().isSaved.includes(user.uid);
-      setIsSaved(isUserSaved);
+      // setIsSaved(isUserSaved);
       // Update the 'isSaved' array based on whether the user's ID is already saved or not
       if (isUserSaved) {
         // Remove the user's ID from the 'isSaved' array
@@ -97,7 +97,7 @@ function Course({
             style={isLoading ? { display: "none" } : { display: "block" }}
           />
           <div className="absolute top-1 right-1">
-            <label className={`ui-bookmark ${isSaved ? "active" : ""}`}>
+            <label className={`ui-bookmark ${isBookmarked ? "active" : ""}`}>
               <input type="checkbox" />
               <div className="bookmark" onClick={handleBookmarkToggle}>
                 <svg viewBox="0 0 32 32">
