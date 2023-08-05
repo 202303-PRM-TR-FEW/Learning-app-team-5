@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { UserAuth } from "../../app/context/AuthContext";
 import {
@@ -41,9 +41,19 @@ function Course({
   const [isLoading, setIsLoading] = useState(true);
   const [isBookmarked, setIsBookmarked] = useState(false);
 
-  console.log(id);
   //  return the state of user is sign in or not
   const { user } = UserAuth();
+
+  const handleSavedStates = async () => {
+    const courseDoc = doc(db, "course-data", id);
+    const courseSnapshot = await getDoc(courseDoc);
+    const isUserSaved = courseSnapshot.data().isSaved.includes(user.uid);
+    setIsBookmarked(isUserSaved);
+  };
+
+  useEffect(() => {
+    handleSavedStates();
+  }, []);
 
   const handleBookmarkToggle = async () => {
     if (!user) {
@@ -52,22 +62,22 @@ function Course({
         setError(null);
       }, 3000);
     } else {
-      setIsBookmarked(!isBookmarked);
-
       // Get a reference to the course document
       const courseDoc = doc(db, "course-data", id); // replace 'courseId' with the actual course ID
 
       // Check if the user's ID is already in the 'isSaved' array
       const courseSnapshot = await getDoc(courseDoc);
       const isUserSaved = courseSnapshot.data().isSaved.includes(user.uid);
-      // setIsSaved(isUserSaved);
+
       // Update the 'isSaved' array based on whether the user's ID is already saved or not
       if (isUserSaved) {
+        setIsBookmarked(false);
         // Remove the user's ID from the 'isSaved' array
         await updateDoc(courseDoc, {
           isSaved: arrayRemove(user.uid),
         });
       } else {
+        setIsBookmarked(true);
         // Add the user's ID to the 'isSaved' array
         await updateDoc(courseDoc, {
           isSaved: arrayUnion(user.uid),

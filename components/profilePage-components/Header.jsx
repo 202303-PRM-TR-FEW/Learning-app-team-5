@@ -52,6 +52,7 @@ const Header = ({ user, userData, setShowForm }) => {
           alt="profile image"
           height={150}
           width={150}
+          priority={false} // {false} | {true}
         />
       </div>
       <div className="flex flex-col gap-2 shadow-sm w-full">

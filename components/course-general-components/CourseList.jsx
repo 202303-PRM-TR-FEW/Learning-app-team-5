@@ -49,9 +49,9 @@ function CourseList({
 
   const coursesToPull = courses.filter((course) => {
     if (pageTitle === t("title-1")) {
-      return course.isRegistered;
+      return course
     } else if (pageTitle === t("title-2")) {
-      return course.isSaved;
+      return course
     } else {
       return console.log("Error: No courses to pull");
     }
