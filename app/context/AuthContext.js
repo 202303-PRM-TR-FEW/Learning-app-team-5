@@ -28,7 +28,8 @@ export const AuthContextProvider = ({ children }) => {
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
-        console.log('User data:', userCredential.user);
+
+        //  set Firestore document
         return setDoc(doc(db, 'users', user.uid), {
           email: user.email,
           password: password,
