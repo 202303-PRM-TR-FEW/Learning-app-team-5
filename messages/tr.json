@@ -18,8 +18,10 @@
     "Email": "E-posta",
     "Password": "şifre",
     "Uesrname": "Kullanıcı Adı",
+    "City": "şehir",
     "Placeholder-1": "xyz@learnU.com",
     "Placeholder-2": "E-postanızı girin",
+    "Placeholder-3":"Istanbul",
     "Message-1": "Kayıt başarılı! Lütfen kimlik bilgilerinizle giriş yapın.",
     "Message-2": "Hesabınız yok mu?",
     "Message-3": "Zaten bir hesabınız var mı?",
@@ -84,7 +86,8 @@
     "Invite": "ARKADAŞLARI DAVET ET",
     "View": "TÜMÜNÜ GÖRÜNTÜLE",
     "Hide": "Gizle",
-    "Submit":"gönder"
+    "Submit":"gönder",
+    "Input":"Lütfen bulunduğunuz şehri giriniz."
   },
   "Discussion":{
     "title":"Topluluktan tavsiye alın.",
