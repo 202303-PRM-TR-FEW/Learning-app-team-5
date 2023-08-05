@@ -9,7 +9,8 @@
   "Search": "Search",
   "Courses": "Courses",
   "Profile": "Profile",
-  "Login": "Login"
+  "Login": "Login",
+  "Discussions":"Q & A"
   },
   "login":{
     "login":"Login",
@@ -84,5 +85,18 @@
   "View" : "VIEW ALL",
   "Hide": "Hide",
   "Submit":"submit"
+  },
+  "Discussion":{
+    "title": "Seek advice from the community.",
+    "Placeholder":"Type your question here...",
+    "Placeholder-2":"Type your answer here...",
+    "Ask":"Asked by",
+    "Answer":"Answer provided by",
+    "Date": "Date of Creation",
+    "Alert" : "Are you sure you want to delete this answer?",
+    "Alert-2":"Are you sure you want to delete this question?",
+    "Error-1":"You need to login first",
+    "Error-2":"You don't have permission to delete this question !!!",
+    "Error-3":"You don't have permission to delete this answer !!!"
   }
 }
