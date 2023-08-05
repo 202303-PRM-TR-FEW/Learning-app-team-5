@@ -67,7 +67,7 @@ const Questions = ({ Error, setError }) => {
   const handleAnswer = async (e, questionId) => {
     e.preventDefault();
     if (!user) {
-      setError("You need to login first");
+      setError(t("Error-1"));
 
       setTimeout(() => {
         setError(null);
