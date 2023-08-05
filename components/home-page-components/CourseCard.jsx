@@ -2,7 +2,13 @@
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import { UserAuth } from "../../app/context/AuthContext";
-import { doc, arrayUnion, updateDoc } from "firebase/firestore";
+import {
+  doc,
+  arrayUnion,
+  updateDoc,
+  arrayRemove,
+  getDoc,
+} from "firebase/firestore";
 import { db } from "@/firebase";
 import { Spinner } from "@material-tailwind/react";
 import { useTranslations } from "next-intl";
@@ -23,67 +29,56 @@ function Course({
   courseImage,
   rating,
   duration,
- 
+  setError,
+  id,
 }) {
-  const t = useTranslations("Home")
+  const t = useTranslations("Home");
+  const d = useTranslations("Discussion");
+
   const hours = Math.floor(duration / 60);
   const minutes = duration % 60;
 
   const [isLoading, setIsLoading] = useState(true);
   const [isBookmarked, setIsBookmarked] = useState(false);
+
+  console.log(id);
   //  return the state of user is sign in or not
   const { user } = UserAuth();
 
-  // const t = useTranslations("Home");
+  const handleBookmarkToggle = async () => {
+    if (!user) {
+      setError(d("Error-1"));
+      setTimeout(() => {
+        setError(null);
+      }, 3000);
+    } else {
+      setIsBookmarked(!isBookmarked);
 
-  const handleBookmarkToggle = () => {
-    setIsBookmarked(!isBookmarked);
+      // Get a reference to the course document
+      const courseDoc = doc(db, "course-data", id); // replace 'courseId' with the actual course ID
+
+      // Check if the user's ID is already in the 'isSaved' array
+      const courseSnapshot = await getDoc(courseDoc);
+      const isUserSaved = courseSnapshot.data().isSaved.includes(user.uid);
+      setIsSaved(isUserSaved);
+      // Update the 'isSaved' array based on whether the user's ID is already saved or not
+      if (isUserSaved) {
+        // Remove the user's ID from the 'isSaved' array
+        await updateDoc(courseDoc, {
+          isSaved: arrayRemove(user.uid),
+        });
+      } else {
+        // Add the user's ID to the 'isSaved' array
+        await updateDoc(courseDoc, {
+          isSaved: arrayUnion(user.uid),
+        });
+      }
+    }
   };
 
   const handleOnLoad = () => {
     setIsLoading(false);
   };
-
-  //set the saved course to user saved courses in firebase
-  // const courseID = doc(db, "users", `${user?.email}`);
-  // const handleSaveCourse = async () => {
-  //   if (user?.email) {
-  //     setIsSaved((pre) => !pre);
-  //     await updateDoc(courseID, {
-  //       savedCourses: arrayUnion({
-  //         id: id,
-  //         title: title,
-  //         authorName: authorName,
-  //         authorImage: authorImage,
-  //         courseImage: courseImage,
-  //         rating: rating,
-  //         duration: duration,
-  //         isSaved: !saved,
-  //       }),
-  //     });
-  //   } else {
-  //     alert("Please sign in to save this course");
-  //   }
-  // };
-  // //set the registerd courses
-  // const handleGetCourse = async () => {
-  //   if (user?.email) {
-  //     await updateDoc(courseID, {
-  //       registeredCourses: arrayUnion({
-  //         id: id,
-  //         title: title,
-  //         authorName: authorName,
-  //         authorImage: authorImage,
-  //         courseImage: courseImage,
-  //         rating: rating,
-  //         duration: duration,
-  //         isRegistered: true,
-  //       }),
-  //     });
-  //   } else {
-  //     alert("Please sign in to save this course");
-  //   }
-  // };
 
   return (
     <div className="rounded-xl bg-white p-2 course-item flex-col w-full my-6 relative dark:bg-indigoDay ">
@@ -102,7 +97,7 @@ function Course({
             style={isLoading ? { display: "none" } : { display: "block" }}
           />
           <div className="absolute top-1 right-1">
-            <label className={`ui-bookmark ${isBookmarked ? "active" : ""}`}>
+            <label className={`ui-bookmark ${isSaved ? "active" : ""}`}>
               <input type="checkbox" />
               <div className="bookmark" onClick={handleBookmarkToggle}>
                 <svg viewBox="0 0 32 32">

@@ -14,6 +14,7 @@ function SearchResults({ searchResult }) {
           courseImage={course.courseImage}
           duration={course.duration}
           rating={course.rating}
+          id={course.id}
         />
       ))}
     </div>

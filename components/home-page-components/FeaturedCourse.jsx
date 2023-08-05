@@ -1,8 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-// import { collection, query, onSnapshot } from "firebase/firestore";
-// import { db } from "@/firebase";
 import { useTranslations } from "next-intl";
+
 import { GetRandomNumbers } from "../../app/context/RandomNumbers";
 import { GetAllCourses } from "../../app/context/FetchAllCourses";
 import Course from "./CourseCard";
@@ -10,7 +9,9 @@ import Course from "./CourseCard";
 function FeaturedCourse() {
   const t = useTranslations("Home");
   const { getRandomNumbers } = GetRandomNumbers();
-  const { Allcourses, isLoading } = GetAllCourses();
+  const { Allcourses } = GetAllCourses();
+
+  const [Error, setError] = useState(null);
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
@@ -35,9 +36,8 @@ function FeaturedCourse() {
               courseImage={course.courseImage}
               duration={course.duration}
               rating={course.rating}
-              saved={course.isSaved}
-              registered={course.registered}
-              t={t}
+              setError={setError}
+              id={course.id}
             />
           );
         })}
