@@ -26,8 +26,8 @@ const TotalStatistics = ({t}) => {
             <p className="text-lg">0</p>
           </div>
         </div>
-        <div className=" mt-2 bg-white dark:bg-indigoDay p-2 rounded-[20px] shadow-md">
-          <div className=" bg-lightOrange rounded-[10px]  px-14 py-2">
+        <div className=" mt-2 bg-white dark:bg-indigoDay p-2 rounded-[20px] shadow-md md:w-56">
+          <div className=" bg-lightOrange rounded-[10px]  px-14 py-2 flex justify-center items-center">
             <svg
               viewBox="0 0 24 24"
               className="h-[40px] w-[40px]"
@@ -42,8 +42,8 @@ const TotalStatistics = ({t}) => {
             <p className="text-lg">0</p>
           </div>
         </div>
-        <div className=" mt-2 bg-white dark:bg-indigoDay p-2 rounded-[20px] shadow-md">
-          <div className=" bg-lightGreen rounded-[10px]  px-14 py-2">
+        <div className=" mt-2 bg-white dark:bg-indigoDay p-2 rounded-[20px] shadow-md md:w-56">
+          <div className=" bg-lightGreen rounded-[10px]  px-14 py-2 flex justify-center items-center">
             <svg
               viewBox="0 0 576 512"
               className="h-[40px] w-[40px]"

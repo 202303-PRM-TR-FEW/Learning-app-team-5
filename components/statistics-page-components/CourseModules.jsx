@@ -37,6 +37,7 @@ const CourseModules = () => {
 
     fetchCourseModules();
     createCoursesWithModules(db, courses, courseModules);
+    // console.log(courseModules)
   }, []);
 
 

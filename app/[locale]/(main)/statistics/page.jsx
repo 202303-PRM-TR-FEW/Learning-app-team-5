@@ -9,6 +9,7 @@ import { db } from "../../../../firebase";
 import { doc, updateDoc } from "firebase/firestore";
 
 import CourseModules from "@/components/statistics-page-components/CourseModules";
+import MockUsers from "@/components/statistics-page-components/UpdateUserProgress";
 
 
 function Statistics() {
@@ -37,7 +38,8 @@ function Statistics() {
       <div className="w-full lg:w-1/2 h-screen m-4">
         <ThisWeek />
         <MyPerformance />
-        <CourseModules />
+         <CourseModules /> 
+        <MockUsers />
       </div>
     </>
   );

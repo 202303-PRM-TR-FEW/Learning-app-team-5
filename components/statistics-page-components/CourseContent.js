@@ -53,6 +53,7 @@ export const createCoursesWithModules = async (db, courses, modules) => {
             console.log(`Course "${course.title}" has been added with module references.`);
         }
         console.log(coursesWithModules);
+        return coursesWithModules;
     }
     catch (error) {
         console.error("Error creating courses with modules: ", error);

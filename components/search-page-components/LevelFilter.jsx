@@ -1,29 +1,68 @@
 "use client";
-import React from "react";
-import CheckIcon from "@mui/icons-material/Check";
+import React, { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+import { GetAllCourses } from "../../app/context/FetchAllCourses";
 
-function LevelFilter({ levels, onChange }) {
+const CheckIcon = dynamic(() => import("@mui/icons-material/Check"));
+
+function LevelFilter({ handleLevelChange, t }) {
+  const { Allcourses } = GetAllCourses();
+
+  const [levels, setLevels] = useState([]);
+
+  useEffect(() => {
+    if (Allcourses && Allcourses.length > 0) {
+      const allLevels = Array.from(
+        new Set(Allcourses.map((course) => capitalizeFirstLetter(course.level)))
+      );
+      setLevels(
+        allLevels.map((level) => ({
+          value: level,
+          label: level,
+          checked: false,
+        }))
+      );
+    }
+  }, [Allcourses]);
+
+  // Function to capitalize the first letter of a string
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+  // Function to handle category change
+  const handleChange = (event) => {
+    const { value, checked } = event.target;
+
+    setLevels((prevLevels) =>
+      prevLevels.map((level) =>
+        level.value === value ? { ...level, checked } : level
+      )
+    );
+
+    handleLevelChange(value, checked);
+  };
+
   return (
     <div className="text-gray-700 dark:text-bodyWhite">
-      <h3 className="text-sm font-semibold  py-2">LEVEL</h3>
-
-      <div className="grid grid-flow-col auto-cols-max gap-6 py-6">
+      <h3 className="text-md font-semibold  py-4">{t("title-3")}</h3>
+      <div className="flex flex-wrap gap-6 py-6">
         {levels.map((level) => (
-          <div key={level} className="flex items-center gap-2">
+          <div key={level.value} className="flex items-center">
             <CheckIcon
-              className={`w-5 h-5 absolute ${
+              className={`w-4.5 h-4.5 absolute ${
                 level.checked ? "opacity-100" : "opacity-0"
               }`}
             />
             <input
               type="checkbox"
-              id={level.value}
               value={level.value}
-              className="w-5 h-5 appearance-none border-2 rounded-lg border-gray-300 relative"
-              onChange={() => onChange(level.value)}
+              className="w-6 h-6 appearance-none border-2 rounded-lg border-gray-300 relative"
+              onChange={handleChange}
               checked={level.checked}
             />
-            <label htmlFor={level.value}>{level.label}</label>
+            <label className="px-2.5 text-xl" htmlFor={level.value}>
+              {level.label}
+            </label>
           </div>
         ))}
       </div>
