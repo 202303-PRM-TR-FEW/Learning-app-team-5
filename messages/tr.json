@@ -9,7 +9,8 @@
     "Search": "Arama",
     "Courses": "Dersler",
     "Profile": "Profil",
-    "Login": "Giriş"
+    "Login": "Giriş",
+    "Discussions":"S ve C"
   },
   "login": {
     "login": "Giriş Yap",
@@ -87,5 +88,18 @@
     "Hide": "Gizle",
     "Submit":"gönder",
     "Input":"Lütfen bulunduğunuz şehri giriniz."
+  },
+  "Discussion":{
+    "title":"Topluluktan tavsiye alın.",
+    "Placeholder":"Sorunuzu buraya yazın...",
+    "Placeholder-2":"Cevabınızı buraya yazın...",
+    "Ask":"Sordu",
+    "Answer":"Cevap veren:",
+    "Date": "Yaratılış Tarihi",
+    "Alert" : "Bu yanıtı silmek istediğinizden emin misiniz?",
+    "Alert-2" : "Bu soruyu silmek istediğinizden emin misiniz?",
+    "Error-1":"Önce giriş yapmalısınız",
+    "Error-2":"Bu soruyu silme izniniz yok!!!",
+    "Error-3":"Bu yanıtı silme izniniz yok!!!"
   }
 }
