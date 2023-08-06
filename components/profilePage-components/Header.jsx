@@ -2,15 +2,19 @@ import Image from "next/image";
 import { doc, updateDoc } from "firebase/firestore";
 import { useTranslations } from "next-intl";
 import { UserAuth } from "../../app/context/AuthContext";
+import { GetAllCourses } from "@/app/context/FetchAllCourses";
 import { db } from "@/firebase";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Header = ({ user, userData, setShowForm }) => {
   const [Form, setForm] = useState(null);
   const [newCity, setNewCity] = useState("");
+  const [myCourses, setMyCourses] = useState([]);
+
   const t = useTranslations("Profile");
   const { logOut } = UserAuth();
+  const { Allcourses } = GetAllCourses();
   const router = useRouter();
 
   const handleLogOut = async () => {
@@ -21,7 +25,6 @@ const Header = ({ user, userData, setShowForm }) => {
       console.log(error);
     }
   };
-
 
   const handleChangeCity = () => {
     setForm(true);
@@ -36,8 +39,16 @@ const Header = ({ user, userData, setShowForm }) => {
 
     // Update the 'city' field of the user
     await updateDoc(userRef, { city: newCity });
-    setShowForm(null);
+    setForm(null);
   }
+
+  useEffect(() => {
+    if (Allcourses.length > 1) {
+      setMyCourses(
+        Allcourses.filter((course) => course.isRegistered.includes(user.uid))
+      );
+    }
+  }, [Allcourses]);
 
   return (
     <div className="flex flex-col md:flex-row w-full  gap-2 items-center">
@@ -123,7 +134,9 @@ const Header = ({ user, userData, setShowForm }) => {
         <div className="bg-white dark:bg-indigoDay rounded-[20px]  p-2 ">
           <div className="bg-bodyWhite dark:bg-[#1c2e50] rounded-[20px] flex justify-between p-4">
             <div className="flex flex-col ">
-              <h3 className="text-center font-bold">0</h3>
+              <h3 className="text-center font-bold">
+                {myCourses.length !== 0 ? myCourses.length : "0"}
+              </h3>
               <p className="text-center mx-2 font-bold">{t("Courses")}</p>
             </div>
             <div className="flex flex-col ">

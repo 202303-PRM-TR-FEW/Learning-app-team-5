@@ -1,34 +1,49 @@
 import React, { useState, useEffect } from "react";
-// import { Progress } from "@material-tailwind/react";
-// import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
-// import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
 import "./CourseCard.css";
 import CourseButton from "./CourseButton";
 import { Spinner } from "@material-tailwind/react";
-import { doc, updateDoc } from "firebase/firestore";
+import {
+  doc,
+  updateDoc,
+  getDoc,
+  arrayRemove,
+  arrayUnion,
+} from "firebase/firestore";
 import { db } from "../../firebase";
+import { UserAuth } from "@/app/context/AuthContext";
 
 function CourseCard({ course, mockProgress, onClick, selectedStyle }) {
   const [width, setWidth] = useState(0);
   const [isSaved, setisSaved] = useState(false);
   const [isClicked, setisClicked] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(true);
-
+  const { user } = UserAuth();
   useEffect(() => {
     setWidth(mockProgress);
     setisSaved(course.isSaved);
   }, []);
 
   const handleBookmarkToggle = async () => {
-    try {
-      const courseID = course.docID;
-      const courseRef = doc(db, "course-data", `${courseID}`);
-      await updateDoc(courseRef, {
-        isSaved: !isSaved,
+    // Get a reference to the course document
+    const courseDoc = doc(db, "course-data", course.id); // replace 'courseId' with the actual course ID
+
+    // Check if the user's ID is already in the 'isSaved' array
+    const courseSnapshot = await getDoc(courseDoc);
+    const isUserSaved = courseSnapshot.data().isSaved.includes(user.uid);
+
+    // Update the 'isSaved' array based on whether the user's ID is already saved or not
+    if (isUserSaved) {
+      setisSaved(false);
+      // Remove the user's ID from the 'isSaved' array
+      await updateDoc(courseDoc, {
+        isSaved: arrayRemove(user.uid),
       });
-      setisSaved(!isSaved);
-    } catch (error) {
-      console.log("Error updating document: ", error);
+    } else {
+      setisSaved(true);
+      // Add the user's ID to the 'isSaved' array
+      await updateDoc(courseDoc, {
+        isSaved: arrayUnion(user.uid),
+      });
     }
   };
 

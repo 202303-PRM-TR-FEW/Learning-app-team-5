@@ -40,20 +40,27 @@ function Course({
 
   const [isLoading, setIsLoading] = useState(true);
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const [Registered, setIsRegistered] = useState(false);
+  const [message, setMessage] = useState(null);
 
   //  return the state of user is sign in or not
   const { user } = UserAuth();
 
-  const handleSavedStates = async () => {
+  // check if the course is saved or registered to handle the user interface
+  const handleCouresStates = async () => {
     const courseDoc = doc(db, "course-data", id);
     const courseSnapshot = await getDoc(courseDoc);
     const isUserSaved = courseSnapshot.data().isSaved.includes(user.uid);
+    const isUserRegistered = courseSnapshot
+      .data()
+      .isRegistered.includes(user.uid);
     setIsBookmarked(isUserSaved);
+    setIsRegistered(isUserRegistered);
   };
 
   useEffect(() => {
-    if (user) handleSavedStates();
-  }, []);
+    if (user) handleCouresStates();
+  }, [user]);
 
   const handleBookmarkToggle = async () => {
     if (!user) {
@@ -63,7 +70,7 @@ function Course({
       }, 3000);
     } else {
       // Get a reference to the course document
-      const courseDoc = doc(db, "course-data", id); // replace 'courseId' with the actual course ID
+      const courseDoc = doc(db, "course-data", id);
 
       // Check if the user's ID is already in the 'isSaved' array
       const courseSnapshot = await getDoc(courseDoc);
@@ -86,6 +93,47 @@ function Course({
     }
   };
 
+  const handleGetCourse = async () => {
+    if (!user) {
+      setError(d("Error-1"));
+      setTimeout(() => {
+        setError(null);
+      }, 3000);
+    } else {
+      // Get a reference to the course document
+      const courseDoc = doc(db, "course-data", id);
+
+      // Check if the user's ID is already in the 'isRegistered' array
+      const courseSnapshot = await getDoc(courseDoc);
+      const isUserRegistered = courseSnapshot
+        .data()
+        .isRegistered.includes(user.uid);
+
+      // Update the 'isRegistered' array based on whether the user's ID is already saved or not
+      if (isUserRegistered) {
+        setIsRegistered(false);
+        // Remove the user's ID from the 'isRegistered' array
+        await updateDoc(courseDoc, {
+          isRegistered: arrayRemove(user.uid),
+        });
+        setMessage(t("Message-2"));
+        setTimeout(() => {
+          setMessage(null);
+        }, 3000);
+      } else {
+        setIsRegistered(true);
+        // Add the user's ID to the 'isRegistered' array
+        await updateDoc(courseDoc, {
+          isRegistered: arrayUnion(user.uid),
+        });
+        setMessage(t("Message-1"));
+        setTimeout(() => {
+          setMessage(null);
+        }, 3000);
+      }
+    }
+  };
+
   const handleOnLoad = () => {
     setIsLoading(false);
   };
@@ -99,13 +147,22 @@ function Course({
               <Spinner className="h-8 w-8" />
             </div>
           )}
-          <img
-            className="rounded-lg h-32 w-[100%] "
-            src={courseImage}
-            alt="courseImage"
-            onLoad={handleOnLoad}
-            style={isLoading ? { display: "none" } : { display: "block" }}
-          />
+          {message ? (
+            <div className="rounded-lg h-32 w-[100%] flex justify-center items-center">
+              <p className="bg-green-200 rounded-md border-2 border-green-600 text-lightBlack px-3 py-1 font-medium">
+                {message}
+              </p>
+            </div>
+          ) : (
+            <img
+              className="rounded-lg h-32 w-[100%] "
+              src={courseImage}
+              alt="courseImage"
+              onLoad={handleOnLoad}
+              style={isLoading ? { display: "none" } : { display: "block" }}
+            />
+          )}
+
           <div className="absolute top-1 right-1">
             <label className={`ui-bookmark ${isBookmarked ? "active" : ""}`}>
               <input type="checkbox" />
@@ -143,10 +200,10 @@ function Course({
             <StarBorderOutlinedIcon /> {rating} /5
           </span>
           <span
-            // onClick={handleGetCourse}
+            onClick={handleGetCourse}
             className="cursor-pointer bg-primaryBlue  px-4 py-2 text-white rounded-full mx-[2px]"
           >
-            {t("button")}
+            {Registered ? t("button-2") : t("button")}
           </span>
         </div>
         <span></span>
