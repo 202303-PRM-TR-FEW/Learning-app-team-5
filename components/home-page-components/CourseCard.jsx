@@ -52,7 +52,7 @@ function Course({
   };
 
   useEffect(() => {
-    handleSavedStates();
+    if (user) handleSavedStates();
   }, []);
 
   const handleBookmarkToggle = async () => {
