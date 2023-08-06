@@ -152,7 +152,7 @@ function CourseOverview({ selectedCourse }) {
         >
           <RatingStars />
         </DropUpMenu>
-        <Link href={`/courses/${courses.title}`}> 
+        <Link href={`/courses/`}> 
           <CourseButton
             buttonName={
               selectedCourse.isRegistered ? t("Button-3") : t("Button-4")
