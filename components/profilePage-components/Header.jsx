@@ -22,6 +22,7 @@ const Header = ({ user, userData, setShowForm }) => {
     }
   };
 
+
   const handleChangeCity = () => {
     setForm(true);
   };
@@ -44,11 +45,7 @@ const Header = ({ user, userData, setShowForm }) => {
         <Image
           onClick={() => setShowForm(true)}
           className="rounded-full  m-2 cursor-pointer"
-          src={
-            userData.photoURL
-              ? userData.photoURL
-              : "https://icon-library.com/images/new-account-icon/new-account-icon-14.jpg"
-          }
+          src={userData.photoURL}
           alt="profile image"
           height={150}
           width={150}
