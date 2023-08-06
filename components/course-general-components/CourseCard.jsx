@@ -18,9 +18,17 @@ function CourseCard({ course, mockProgress, onClick, selectedStyle }) {
   const [isClicked, setisClicked] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(true);
   const { user } = UserAuth();
+
+  const handleCouresStates = async () => {
+    const courseDoc = doc(db, "course-data", course.id);
+    const courseSnapshot = await getDoc(courseDoc);
+    const isUserSaved = courseSnapshot.data().isSaved.includes(user.uid);
+    setisSaved(isUserSaved);
+  };
+
   useEffect(() => {
     setWidth(mockProgress);
-    setisSaved(course.isSaved);
+    if (user) handleCouresStates();
   }, []);
 
   const handleBookmarkToggle = async () => {
