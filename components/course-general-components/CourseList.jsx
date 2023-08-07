@@ -94,10 +94,10 @@ function CourseList({
             <span className="text-primaryBlue font-bold text-2xl py-6">
               Oops !!!{" "}
             </span>
-            <p>It seems you do not have any course yet </p>
+            <p>{t("Message-3")} </p>
             <Link href="/search" className="pb-6 pt-4">
               <button className="bg-primaryBlue rounded-xl py-2 px-4 ">
-                Check out our courses
+                {t("Button-5")}
               </button>
             </Link>
           </div>

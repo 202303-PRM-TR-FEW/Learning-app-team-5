@@ -113,7 +113,7 @@ function CourseCard({ course, mockProgress, onClick, selectedStyle }) {
           </label>
         </div>
 
-        {mockProgress !== null ? (
+        {user !== null ? (
           /* Progress */
           <div id="course-progress" className="mt-4">
             {/* Progress Bar */}

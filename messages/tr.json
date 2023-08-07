@@ -66,8 +66,10 @@
     "Button-2": "Önizleme",
     "Button-3": "Devam Et",
     "Button-4": "Kaydol",
+    "Button-5": "Kurslarımıza göz atın",
     "Message-1": "Merhaba!",
-    "Message-2": "Lütfen görüntülemek için bir ders seçin"
+    "Message-2": "Lütfen görüntülemek için bir ders seçin",
+    "Message-3": "Henüz herhangi bir dersiniz yok gibi görünüyor"
   },
 
   "Profile": {

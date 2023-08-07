@@ -67,8 +67,10 @@
     "Button-2":"Preview",
     "Button-3":"Continue",
     "Button-4":"Enroll",
+    "Button-5":"Check out our courses",
     "Message-1":"Hey there!",
-    "Message-2":"Please select a course to view"
+    "Message-2":"Please select a course to view",
+    "Message-3":"It seems you do not have any course yet"
   },
   "Profile":{
   "title": "Total Statistic",
