@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
-// import { Progress } from "@material-tailwind/react";
-// import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
-// import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
 import "./CourseCard.css";
 import CourseButton from "./CourseButton";
 import { Spinner } from "@material-tailwind/react";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
+import { UserAuth } from "@/app/context/AuthContext";
 
 function CourseCard({ course, mockProgress, onClick, selectedStyle }) {
   const [width, setWidth] = useState(0);
   const [isSaved, setisSaved] = useState(false);
   const [isClicked, setisClicked] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(true);
+  const {user}= UserAuth()
 
   useEffect(() => {
     setWidth(mockProgress);
@@ -90,7 +89,7 @@ function CourseCard({ course, mockProgress, onClick, selectedStyle }) {
           </label>
         </div>
 
-        {mockProgress !== null ? (
+        {user !== null ? (
           /* Progress */
           <div id="course-progress" className="mt-4">
             {/* Progress Bar */}
