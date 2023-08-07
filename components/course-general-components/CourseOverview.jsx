@@ -152,16 +152,15 @@ function CourseOverview({ selectedCourse }) {
         >
           <RatingStars />
         </DropUpMenu>
-        <Link href={`/courses/`}> 
-          <CourseButton
-            buttonName={
-              selectedCourse.isRegistered ? t("Button-3") : t("Button-4")
-            }
-            handleClick={() =>
-              console.log("add enroll page navigation to handleClick function")
-            }
-          />
-        </Link>
+
+        <CourseButton
+          buttonName={
+            selectedCourse.isRegistered ? t("Button-3") : t("Button-4")
+          }
+          handleClick={() =>
+            console.log("add enroll page navigation to handleClick function")
+          }
+        />
       </div>
     </div>
   );
