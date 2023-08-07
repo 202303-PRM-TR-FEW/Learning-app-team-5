@@ -35,13 +35,13 @@
     "minute": "m",
     "more" : "Show More",
     "less" : "Show Less",
-    "Sales": "Sales",
-    "HR": "HR",
-    "Drawing": "Drawing",
-    "Big Data": "Big Data",
+    "Sales": "Business",
+    "HR": "Personal Development",
+    "Drawing": "Music",
+    "Big Data": "Data Science",
     "Design": "Design",
     "Marketing": "Marketing",
-    "Astronomy": "Astronomy",
+    "Astronomy": "Photography",
     "Web Development": "Web Development"
   },
   "Search":{

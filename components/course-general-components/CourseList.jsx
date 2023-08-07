@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase";
 import { getDocs, collection } from "firebase/firestore";
@@ -8,6 +7,7 @@ import { Spinner } from "@material-tailwind/react";
 import NavigateNextOutlinedIcon from "@mui/icons-material/NavigateNextOutlined";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { UserAuth } from "@/app/context/AuthContext";
 
 function CourseList({
   onCourseClick,
@@ -18,7 +18,8 @@ function CourseList({
 }) {
   const [courses, setCourses] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const t =useTranslations("Courses")
+  const { user } = UserAuth();
+  const t = useTranslations("Courses");
 
   const coursesCollection = collection(db, "course-data");
 
@@ -49,9 +50,9 @@ function CourseList({
 
   const coursesToPull = courses.filter((course) => {
     if (pageTitle === t("title-1")) {
-      return course.isRegistered.includes(user.uid);
+      return course.isRegistered.includes(user ? user.uid : "");
     } else if (pageTitle === t("title-2")) {
-      return course.isSaved.includes(user.uid);
+      return course.isSaved.includes(user ? user.uid : "");
     } else if (pageTitle === course.category) {
       return course.category;
     } else {
