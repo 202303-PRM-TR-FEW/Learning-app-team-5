@@ -17,13 +17,19 @@ function CourseCard({ course, mockProgress, onClick, selectedStyle }) {
   const [isSaved, setisSaved] = useState(false);
   const [isClicked, setisClicked] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(true);
+  const [Registered, setIsRegistered] = useState(false);
+
   const { user } = UserAuth();
 
   const handleCouresStates = async () => {
     const courseDoc = doc(db, "course-data", course.uid);
     const courseSnapshot = await getDoc(courseDoc);
     const isUserSaved = courseSnapshot.data().isSaved.includes(user.uid);
+    const isUserRegistered = courseSnapshot
+      .data()
+      .isRegistered.includes(user.uid);
     setisSaved(isUserSaved);
+    setIsRegistered(isUserRegistered);
   };
 
   useEffect(() => {
@@ -55,6 +61,17 @@ function CourseCard({ course, mockProgress, onClick, selectedStyle }) {
     }
   };
 
+  const handleGetCourse = async () => {
+    // Get a reference to the course document
+    const courseDoc = doc(db, "course-data", course.uid);
+
+    // Add the user's ID to the 'isRegistered' array
+    await updateDoc(courseDoc, {
+      isRegistered: arrayUnion(user.uid),
+    });
+    setIsRegistered(true);
+    console.log(course.uid);
+  };
   function handleCardClick() {
     onClick(course);
     setisClicked(!isClicked);
@@ -113,7 +130,7 @@ function CourseCard({ course, mockProgress, onClick, selectedStyle }) {
           </label>
         </div>
 
-        {user !== null ? (
+        {Registered ? (
           /* Progress */
           <div id="course-progress" className="mt-4">
             {/* Progress Bar */}
@@ -134,10 +151,7 @@ function CourseCard({ course, mockProgress, onClick, selectedStyle }) {
             <div className="w-full text-gray-500 text-sm font-bold">
               Not Started
             </div>
-            <CourseButton
-              buttonName="Enroll"
-              handleClick={() => console.log("enrolled to the course")}
-            />
+            <CourseButton buttonName="Enroll" handleClick={handleGetCourse} />
           </div>
         )}
       </div>
