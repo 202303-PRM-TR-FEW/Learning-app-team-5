@@ -38,7 +38,9 @@ function CourseOverview({ selectedCourse }) {
       <div className="flex flex-col bg-[rgba(251,_251,_251,_0.5)] dark:bg-indigoDay p-4 m-4 rounded-2xl shadow-md justify-center items-center ">
         <div className="flex w-full justify-center items-center">
           <WavingHandOutlinedIcon className="text-[#56a0fe] text-6xl h-1/2 mr-2" />
-          <h1 className="text-2xl font-bold text-[#56a0fe]">{t("Message-1")}</h1>
+          <h1 className="text-2xl font-bold text-[#56a0fe]">
+            {t("Message-1")}
+          </h1>
         </div>
         {showArrowIcons && (
           <div className="flex w-full justify-center items-center">
@@ -51,14 +53,13 @@ function CourseOverview({ selectedCourse }) {
     );
   }
   return (
-    <div className="flex flex-col bg-white dark:bg-indigoDay p-4 m-4 rounded-2xl shadow-md justify-between ">
+    <div className="flex flex-col bg-white dark:bg-indigoDay  p-4 m-4 rounded-2xl shadow-md justify-between">
       {/* IDENTITY */}
-      <div className="lg:h-2/3 w-auto lg:flex lg:flex-col lg:justify-between grid grid-cols-2 lg:mb-2 mb-6 h-full">
+      <div className=" w-auto lg:flex lg:flex-col lg:justify-between grid grid-cols-2 lg:mb-2 mb-6">
         {/* IMAGE OR VIDEO  */}
         <div
-          className="hidden sm:block h-[300px] p-4 rounded-2xl w-full lg:w-full"
+          className="hidden sm:block h-[350px] p-4 rounded-2xl w-full lg:w-full"
           style={{
-
             backgroundImage: `url(${selectedCourse.courseImage})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
@@ -141,13 +142,17 @@ function CourseOverview({ selectedCourse }) {
       {/* PREVIEW AND ENROLL BUTTONS */}
       <div className="flex justify-between my-4">
         <CourseButton
-          buttonName={selectedCourse.isRegistered ? t("Button-1") : t("Button-2")}
+          buttonName={
+            selectedCourse.isRegistered ? t("Button-1") : t("Button-2")
+          }
           handleClick={() =>
             console.log("add preview page navigation to handleClick function")
           }
         />
         <CourseButton
-          buttonName={selectedCourse.isRegistered ? t("Button-3"): t("Button-4")}
+          buttonName={
+            selectedCourse.isRegistered ? t("Button-3") : t("Button-4")
+          }
           handleClick={() =>
             console.log("add enroll page navigation to handleClick function")
           }

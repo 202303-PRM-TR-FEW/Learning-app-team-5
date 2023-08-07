@@ -33,9 +33,9 @@ function CourseList({
 
   const coursesToPull = courses.filter((course) => {
     if (pageTitle === t("title-1")) {
-      return course.isRegistered.includes(user.uid);
+      return course.isRegistered.includes(user ? user.uid : "");
     } else if (pageTitle === t("title-2")) {
-      return course.isSaved.includes(user.uid);
+      return course.isSaved.includes(user ? user.uid : "");
     } else if (pageTitle === course.category) {
       return course.category;
     } else {
