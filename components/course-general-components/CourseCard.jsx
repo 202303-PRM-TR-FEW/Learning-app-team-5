@@ -20,7 +20,7 @@ function CourseCard({ course, mockProgress, onClick, selectedStyle }) {
   const { user } = UserAuth();
 
   const handleCouresStates = async () => {
-    const courseDoc = doc(db, "course-data", course.id);
+    const courseDoc = doc(db, "course-data", course.uid);
     const courseSnapshot = await getDoc(courseDoc);
     const isUserSaved = courseSnapshot.data().isSaved.includes(user.uid);
     setisSaved(isUserSaved);
@@ -33,7 +33,7 @@ function CourseCard({ course, mockProgress, onClick, selectedStyle }) {
 
   const handleBookmarkToggle = async () => {
     // Get a reference to the course document
-    const courseDoc = doc(db, "course-data", course.id); // replace 'courseId' with the actual course ID
+    const courseDoc = doc(db, "course-data", course.uid); // replace 'courseId' with the actual course ID
 
     // Check if the user's ID is already in the 'isSaved' array
     const courseSnapshot = await getDoc(courseDoc);

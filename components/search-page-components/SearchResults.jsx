@@ -14,7 +14,7 @@ function SearchResults({ searchResult, setError }) {
           courseImage={course.courseImage}
           duration={course.duration}
           rating={course.rating}
-          id={course.id}
+          id={course.uid}
           setError={setError}
         />
       ))}

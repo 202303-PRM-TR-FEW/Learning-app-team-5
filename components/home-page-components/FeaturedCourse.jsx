@@ -42,7 +42,7 @@ function FeaturedCourse() {
               duration={course.duration}
               rating={course.rating}
               setError={setError}
-              id={course.id}
+              id={course.uid}
             />
           );
         })}
