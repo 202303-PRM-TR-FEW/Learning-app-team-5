@@ -4,7 +4,7 @@ const page = ({ params }) => {
   return (
     <div className="min-h-screen">
       <CourseDisplayPage
-        pageTitle={params.gategory}
+        pageTitle={params.category}
         navigationPath={"./"}
         navigationName={"Home"}
       />
