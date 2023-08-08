@@ -41,9 +41,9 @@ function TopSearches({ recentSearches, onSearchClick, t }) {
   }, [recentSearches]);
 
   return (
-    <div className="mb-8 text-gray-700 dark:text-bodyWhite">
-      <h3 className="text-md font-semibold  py-4">{t("title-6")}</h3>
-      <ul className="flex justify-start py-6">
+    <div className=" text-gray-700 dark:text-bodyWhite">
+      <h3 className="text-md font-semibold  py-2">{t("title-6")}</h3>
+      <ul className="flex justify-start py-3">
         {storedUniqe ? (
           storedUniqe.map((searchTerm, index) => (
             <li

@@ -10,7 +10,7 @@ function SearchInput({ value, onChange, onSubmit, setSearch, t }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="my-8">
+    <form onSubmit={handleSubmit} className="mt-3">
       <input
         type="text"
         placeholder={`${t("button")}....`}

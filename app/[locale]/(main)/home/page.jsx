@@ -18,8 +18,7 @@ function Page() {
         </div>
       ) : (
         <div
-          className="container mx-auto px-4 min-h-screen
-    max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-[1370px] 3xl:w-[1650px] dark:text-bodyWhite"
+          className=" mx-auto px-4 min-h-full lg:max-w-[1280px] dark:text-bodyWhite"
         >
           <FeaturedCourse />
           <Categories />

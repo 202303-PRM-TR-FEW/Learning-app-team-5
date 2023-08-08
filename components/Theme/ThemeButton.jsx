@@ -37,7 +37,7 @@ const ThemeButton = () => {
         aria-checked={isOn ? "true" : "false"}
         tabIndex={0}
         onClick={handleClick}
-        className={`cursor-pointer w-11 h-5 ${colour} rounded-full relative px-1.5 flex items-center${
+        className={`z-50 cursor-pointer w-11 h-5 ${colour} rounded-full relative px-1.5 flex items-center${
           isOn ? "" : " justify-end"
         }`}
       >
@@ -74,7 +74,7 @@ const ThemeButton = () => {
   }
 
   return (
-    <div className="flex justify-end py-4 px-6">
+    <div className="absolute top-3 right-3">
       <DarkModeToggle
         onToggle={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
         on={resolvedTheme === "dark"}
