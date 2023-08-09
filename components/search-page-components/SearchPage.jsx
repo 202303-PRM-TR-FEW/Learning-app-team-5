@@ -17,6 +17,7 @@ function SearchPage() {
   const { Allcourses } = GetAllCourses();
 
   const [recentSearches, setRecentSearches] = useState([]);
+  const [Error, setError] = useState(null);
 
   const filterData = (searchTerm) => {
     const courseSearchResults = Allcourses.filter((course) =>
@@ -142,11 +143,16 @@ function SearchPage() {
         setSearchResult={setSearchResult}
         t={t}
       />
-      <div className="py-2 mb-8 mt-2">
+      <div className="flex flex-col py-2 mb-8 mt-2">
         <h3 className="text-md font-semibold text-gray-700 dark:text-bodyWhite">
           {t("title-5")}
         </h3>
-        <SearchResults searchResult={searchResult} />
+        {Error && (
+          <div className="self-center text-center text-red-400 text-xl font-bold bg-red-100 my-2 py-4 w-1/2 rounded-xl border-2 border-red-500">
+            {Error}
+          </div>
+        )}
+        <SearchResults searchResult={searchResult} setError={setError} />
       </div>
     </>
   );

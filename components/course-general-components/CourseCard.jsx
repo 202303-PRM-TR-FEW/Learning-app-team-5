@@ -1,60 +1,77 @@
 import React, { useState, useEffect } from "react";
-// import { Progress } from "@material-tailwind/react";
-// import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
-// import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
 import "./CourseCard.css";
 import CourseButton from "./CourseButton";
 import { Spinner } from "@material-tailwind/react";
-import { doc, updateDoc } from "firebase/firestore";
+import {
+  doc,
+  updateDoc,
+  getDoc,
+  arrayRemove,
+  arrayUnion,
+} from "firebase/firestore";
 import { db } from "../../firebase";
-import { UserAuth } from "app/context/AuthContext.js";
-import { collection } from "firebase/firestore";
+import { UserAuth } from "@/app/context/AuthContext";
 
 function CourseCard({ course, mockProgress, onClick, selectedStyle }) {
   const [width, setWidth] = useState(0);
   const [isSaved, setisSaved] = useState(false);
   const [isClicked, setisClicked] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(true);
+  const [Registered, setIsRegistered] = useState(false);
+
   const { user } = UserAuth();
+
+  const handleCouresStates = async () => {
+    const courseDoc = doc(db, "course-data", course.uid);
+    const courseSnapshot = await getDoc(courseDoc);
+    const isUserSaved = courseSnapshot.data().isSaved.includes(user.uid);
+    const isUserRegistered = courseSnapshot
+      .data()
+      .isRegistered.includes(user.uid);
+    setisSaved(isUserSaved);
+    setIsRegistered(isUserRegistered);
+  };
 
   useEffect(() => {
     setWidth(mockProgress);
-    setisSaved(course.isSaved);
+    if (user) handleCouresStates();
   }, []);
 
-/*   const handleBookmarkToggle = async () => {
-    try {
-      const courseID = course.docID;
-      const courseRef = doc(db, "course-data", `${courseID}`);
-      await updateDoc(courseRef, {
-        isSaved: !isSaved,
-      });
-      setisSaved(!isSaved);
-    } catch (error) {
-      console.log("Error updating document: ", error);
-    }
-  }; */
-
   const handleBookmarkToggle = async () => {
-    if (!user) console.log("Error: No user logged in");
-    try {
-      const userID = user.uid;
-      console.log(userID);
-      const userRef = doc(db, "users", `${userID}`);
-      const courseProgressRef = userRef.collection("courseProgress");
-      await updateDoc(courseProgressRef, {
-        courseID: course.docID
+    // Get a reference to the course document
+    const courseDoc = doc(db, "course-data", course.uid); // replace 'courseId' with the actual course ID
+
+    // Check if the user's ID is already in the 'isSaved' array
+    const courseSnapshot = await getDoc(courseDoc);
+    const isUserSaved = courseSnapshot.data().isSaved.includes(user.uid);
+
+    // Update the 'isSaved' array based on whether the user's ID is already saved or not
+    if (isUserSaved) {
+      setisSaved(false);
+      // Remove the user's ID from the 'isSaved' array
+      await updateDoc(courseDoc, {
+        isSaved: arrayRemove(user.uid),
       });
-      courseProgressRef.doc(course.docID).set({
-        completedLessons: 15,
-        isSaved: !isSaved,
+    } else {
+      setisSaved(true);
+      // Add the user's ID to the 'isSaved' array
+      await updateDoc(courseDoc, {
+        isSaved: arrayUnion(user.uid),
       });
-    } catch (error) {
-      console.log("Error updating document: ", error);
     }
   };
 
+  const handleGetCourse = async () => {
+    // Get a reference to the course document
+    const courseDoc = doc(db, "course-data", course.uid);
 
+    // Add the user's ID to the 'isRegistered' array
+    await updateDoc(courseDoc, {
+      isRegistered: arrayUnion(user.uid),
+    });
+    setIsRegistered(true);
+    console.log(course.uid);
+  };
   function handleCardClick() {
     onClick(course);
     setisClicked(!isClicked);
@@ -113,7 +130,7 @@ function CourseCard({ course, mockProgress, onClick, selectedStyle }) {
           </label>
         </div>
 
-        {mockProgress !== null ? (
+        {Registered ? (
           /* Progress */
           <div id="course-progress" className="mt-4">
             {/* Progress Bar */}
@@ -134,10 +151,7 @@ function CourseCard({ course, mockProgress, onClick, selectedStyle }) {
             <div className="w-full text-gray-500 text-sm font-bold">
               Not Started
             </div>
-            <CourseButton
-              buttonName="Enroll"
-              handleClick={() => console.log("enrolled to the course")}
-            />
+            <CourseButton buttonName="Enroll" handleClick={handleGetCourse} />
           </div>
         )}
       </div>

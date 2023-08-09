@@ -4,6 +4,7 @@ import InfoComp from "@/components/profilePage-components/InfoSide";
 import { UserAuth } from "@/app/context/AuthContext";
 import Link from "next/link";
 import { useState } from "react";
+import { Spinner } from "@material-tailwind/react";
 
 function Profile({ params }) {
   const { user, userData } = UserAuth();
@@ -12,13 +13,19 @@ function Profile({ params }) {
   return (
     <>
       {user ? (
-        <div
-          className="flex flex-col container mx-auto px-4 min-h-screen md:flex-row md:gap-20  
+        userData ? (
+          <div
+            className="flex flex-col container mx-auto px-4 min-h-screen md:flex-row md:gap-20  
      max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-[1350px] text-lightBlack dark:text-bodyWhite"
-        >
-          <InfoComp user={user} userData={userData} />
-          <FriendsComp lang={params.locale} />
-        </div>
+          >
+            <InfoComp user={user} userData={userData} />
+            <FriendsComp lang={params.locale} />
+          </div>
+        ) : (
+          <div className="flex justify-center items-center h-screen">
+            <Spinner className="h-14 w-14" />
+          </div>
+        )
       ) : (
         <div className="h-screen flex justify-center items-center font-bold text-xl md:text-2xl dark:text-bodyWhite ">
           <div className="w-[90%] md:w-[50%] m-x-auto bg-white dark:bg-indigoDay rounded-[20px] text-center">

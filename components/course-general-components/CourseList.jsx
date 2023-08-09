@@ -1,12 +1,16 @@
 "use client";
-import React from "react";
+import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import CourseCard from "./CourseCard";
-import { Spinner } from "@material-tailwind/react";
-import NavigateNextOutlinedIcon from "@mui/icons-material/NavigateNextOutlined";
-import Link from "next/link";
-import { GetAllCourses } from "../../app/context/FetchAllCourses";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
+import { Spinner } from "@material-tailwind/react";
+
+import CourseCard from "./CourseCard";
+import { GetAllCourses } from "../../app/context/FetchAllCourses";
+import { UserAuth } from "@/app/context/AuthContext";
+const NavigateNextOutlinedIcon = dynamic(() =>
+  import("@mui/icons-material/NavigateNextOutlined")
+);
 
 function CourseList({
   onCourseClick,
@@ -17,10 +21,11 @@ function CourseList({
 }) {
   const [courses, setCourses] = useState([]);
   const { Allcourses, isLoading } = GetAllCourses();
-  const t =useTranslations("Courses")
+  const { user } = UserAuth();
+  const t = useTranslations("Courses");
 
   useEffect(() => {
-    const getCourses = () => { 
+    const getCourses = () => {
       setCourses(Allcourses);
     };
     getCourses();
@@ -28,13 +33,12 @@ function CourseList({
 
   const coursesToPull = courses.filter((course) => {
     if (pageTitle === t("title-1")) {
-      return course.isRegistered;
+      return course.isRegistered.includes(user.uid);
     } else if (pageTitle === t("title-2")) {
-      return course.isSaved;
+      return course.isSaved.includes(user.uid);
     } else if (pageTitle === course.category) {
       return course.category;
-    }
-     else {
+    } else {
       return console.log("Error: No courses to pull");
     }
   });
@@ -42,11 +46,10 @@ function CourseList({
   function capitalizeFirstLetters(str) {
     return str
       .toLowerCase()
-      .split(' ')
+      .split(" ")
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
+      .join(" ");
   }
-  
 
   if (isLoading) {
     return (
@@ -70,9 +73,10 @@ function CourseList({
           <NavigateNextOutlinedIcon className="text-white" />
         </Link>
       </div>
-      {coursesToPull.map((course) => {
-        const selectedStyle =
-          course.id === selectedCourse?.id ? "card-clicked" : "";
+      {coursesToPull.length !== 0 ? (
+        coursesToPull.map((course) => {
+          const selectedStyle =
+            course.id === selectedCourse?.id ? "card-clicked" : "";
           const randomProgress = Math.floor(Math.random() * 101);
           return (
             <CourseCard
@@ -83,7 +87,22 @@ function CourseList({
               selectedStyle={selectedStyle}
             />
           );
-      })}
+        })
+      ) : (
+        <div className="h-full flex justify-center items-center text-center text-lg">
+          <div className="bg-white dark:bg-indigoDay mx-auto w-[80%] rounded-2xl flex flex-col gap-3">
+            <span className="text-primaryBlue font-bold text-2xl py-6">
+              Oops !!!{" "}
+            </span>
+            <p>{t("Message-3")} </p>
+            <Link href="/search" className="pb-6 pt-4">
+              <button className="bg-primaryBlue rounded-xl py-2 px-4 ">
+                {t("Button-5")}
+              </button>
+            </Link>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

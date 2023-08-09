@@ -54,7 +54,6 @@ const InfoComp = ({ user, userData }) => {
       setImage(URL.createObjectURL(e.target.files[0]));
     }
   };
-  console.log(user.uid);
   const handleSubmitImage = async (e) => {
     e.preventDefault();
     if (selectedFile) {

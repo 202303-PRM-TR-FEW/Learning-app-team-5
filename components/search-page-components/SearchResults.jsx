@@ -2,7 +2,7 @@
 import React from "react";
 import Course from "../home-page-components/CourseCard";
 
-function SearchResults({ searchResult }) {
+function SearchResults({ searchResult, setError }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       {searchResult.map((course) => (
@@ -14,6 +14,8 @@ function SearchResults({ searchResult }) {
           courseImage={course.courseImage}
           duration={course.duration}
           rating={course.rating}
+          id={course.uid}
+          setError={setError}
         />
       ))}
     </div>
