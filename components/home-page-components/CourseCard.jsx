@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import dynamic from "next/dynamic";
 import { UserAuth } from "../../app/context/AuthContext";
 import {
@@ -45,9 +46,73 @@ function Course({
 
   //  return the state of user is sign in or not
   const { user } = UserAuth();
+
   const placeHolderImage =
     "https://firebasestorage.googleapis.com/v0/b/learning-app-team-5.appspot.com/o/review-placeholder-1.png?alt=media&token=e928937b-03be-49ab-8e26-170e44d9aa8a";
-  // const t = useTranslations("Home");
+  
+
+  // check if the course is saved or registered to handle the user interface
+  const handleCouresStates = async () => {
+    const courseDoc = doc(db, "course-data", id);
+    const courseSnapshot = await getDoc(courseDoc);
+    const isUserSaved = courseSnapshot.data().isSaved.includes(user.uid);
+    const isUserRegistered = courseSnapshot
+      .data()
+      .isRegistered.includes(user.uid);
+    setIsBookmarked(isUserSaved);
+    setIsRegistered(isUserRegistered);
+  };
+
+  useEffect(() => {
+    if (user) handleCouresStates();
+  }, [user]);
+
+  const handleBookmarkToggle = async () => {
+    if (!user) {
+      setError(d("Error-1"));
+      setTimeout(() => {
+        setError(null);
+      }, 3000);
+    } else {
+      // Get a reference to the course document
+      const courseDoc = doc(db, "course-data", id);
+
+      // Check if the user's ID is already in the 'isSaved' array
+      const courseSnapshot = await getDoc(courseDoc);
+      const isUserSaved = courseSnapshot.data().isSaved.includes(user.uid);
+
+      // Update the 'isSaved' array based on whether the user's ID is already saved or not
+      if (isUserSaved) {
+        setIsBookmarked(false);
+        // Remove the user's ID from the 'isSaved' array
+        await updateDoc(courseDoc, {
+          isSaved: arrayRemove(user.uid),
+        });
+      } else {
+        setIsBookmarked(true);
+        // Add the user's ID to the 'isSaved' array
+        await updateDoc(courseDoc, {
+          isSaved: arrayUnion(user.uid),
+        });
+      }
+    }
+  };
+
+  const handleGetCourse = async () => {
+    if (!user) {
+      setError(d("Error-1"));
+      setTimeout(() => {
+        setError(null);
+      }, 3000);
+    } else {
+      // Get a reference to the course document
+      const courseDoc = doc(db, "course-data", id);
+
+      // Check if the user's ID is already in the 'isRegistered' array
+      const courseSnapshot = await getDoc(courseDoc);
+      const isUserRegistered = courseSnapshot
+        .data()
+        .isRegistered.includes(user.uid);
 
       // Update the 'isRegistered' array based on whether the user's ID is already saved or not
       if (isUserRegistered) {
