@@ -1,9 +1,14 @@
 "use client";
-import React, { useState } from "react";
-import Image from "next/image";
+import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { UserAuth } from "../../app/context/AuthContext";
-import { doc, arrayUnion, updateDoc } from "firebase/firestore";
+import {
+  doc,
+  arrayUnion,
+  updateDoc,
+  arrayRemove,
+  getDoc,
+} from "firebase/firestore";
 import { db } from "@/firebase";
 import { Spinner } from "@material-tailwind/react";
 import { useTranslations } from "next-intl";
@@ -24,67 +29,54 @@ function Course({
   courseImage,
   rating,
   duration,
+  setError,
+  id,
 }) {
   const t = useTranslations("Home");
+  const d = useTranslations("Discussion");
+
   const hours = Math.floor(duration / 60);
   const minutes = duration % 60;
 
   const [isLoading, setIsLoading] = useState(true);
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const [Registered, setIsRegistered] = useState(false);
+  const [message, setMessage] = useState(null);
+
   //  return the state of user is sign in or not
   const { user } = UserAuth();
   const placeHolderImage =
     "https://firebasestorage.googleapis.com/v0/b/learning-app-team-5.appspot.com/o/review-placeholder-1.png?alt=media&token=e928937b-03be-49ab-8e26-170e44d9aa8a";
   // const t = useTranslations("Home");
 
-  const handleBookmarkToggle = () => {
-    setIsBookmarked(!isBookmarked);
+      // Update the 'isRegistered' array based on whether the user's ID is already saved or not
+      if (isUserRegistered) {
+        setIsRegistered(false);
+        // Remove the user's ID from the 'isRegistered' array
+        await updateDoc(courseDoc, {
+          isRegistered: arrayRemove(user.uid),
+        });
+        setMessage(t("Message-2"));
+        setTimeout(() => {
+          setMessage(null);
+        }, 3000);
+      } else {
+        setIsRegistered(true);
+        // Add the user's ID to the 'isRegistered' array
+        await updateDoc(courseDoc, {
+          isRegistered: arrayUnion(user.uid),
+        });
+        setMessage(t("Message-1"));
+        setTimeout(() => {
+          setMessage(null);
+        }, 3000);
+      }
+    }
   };
 
   const handleOnLoad = () => {
     setIsLoading(false);
   };
-
-  //set the saved course to user saved courses in firebase
-  // const courseID = doc(db, "users", `${user?.email}`);
-  // const handleSaveCourse = async () => {
-  //   if (user?.email) {
-  //     setIsSaved((pre) => !pre);
-  //     await updateDoc(courseID, {
-  //       savedCourses: arrayUnion({
-  //         id: id,
-  //         title: title,
-  //         authorName: authorName,
-  //         authorImage: authorImage,
-  //         courseImage: courseImage,
-  //         rating: rating,
-  //         duration: duration,
-  //         isSaved: !saved,
-  //       }),
-  //     });
-  //   } else {
-  //     alert("Please sign in to save this course");
-  //   }
-  // };
-  // //set the registerd courses
-  // const handleGetCourse = async () => {
-  //   if (user?.email) {
-  //     await updateDoc(courseID, {
-  //       registeredCourses: arrayUnion({
-  //         id: id,
-  //         title: title,
-  //         authorName: authorName,
-  //         authorImage: authorImage,
-  //         courseImage: courseImage,
-  //         rating: rating,
-  //         duration: duration,
-  //         isRegistered: true,
-  //       }),
-  //     });
-  //   } else {
-  //     alert("Please sign in to save this course");
-  //   }
-  // };
 
   return (
     <div className="rounded-xl bg-white p-2 course-item flex-col w-full my-6 relative dark:bg-indigoDay w-full">
@@ -95,13 +87,22 @@ function Course({
               <Spinner className="h-8 w-8" />
             </div>
           )}
-          <img
-            className="rounded-lg h-32 w-[100%] "
-            src={courseImage}
-            alt="courseImage"
-            onLoad={handleOnLoad}
-            style={isLoading ? { display: "none" } : { display: "block" }}
-          />
+          {message ? (
+            <div className="rounded-lg h-32 w-[100%] flex justify-center items-center">
+              <p className="bg-green-200 rounded-md border-2 border-green-600 text-lightBlack px-3 py-1 font-medium">
+                {message}
+              </p>
+            </div>
+          ) : (
+            <img
+              className="rounded-lg h-32 w-[100%] "
+              src={courseImage}
+              alt="courseImage"
+              onLoad={handleOnLoad}
+              style={isLoading ? { display: "none" } : { display: "block" }}
+            />
+          )}
+
           <div className="absolute top-1 right-1">
             <label className={`ui-bookmark ${isBookmarked ? "active" : ""}`}>
               <input type="checkbox" />
@@ -141,10 +142,10 @@ function Course({
             <StarBorderOutlinedIcon /> {rating} /5
           </span>
           <span
-            // onClick={handleGetCourse}
+            onClick={handleGetCourse}
             className="cursor-pointer bg-primaryBlue  px-4 py-2 text-white rounded-full mx-[2px]"
           >
-            {t("button")}
+            {Registered ? t("button-2") : t("button")}
           </span>
         </div>
         <span></span>

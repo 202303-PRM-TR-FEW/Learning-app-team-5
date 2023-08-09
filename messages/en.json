@@ -31,8 +31,11 @@
     "title-1":"Featured Courses",
     "title-2":"Categories",
     "button" :"Get",
+    "button-2" :"Remove",
     "hour" :"h",
     "minute": "m",
+    "Message-1":"The course was added successfully ",
+    "Message-2":"The course was removed successfully ",
     "more" : "Show More",
     "less" : "Show Less",
     "Sales": "Sales",
@@ -64,8 +67,10 @@
     "Button-2":"Preview",
     "Button-3":"Continue",
     "Button-4":"Enroll",
+    "Button-5":"Check out our courses",
     "Message-1":"Hey there!",
-    "Message-2":"Please select a course to view"
+    "Message-2":"Please select a course to view",
+    "Message-3":"It seems you do not have any course yet"
   },
   "Profile":{
   "title": "Total Statistic",
