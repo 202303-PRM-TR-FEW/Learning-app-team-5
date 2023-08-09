@@ -19,7 +19,6 @@ const LeaderboardOutlinedIcon = dynamic(() =>
 
 import "./CourseCard.css";
 import CourseButton from "./CourseButton";
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 function CourseOverview({ selectedCourse }) {
@@ -128,7 +127,7 @@ function CourseOverview({ selectedCourse }) {
       <div className="h-1/3 hidden lg:block">
         {/* description title */}
         <div className="flex flex-col justify-center my-2 mt-8">
-          <h2 className="text-[#373737] text-xl font-semibold mb-4">
+          <h2 className="text-[#373737] dark:text-bodyWhite text-xl font-semibold mb-4">
             {t("Descripttion")}
           </h2>
           {/* description content */}

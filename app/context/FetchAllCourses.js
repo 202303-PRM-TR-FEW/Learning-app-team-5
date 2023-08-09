@@ -17,7 +17,7 @@ export const CoursesContextProvider = ({ children }) => {
             const coursesArray = [];
 
             querySnapshot.forEach((doc) => {
-                coursesArray.push({ ...doc.data(), id: doc.id });
+                coursesArray.push({ ...doc.data(), uid: doc.id });
             });
 
             setCourses(coursesArray);
