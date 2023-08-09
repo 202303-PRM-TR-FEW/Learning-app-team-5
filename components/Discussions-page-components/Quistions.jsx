@@ -99,7 +99,7 @@ const Questions = ({ Error, setError }) => {
       return;
     }
     if (user.email === questionEmail) {
-      const hasConfirmed = confirm(`${t("Alert")}`);
+      const hasConfirmed = confirm(`${t("Alert-2")}`);
       if (hasConfirmed) {
         const docRef = doc(db, "questions", questionId);
         await deleteDoc(docRef)
