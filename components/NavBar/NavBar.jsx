@@ -50,7 +50,7 @@ function NavBar({ locale }) {
 
   return (
     <>
-      <div className="absolute top-7 left-6 z-50 py-2">
+      <div className="absolute top-1 lg:top-7 left-6 z-50 py-2">
         <Link href={`${EN}/`}>
           <span>
             <svg
