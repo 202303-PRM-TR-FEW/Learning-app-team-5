@@ -43,12 +43,15 @@ export const GetCourseModules = () => {
     return useContext(FetchCourseContentContext);
 };
 
-export const createCoursesWithModules = async (db, courses, modules) => {
+/* export const createCoursesWithModules = async (db, courses, modules) => {
     try {
         const coursesWithModules = [];
         for (let i=0; i<courses.length; i++) {
             const course = courses[i];
             const modulesForCourse = modules.filter(module => module.moduleID === course.id);
+            console.log(course.id);
+            console.log(modulesForCourse);
+            modules.forEach(module => {console.log(module.moduleID)});
             coursesWithModules.push({ ...course, modules: modulesForCourse });
             console.log(`Course "${course.title}" has been added with module references.`);
         }
@@ -59,3 +62,4 @@ export const createCoursesWithModules = async (db, courses, modules) => {
         console.error("Error creating courses with modules: ", error);
 }
 }
+ */

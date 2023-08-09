@@ -1,20 +1,19 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import CourseButton from "@/components/course-general-components/CourseButton";
+// import Link from "next/link";
+// import CourseButton from "@/components/course-general-components/CourseButton";
 import MyPerformance from "@/components/statistics-page-components/MyPerformance";
 import ThisWeek from "@/components/statistics-page-components/ThisWeek";
-import { UserAuth } from "app/context/AuthContext.js";
-import { db } from "../../../../firebase";
-import { doc, updateDoc } from "firebase/firestore";
-
-import CourseModules from "@/components/statistics-page-components/CourseModules";
-import MockUsers from "@/components/statistics-page-components/UpdateUserProgress";
+// import { UserAuth } from "app/context/AuthContext.js";
+// import { db } from "../../../../firebase";
+// import { doc, updateDoc } from "firebase/firestore";
+// import CourseModules from "@/components/statistics-page-components/CourseModules";
+import  Temp  from "@/components/statistics-page-components/Temp";
 
 
 function Statistics() {
-  const { user } = UserAuth();
-  console.log(user);
+ /*  const { user } = UserAuth();
+
 
   const createUserProgressDoc = async () => {
     if (!user) console.log("Error: No user logged in");
@@ -29,17 +28,16 @@ function Statistics() {
     } catch (error) {
       console.log("Error updating document: ", error);
     }
-  };
+  }; */
 
-  createUserProgressDoc();
+  // createUserProgressDoc();
 
   return (
     <>
       <div className="w-full lg:w-1/2 h-screen m-4">
         <ThisWeek />
         <MyPerformance />
-         <CourseModules /> 
-        <MockUsers />
+         <Temp /> 
       </div>
     </>
   );

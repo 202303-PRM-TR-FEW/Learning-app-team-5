@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { db } from '@/firebase'; // Replace with the actual path to your firebaseConfig file
 import { collection, getDocs } from 'firebase/firestore';
 import ModuleContent from './ModuleContent';
-import { createCoursesWithModules } from './CourseContent';
+// import { createCoursesWithModules } from './CourseContent';
 import { GetAllCourses } from '../../app/context/FetchAllCourses';
 
 
@@ -36,8 +36,7 @@ const CourseModules = () => {
     };
 
     fetchCourseModules();
-    createCoursesWithModules(db, courses, courseModules);
-    // console.log(courseModules)
+    // createCoursesWithModules(db, courses, courseModules);
   }, []);
 
 
