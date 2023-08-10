@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState, useTransition } from "react";
-import { getDocs, collection, doc, getDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { doc, getDoc } from "firebase/firestore";
 import { GetAllUsers } from "@/app/context/FetchAllUsers";
 import { UserAuth } from "@/app/context/AuthContext";
+import { useTranslations } from "next-intl";
 import { db } from "@/firebase";
 
 const SuggestionsFriends = ({ t }) => {
@@ -13,16 +14,11 @@ const SuggestionsFriends = ({ t }) => {
   const [following, setFollowing] = useState([]);
 
   const showFriends = async () => {
-    const followingArray = await getFollowingArray(user.uid);
-    setFollowing(followingArray);
-    setMyFriends(users.filter((friend) => followingArray.includes(friend.id)));
-  };
-
-  const getFollowingArray = async (userId) => {
-    const userDoc = doc(db, "users", userId);
+    const userDoc = doc(db, "users", user.uid);
     const followingArraySnapShot = await getDoc(userDoc);
     const followingArray = followingArraySnapShot.data().FOLLOWING;
-    return followingArray;
+    setFollowing(followingArray);
+    setMyFriends(users.filter((friend) => followingArray.includes(friend.id)));
   };
 
   useEffect(() => {
@@ -62,8 +58,7 @@ const SuggestionsFriends = ({ t }) => {
 };
 
 const FriendSugCard = ({ user }) => {
-
-  const t = useTransition("profile");
+  const t = useTranslations("Profile");
   return (
     <div>
       <div className="flex justify-between items-center py-3 px-6 ">
@@ -77,7 +72,7 @@ const FriendSugCard = ({ user }) => {
         </div>
         <div className="flex justify-between gap-2">
           <p className=" p-2 text-primaryBlue font-bold cursor-pointer hover:text-blue-200">
-            {/* {t("Profile")} */}
+            {t("Profile")}
           </p>
         </div>
       </div>

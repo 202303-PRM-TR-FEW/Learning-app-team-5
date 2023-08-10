@@ -1,16 +1,18 @@
 import Image from "next/image";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc, getDoc } from "firebase/firestore";
 import { useTranslations } from "next-intl";
 import { UserAuth } from "../../app/context/AuthContext";
 import { GetAllCourses } from "@/app/context/FetchAllCourses";
 import { db } from "@/firebase";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 const Header = ({ user, userData, setShowForm }) => {
   const [Form, setForm] = useState(null);
   const [newCity, setNewCity] = useState("");
   const [myCourses, setMyCourses] = useState([]);
+  const [following, setFollowing] = useState([]);
+  const [followers, setFollowers] = useState([]);
 
   const t = useTranslations("Profile");
   const { logOut } = UserAuth();
@@ -41,6 +43,15 @@ const Header = ({ user, userData, setShowForm }) => {
     await updateDoc(userRef, { city: newCity });
     setForm(null);
   }
+
+  const showFriends = useMemo(async () => {
+    const userDoc = doc(db, "users", user.uid);
+    const userDocSnapShot = await getDoc(userDoc);
+    const followingArray = userDocSnapShot.data().FOLLOWING;
+    const followersArray = userDocSnapShot.data().FOLLOWERS;
+    setFollowing(followingArray);
+    setFollowers(followersArray);
+  }, []);
 
   useEffect(() => {
     if (Allcourses.length > 1) {
@@ -140,11 +151,15 @@ const Header = ({ user, userData, setShowForm }) => {
               <p className="text-center mx-2 font-bold">{t("Courses")}</p>
             </div>
             <div className="flex flex-col ">
-              <h3 className="text-center font-bold">0</h3>
+              <h3 className="text-center font-bold">
+                {followers.length !== 0 ? followers.length : "0"}
+              </h3>
               <p className="text-center mx-2 font-bold">{t("Followers")}</p>
             </div>
             <div className="flex flex-col ">
-              <h3 className="text-center font-bold">0</h3>
+              <h3 className="text-center font-bold">
+                {following.length !== 0 ? following.length : "0"}
+              </h3>
               <p className="text-center mx-2 font-bold">{t("Following")}</p>
             </div>
           </div>
