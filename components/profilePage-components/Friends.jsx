@@ -6,6 +6,7 @@ import { GetAllUsers } from "@/app/context/FetchAllUsers";
 import { UserAuth } from "@/app/context/AuthContext";
 import { useTranslations } from "next-intl";
 import { db } from "@/firebase";
+import Link from "next/link";
 
 const SuggestionsFriends = ({ t }) => {
   const { users } = GetAllUsers();
@@ -71,9 +72,11 @@ const FriendSugCard = ({ user }) => {
           <h3 className="font-medium self-center">{user.username}</h3>
         </div>
         <div className="flex justify-between gap-2">
-          <p className=" p-2 text-primaryBlue font-bold cursor-pointer hover:text-blue-200">
-            {t("Profile")}
-          </p>
+          <Link href={`/profile/${user.id}`}>
+            <p className=" p-2 text-primaryBlue font-bold cursor-pointer hover:text-blue-200">
+              {t("Profile")}
+            </p>
+          </Link>
         </div>
       </div>
       <hr className="w-[90%] m-auto" />
