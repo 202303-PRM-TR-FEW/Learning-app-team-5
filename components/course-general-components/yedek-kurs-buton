@@ -1,0 +1,46 @@
+import React from "react";
+import Link from "next/link";
+
+
+function CourseButton({ 
+  buttonName = "Button", 
+  handleClick = () => {},
+  selectedCourse = null, 
+  widthPercentage="w-[45%]" 
+}) {
+  return (
+/*     <button
+      className={`bg-[#56a0fe] w-[${widthPercentage}%] rounded-2xl text-white py-2 px-4 hover:bg-[#fbfbfb] hover:text-[#56a0fe] hover:border-[#56a0fe] hover:border-2 text-base cursor-pointer`}
+      onClick={handleClick}
+    > */
+
+
+<Link
+  href={
+    buttonName === "Continue" || buttonName === "Enroll"
+      ? "./continue-learning"
+      : buttonName === "Review"
+      ? "./review"
+      : "./login"
+  }
+  
+>
+<button
+      className={`bg-[#56a0fe] w-[${widthPercentage}%] rounded-2xl text-white py-2 px-4 hover:bg-[#fbfbfb] hover:text-[#56a0fe] hover:border-[#56a0fe] hover:border-2 text-base cursor-pointer`}
+      onClick={handleClick}
+    >
+  {buttonName}
+</button>
+</Link>
+
+  /*   </button> */
+  );
+}
+
+CourseButton.defaultProps = {
+  buttonName: "Button",
+  handleClick: () => {},
+  widthPercentage: "w-[45%]",
+};
+
+export default CourseButton;
