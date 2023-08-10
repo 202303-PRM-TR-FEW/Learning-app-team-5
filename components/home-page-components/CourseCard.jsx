@@ -33,6 +33,7 @@ function Course({
   setError,
   id,
 }) {
+  console.log(authorImage);
   const t = useTranslations("Home");
   const d = useTranslations("Discussion");
 
@@ -49,7 +50,6 @@ function Course({
 
   const placeHolderImage =
     "https://firebasestorage.googleapis.com/v0/b/learning-app-team-5.appspot.com/o/review-placeholder-1.png?alt=media&token=e928937b-03be-49ab-8e26-170e44d9aa8a";
-  
 
   // check if the course is saved or registered to handle the user interface
   const handleCouresStates = async () => {
@@ -182,10 +182,8 @@ function Course({
           </div>
         </div>
         <div className="justify-between rounded-full bg-white shadow-2xl flex w-[55%] py-1 absolute mt-[-25px] dark:bg-purssianBlue">
-          <Image
+          <img
             className="rounded-full px-1  h-12 w-12"
-            height={20}
-            width={20}
             src={isLoading ? placeHolderImage : authorImage}
             alt="auter-image"
           />
