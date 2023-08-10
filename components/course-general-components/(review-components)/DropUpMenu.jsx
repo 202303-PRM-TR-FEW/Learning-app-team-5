@@ -41,7 +41,7 @@ function DropUpMenu({ buttonName, handleClick }) {
 
       {showPopup && (
         <div
-          className="bg-white rounded-xl w-60 h-12 p-1 mb-2 drop-shadow-lg  transition-all transform translate-y-2 flex justify-around"
+          className="bg-white rounded-xl w-60 h-12 p-1 mb-2 drop-shadow-lg  flex justify-around"
           ref={setPopperElement}
           style={styles.popper}
           {...attributes.popper}

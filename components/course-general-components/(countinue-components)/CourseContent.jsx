@@ -11,6 +11,26 @@ function getRandomVideoDuration() {
   }
   
   const randomCourses = [
+    
+    {
+      title: "Introduction to Python Programming",
+      videos: [
+        { name: "Variables and Data Types", duration: getRandomVideoDuration() },
+        { name: "Conditional Statements in Python", duration: getRandomVideoDuration() },
+        { name: "Loops and Iteration in Python", duration: getRandomVideoDuration() },
+        { name: "Functions and Modules in Python", duration: getRandomVideoDuration() },
+        { name: "Working with Lists and Dictionaries", duration: getRandomVideoDuration() }
+      ]
+    }, {
+      title: "Introduction to Python Programming",
+      videos: [
+        { name: "Variables and Data Types", duration: getRandomVideoDuration() },
+        { name: "Conditional Statements in Python", duration: getRandomVideoDuration() },
+        { name: "Loops and Iteration in Python", duration: getRandomVideoDuration() },
+        { name: "Functions and Modules in Python", duration: getRandomVideoDuration() },
+        { name: "Working with Lists and Dictionaries", duration: getRandomVideoDuration() }
+      ]
+    },
     {
       title: "Introduction to Python Programming",
       videos: [
@@ -71,28 +91,31 @@ const AccordionContent = React.forwardRef(({ children, className, ...props }, fo
 
 const CourseContent = () => (
     <>
-      <h1>Course Overview</h1>
+      <h1 className='text-xl text-gray-500 font-medium  ml-2 p-5'>Course Overview</h1>
       <Accordion.Root className="AccordionRoo" type="single" defaultValue="item-1" collapsible>
         {randomCourses.map((course, index) => (
           <Accordion.Item key={index} className="AccordionItem" value={`item-${index}`}>
             <AccordionTrigger className="">{course.title}</AccordionTrigger>
             <AccordionContent>
-              {course.videos.map((video, videoIndex) => (
-                <div key={videoIndex}>
-                  {video.name} - Duration: {video.duration} minutes
-                </div>
-              ))}
+             <ul>
+              <li>
+                {course.videos.map((video, videoIndex) => (
+                  <div className='p-2' key={videoIndex}>
+                    {video.name}  
+                    <div className='text-sm opacity-30'>{video.duration} minutes </div>
+                    
+                   
+                  </div>
+                  
+                
+                ))}
+              </li>
+              </ul> 
+            
             </AccordionContent>
           </Accordion.Item>
         ))}
-        <Accordion.Item className="AccordionItem" value="item-3">
-          <AccordionTrigger>test</AccordionTrigger>
-          <Accordion.Content className="AccordionContent">
-            <div className="AccordionContentText">
-              test content
-            </div>
-          </Accordion.Content>
-        </Accordion.Item>
+        
       </Accordion.Root>
     </>
   );

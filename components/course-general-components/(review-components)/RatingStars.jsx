@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Typography, Rating } from "@mui/material";
 
-const RatingStars = () => {
+const RatingStars = ({ handleRatingChange }) => {
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -18,10 +18,7 @@ const RatingStars = () => {
         className="p-2"
         name="simple-controlled"
         value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-          console.log(setVaue())
-        }}
+        onChange={handleChange}
       />
     </div>
   );
