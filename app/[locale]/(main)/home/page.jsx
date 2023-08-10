@@ -17,9 +17,7 @@ function Page() {
           <Spinner className="h-14 w-14" />
         </div>
       ) : (
-        <div
-          className=" mx-auto px-4 min-h-full lg:max-w-[1280px] dark:text-bodyWhite"
-        >
+        <div className=" mx-auto px-4 dark:min-h-screen lg:max-w-[1280px] dark:text-bodyWhite">
           <FeaturedCourse />
           <Categories />
         </div>

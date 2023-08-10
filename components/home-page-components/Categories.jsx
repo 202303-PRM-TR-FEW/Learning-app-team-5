@@ -101,7 +101,7 @@ function Categories() {
   };
 
   return (
-    <div className="font-sans">
+    <div className="font-sans mt-0 xl:pt-12">
       <h2 className="text-4xl font-bold py-6">{t("title-2")}</h2>
       <div className="grid place-content-center sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 2xl:gap-x-20">
         {categoriesToShow.map((category) => (

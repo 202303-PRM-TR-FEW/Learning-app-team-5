@@ -23,7 +23,7 @@ function FeaturedCourse() {
   return (
     <div className="flex flex-col">
       <div>
-        <h1 className="text-3xl font-bold pt-12 md:pt-0">{t("title-1")}</h1>
+        <h1 className="text-3xl font-bold pt-6 md:pt-0">{t("title-1")}</h1>
       </div>
       {Error && (
         <div className="self-center text-center text-red-400 text-xl font-bold bg-red-100 my-2 py-4 w-1/2 rounded-xl border-2 border-red-500">

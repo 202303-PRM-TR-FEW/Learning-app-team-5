@@ -60,8 +60,8 @@ function CourseList({
   }
 
   return (
-    <div className="flex flex-col overflow-y-auto m-4">
-      <div className="flex justify-between items-center m-4 p-4 bg-[#56a0fe] opacity-80 rounded lg:sticky top-0 z-50">
+    <div className="flex flex-col h-screen m-4 overflow-y-auto ">
+      <div className="flex justify-between items-center m-4 p-4 bg-[#56a0fe]  rounded sticky top-0 z-50">
         <h1 className="text-white md:text-2xl text-xl font-semibold">
           {capitalizeFirstLetters(pageTitle)}
         </h1>
