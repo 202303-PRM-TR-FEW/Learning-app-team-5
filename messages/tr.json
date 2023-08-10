@@ -38,13 +38,13 @@
     "Message-2":"Kurs başarıyla kaldırıldı",
     "more": "Daha Fazla Göster",
     "less": "Daha Az Göster",
-    "Sales": "Satış",
-    "HR": "İnsan Kaynakları",
-    "Drawing": "Çizim",
-    "Big Data": "Büyük Veri",
+    "Sales": "işletme",
+    "HR": "Kişisel Gelişim",
+    "Drawing": "Müzik",
+    "Big Data": "Veri Bilimi",
     "Design": "Tasarım",
     "Marketing": "Pazarlama",
-    "Astronomy": "Astronomi",
+    "Astronomy": "fotoğrafçılık",
     "Web Development": "Web Geliştirme"
   },
   "Search": {

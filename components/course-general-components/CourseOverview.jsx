@@ -38,7 +38,9 @@ function CourseOverview({ selectedCourse }) {
       <div className="flex flex-col bg-[rgba(251,_251,_251,_0.5)] dark:bg-indigoDay p-4 m-4 rounded-2xl shadow-md justify-center items-center ">
         <div className="flex w-full justify-center items-center">
           <WavingHandOutlinedIcon className="text-[#56a0fe] text-6xl h-1/2 mr-2" />
-          <h1 className="text-2xl font-bold text-[#56a0fe]">{t("Message-1")}</h1>
+          <h1 className="text-2xl font-bold text-[#56a0fe]">
+            {t("Message-1")}
+          </h1>
         </div>
         {showArrowIcons && (
           <div className="flex w-full justify-center items-center">
