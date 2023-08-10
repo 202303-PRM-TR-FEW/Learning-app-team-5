@@ -3,10 +3,6 @@ import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
 const AccessTimeIcon = dynamic(() => import("@mui/icons-material/AccessTime"));
 const StarBorderIcon = dynamic(() => import("@mui/icons-material/StarBorder"));
-const ArrowBackIcon = dynamic(() => import("@mui/icons-material/ArrowBack"));
-const ArrowUpwardOutlinedIcon = dynamic(() =>
-  import("@mui/icons-material/ArrowUpwardOutlined")
-);
 const WavingHandOutlinedIcon = dynamic(() =>
   import("@mui/icons-material/WavingHandOutlined")
 );
@@ -21,7 +17,7 @@ import "./CourseCard.css";
 import CourseButton from "./CourseButton";
 import { useTranslations } from "next-intl";
 
-function CourseOverview({ selectedCourse }) {
+function CourseOverview({ selectedCourse, notifyContent }) {
   const [showArrowIcons, setShowArrowIcons] = useState(false);
   const t = useTranslations("Courses");
 
@@ -42,8 +38,6 @@ function CourseOverview({ selectedCourse }) {
         </div>
         {showArrowIcons && (
           <div className="flex w-full justify-center items-center">
-            <ArrowBackIcon className="arrow-icon arrow-icon-lg" />
-            <ArrowUpwardOutlinedIcon className="arrow-icon arrow-icon-sm" />
             <p className="ml-2">{t("Message-2")}</p>
           </div>
         )}
@@ -139,7 +133,7 @@ function CourseOverview({ selectedCourse }) {
       </div>
 
       {/* PREVIEW AND ENROLL BUTTONS */}
-      <div className="flex justify-between my-4">
+      <div className="flex justify-between my-4 md:mb-0 mb-10">
         <CourseButton
           buttonName={selectedCourse.isRegistered ? t("Button-1") : t("Button-2")}
           handleClick={() =>
@@ -149,7 +143,7 @@ function CourseOverview({ selectedCourse }) {
         <CourseButton
           buttonName={selectedCourse.isRegistered ? t("Button-3"): t("Button-4")}
           handleClick={() =>
-            console.log("add enroll page navigation to handleClick function")
+           notifyContent()
           }
         />
       </div>

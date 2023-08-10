@@ -1,14 +1,29 @@
 "use client";
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CourseList from "./CourseList";
 import CourseOverview from "./CourseOverview";
 
 function CourseDisplayPage({ pageTitle, navigationPath, navigationName }) {
-  const [selectedCourse, setSelectedCourse] = useState(null);
+  const [selectedCourse, setSelectedCourse] = useState({});
+  const [contentButtonPressed, setContentButtonPressed] = useState(false);
 
   function handleCourseClick(course) {
     setSelectedCourse(course);
+  }
+
+  function handleNotifyContent() {
+    if (selectedCourse) {
+      setContentButtonPressed(true);
+    }
+  }
+
+  if (contentButtonPressed) {
+    return (
+      <div>
+        <h1>Content Button Pressed, This Is The Selected Course: {selectedCourse}</h1>
+      </div>
+    )
   }
 
   return (
@@ -21,7 +36,7 @@ function CourseDisplayPage({ pageTitle, navigationPath, navigationName }) {
           navigationPath={navigationPath || "./home"}
           navigationName={navigationName || "Enter Page Name To Navigate Here"}
         />
-        <CourseOverview selectedCourse={selectedCourse} />
+        <CourseOverview selectedCourse={selectedCourse} notifyContent={handleNotifyContent}/>
       </div>
     </div>
   );

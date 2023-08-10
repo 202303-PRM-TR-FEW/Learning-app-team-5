@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { use } from "react";
 import { useEffect, useState } from "react";
 import { Spinner } from "@material-tailwind/react";
 import { GetAllCourses } from "../../app/context/FetchAllCourses";
@@ -14,6 +14,7 @@ function Temp() {
   const [isModuleLoading, setIsModuleLoading] = useState(true);
   const [error, setError] = useState(null);
   const { user, userData } = UserAuth();
+  const [coursesWithModules, setCoursesWithModules] = useState([]);
 
   useEffect(() => {
     const getCourses = () => {
@@ -46,18 +47,31 @@ function Temp() {
     return () => unsubscribe();
   }, []);
 
-  if (courseModules.length > 0) {
-    const coursesWithModules = [];
-    courses.forEach((course) => {
-      const courseModule = courseModules.find(
-        (module) => module.moduleID === course.id
-      );
-      coursesWithModules.push({ ...course, module: courseModule });
-    });
-  }
+
+  useEffect(() => {
+    if (courseModules.length > 0) {
+      const coursesWithModulesArray = [];
+      courses.forEach((course) => {
+        const courseModule = courseModules.find(
+          (module) => module.moduleID === course.id
+        );
+        coursesWithModulesArray.push({...course, courseModule: courseModule});
+      });
+      if (coursesWithModulesArray.length === 80) {
+        setCoursesWithModules(coursesWithModulesArray);
+      }
+    }
+  }, [courseModules]);
 
   console.log(user);
   console.log(userData);
+  
+  useEffect(() => {
+    console.log(coursesWithModules);
+  }, [coursesWithModules]);
+
+
+
   const exampleUser = {
     username: "John Doe",
     email: "johndoe@gmail.com",
