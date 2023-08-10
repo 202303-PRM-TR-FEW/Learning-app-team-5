@@ -7,12 +7,12 @@ import { db } from "@/firebase";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useMemo } from "react";
 
-const Header = ({ user, userData, setShowForm }) => {
+const Header = ({ user, userData, setShowForm, followers, following }) => {
   const [Form, setForm] = useState(null);
   const [newCity, setNewCity] = useState("");
   const [myCourses, setMyCourses] = useState([]);
-  const [following, setFollowing] = useState([]);
-  const [followers, setFollowers] = useState([]);
+  // const [following, setFollowing] = useState([]);
+  // const [followers, setFollowers] = useState([]);
 
   const t = useTranslations("Profile");
   const { logOut } = UserAuth();
@@ -44,14 +44,14 @@ const Header = ({ user, userData, setShowForm }) => {
     setForm(null);
   }
 
-  const showFriends = useMemo(async () => {
-    const userDoc = doc(db, "users", user.uid);
-    const userDocSnapShot = await getDoc(userDoc);
-    const followingArray = userDocSnapShot.data().FOLLOWING;
-    const followersArray = userDocSnapShot.data().FOLLOWERS;
-    setFollowing(followingArray);
-    setFollowers(followersArray);
-  }, []);
+  // const showFriends = useMemo(async () => {
+  //   const userDoc = doc(db, "users", user.uid);
+  //   const userDocSnapShot = await getDoc(userDoc);
+  //   const followingArray = userDocSnapShot.data().FOLLOWING;
+  //   const followersArray = userDocSnapShot.data().FOLLOWERS;
+  //   setFollowing(followingArray);
+  //   setFollowers(followersArray);
+  // }, []);
 
   useEffect(() => {
     if (Allcourses.length > 1) {

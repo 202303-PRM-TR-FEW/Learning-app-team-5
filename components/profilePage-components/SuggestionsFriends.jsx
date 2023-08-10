@@ -1,21 +1,14 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import {
-  doc,
-  writeBatch,
-  arrayUnion,
-  updateDoc,
-  arrayRemove,
-  getDoc,
-} from "firebase/firestore";
+import { doc, writeBatch, arrayUnion } from "firebase/firestore";
 import { FriendSugCard } from "./SuggestionCard";
 import { GetAllUsers } from "@/app/context/FetchAllUsers";
 import { GetRandomNumbers } from "@/app/context/RandomNumbers";
 import { UserAuth } from "@/app/context/AuthContext";
 import { db } from "@/firebase";
 
-const SuggestionsFriends = ({ t }) => {
+const SuggestionsFriends = ({ t, setRefrash }) => {
   const { users } = GetAllUsers();
   const { user } = UserAuth();
   const { getRandomNumbers } = GetRandomNumbers();

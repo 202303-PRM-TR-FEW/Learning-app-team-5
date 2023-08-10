@@ -1,29 +1,48 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 import { GetAllUsers } from "@/app/context/FetchAllUsers";
 import { UserAuth } from "@/app/context/AuthContext";
 import { useTranslations } from "next-intl";
 import { db } from "@/firebase";
 import Link from "next/link";
 
-const SuggestionsFriends = ({ t }) => {
+const SuggestionsFriends = ({
+  t,
+  setFollowers,
+  setFollowing,
+  following,
+
+}) => {
   const { users } = GetAllUsers();
   const { user } = UserAuth();
   const [myFriends, setMyFriends] = useState([]);
-  const [following, setFollowing] = useState([]);
 
   const showFriends = async () => {
     const userDoc = doc(db, "users", user.uid);
-    const followingArraySnapShot = await getDoc(userDoc);
-    const followingArray = followingArraySnapShot.data().FOLLOWING;
-    setFollowing(followingArray);
-    setMyFriends(users.filter((friend) => followingArray.includes(friend.id)));
+
+    // Listen for real-time updates
+    const unsubscribe = onSnapshot(userDoc, (docSnapshot) => {
+      const followingArray = docSnapshot.data()?.FOLLOWING || [];
+      const followersArray = docSnapshot.data()?.FOLLOWERS || [];
+
+      setFollowing(followingArray);
+      setFollowers(followersArray);
+
+      const myFriends = users.filter((friend) =>
+        followingArray.includes(friend.id)
+      );
+      setMyFriends(myFriends);
+    });
+
+    // Cleanup the listener when you no longer need it
+    return () => unsubscribe();
   };
 
   useEffect(() => {
     showFriends();
+
   }, []);
   //toggal view or hide states
   const [showAll, setShowAll] = useState(false);

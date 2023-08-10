@@ -2,11 +2,14 @@
 import { useTranslations } from "next-intl";
 import SuggestionsFriends from "./SuggestionsFriends";
 import Friends from "./Friends";
+import { useState } from "react";
 
 // I splited the page into two sections
-const FriendsComp = ({ lang }) => {
+const FriendsComp = ({ lang, setFollowers, setFollowing, following }) => {
   // this for check if the language is English or not. I need it for styling
   const isEnglish = lang === "en";
+
+ 
 
   const t = useTranslations("Profile");
 
@@ -14,7 +17,13 @@ const FriendsComp = ({ lang }) => {
     <div className="flex flex-col  w-full lg:w-1/2 ">
       {/* Each section has its own componentes which they are inside profilePage component folder */}
       <SuggestionsFriends t={t} />
-      <Friends t={t} />
+      <Friends
+        t={t}
+        setFollowers={setFollowers}
+        setFollowing={setFollowing}
+        following={following}
+
+      />
       <div className="flex flex-col md:flex-row w-full pt-8 pb-20 md:py-8 justify-between">
         <button
           className={`font-bold text-primaryBlue border border-primaryBlue rounded-[15px] hover:bg-primaryBlue hover:text-white hover:border-2 hover:border-primaryBlue ${

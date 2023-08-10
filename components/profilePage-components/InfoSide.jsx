@@ -14,7 +14,7 @@ import Achievemntes from "./Achievemntes";
 import Header from "./Header";
 import TotalStatistics from "@/components/profilePage-components/TotalStatistics";
 
-const InfoComp = ({ user, userData }) => {
+const InfoComp = ({ user, userData, followers, following }) => {
   const [showForm, setShowForm] = useState(false);
   const [image, setImage] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
@@ -67,7 +67,14 @@ const InfoComp = ({ user, userData }) => {
 
   return (
     <div className="w-full lg:w-1/2 relative ">
-      <Header setShowForm={setShowForm} user={user} userData={userData} t={t} />
+      <Header
+        setShowForm={setShowForm}
+        user={user}
+        userData={userData}
+        t={t}
+        followers={followers}
+        following={following}
+      />
 
       {showForm && (
         <form
