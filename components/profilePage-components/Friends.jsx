@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { GetAllUsers } from "@/app/context/FetchAllUsers";
 
-//list of users we will replace it with firebase data
+// list of users we will replace it with firebase data
 const users = [
   {
     image: "https://loremflickr.com/640/480/girls",
@@ -31,6 +32,10 @@ const users = [
 ];
 
 const SuggestionsFriends = ({ t }) => {
+  const [Users, setUsers] = useState([]);
+
+
+
   //toggal view or hide states
   const [showAll, setShowAll] = useState(false);
 

@@ -35,7 +35,9 @@ export const AuthContextProvider = ({ children }) => {
           password: password,
           city: city,
           username: displayName,
-          photoURL: "https://icon-library.com/images/new-account-icon/new-account-icon-14.jpg"
+          photoURL: "https://icon-library.com/images/new-account-icon/new-account-icon-14.jpg",
+          FOLLOWERS: [],
+          FOLLOWING: []
         });
 
       })
