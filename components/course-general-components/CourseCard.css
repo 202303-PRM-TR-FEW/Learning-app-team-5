@@ -119,20 +119,6 @@
   display: none;
 }
 
-@media (max-width: 1024px) {
-  .arrow-icon-lg {
-    display: block;
-  }
-  .arrow-icon-sm {
-    display: none;
-  }
-}
 
-@media (max-width: 600px) {
-  .arrow-icon-lg {
-    display: none;
-  }
-  .arrow-icon-sm {
-    display: block;
-  }
-}
+
+
