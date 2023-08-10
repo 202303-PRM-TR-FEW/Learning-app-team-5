@@ -21,18 +21,10 @@ const SuggestionsFriends = ({ t }) => {
   const { getRandomNumbers } = GetRandomNumbers();
 
   const [newUsers, setNewUsers] = useState([]);
-
-  const getCurrentUserFollowing = async (uid) => {
-    const docRef = doc(db, "users", user.uid);
-    const docSnap = await getDoc(docRef);
-    const isFriend = docSnap.data().FOLLOWING.includes(uid);
-    return isFriend;
-  };
+  const [message, setMessage] = useState(null);
 
   const AllSuggestions = useMemo(() => {
-    const Allusers = users.filter(
-      (friend) => friend.id !== user.uid && !getCurrentUserFollowing(friend.id)
-    );
+    const Allusers = users.filter((friend) => friend.id !== user.uid);
     return Allusers.slice(0, 10);
   }, [users, user.uid]);
 
@@ -65,6 +57,10 @@ const SuggestionsFriends = ({ t }) => {
     batch.update(currentUserRef, { FOLLOWING: arrayUnion(ID) });
 
     await batch.commit();
+    setMessage(t("Message"));
+    setTimeout(() => {
+      setMessage(null);
+    }, 4000);
   };
 
   return (

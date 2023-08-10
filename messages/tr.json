@@ -92,7 +92,8 @@
     "View": "TÜMÜNÜ GÖRÜNTÜLE",
     "Hide": "Gizle",
     "Submit":"gönder",
-    "Input":"Lütfen bulunduğunuz şehri giriniz."
+    "Input":"Lütfen bulunduğunuz şehri giriniz.",
+  "Message" : "Arkadaş başarıyla eklendi"
   },
   "Discussion":{
     "title":"Topluluktan tavsiye alın.",
