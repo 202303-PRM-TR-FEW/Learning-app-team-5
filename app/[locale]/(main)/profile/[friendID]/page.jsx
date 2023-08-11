@@ -1,27 +1,33 @@
 "use client";
 import { GetAllUsers } from "@/app/context/FetchAllUsers";
-import Image from "next/image";
-import { useMemo, useState } from "react";
+import FriendHeader from "@/components/profilePage-components/FriendHeader";
+import { useMemo } from "react";
+import { Spinner } from "@material-tailwind/react";
+import TotalStatistics from "@/components/profilePage-components/TotalStatistics";
+import { useTranslations } from "next-intl";
+import UidFriends from "@/components/profilePage-components/UidFrinds";
 
 const Page = ({ params }) => {
   const { users } = GetAllUsers();
+  const t = useTranslations("Profile");
 
   const setUser = useMemo(() => {
     return users.find((user) => user.id === params.friendID);
   }, []);
 
-  return (
-    <div className="mx-auto px-4 dark:min-h-screen lg:max-w-[1280px] dark:text-bodyWhite">
-      <Image
-        className="rounded-full m-2"
-        src={setUser.photoURL}
-        height={150}
-        width={150}
-        priority={false} // {false} | {true}
-        alt="user image"
-      />
-      <p>{setUser.username}</p>
-      <p>{setUser.city}</p>
+  return setUser ? (
+    <div className="flex flex-col container mx-auto px-4 min-h-screen md:flex-row md:gap-20  lg:max-w-[1280px] text-lightBlack dark:text-bodyWhite">
+      <div className="w-full md:w-1/2">
+        <FriendHeader user={setUser} />
+        <TotalStatistics t={t} />
+      </div>
+      <div className="w-full md:1/2">
+        <UidFriends t={t} friend={setUser} />
+      </div>
+    </div>
+  ) : (
+    <div className="flex justify-center items-center h-screen">
+      <Spinner className="h-14 w-14" />
     </div>
   );
 };

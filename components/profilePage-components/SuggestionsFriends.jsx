@@ -18,8 +18,10 @@ const SuggestionsFriends = ({ t, following }) => {
 
   const AllSuggestions = useMemo(() => {
     console.log("follwing", following);
-    const Allusers = users.filter((friend) => friend.id !== user.uid);
-    return Allusers.slice(0, 10);
+    const Allusers = users.filter(
+      (friend) => friend.id !== user.uid && !following?.includes(friend.id)
+    );
+    return Allusers;
   }, [users, user.uid]);
 
   const handleDeleteSuggestion = (id) => {
