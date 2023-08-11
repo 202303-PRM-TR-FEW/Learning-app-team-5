@@ -6,11 +6,16 @@ describe('<LevelFilter />', () => {
     const levels = [
       { value: 'beginner', label: 'Beginner', checked: false },
       { value: 'intermediate', label: 'Intermediate', checked: true },
-      // Add more levels as needed for your test
+
     ];
 
     const handleChange = cy.stub().as('handleChange');
-    cy.mount(<LevelFilter levels={levels} onChange={handleChange} />);
+
+    cy.mount(
+      <LevelFilter
+        levels={levels}
+        onChange={handleChange}
+      />);
 
     // Check if the checkboxes are displayed
     cy.get('input[type="checkbox"]').should('have.length', levels.length);

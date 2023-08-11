@@ -152,6 +152,7 @@ const LoginPage = () => {
             />
           </div>
           <button
+            id="login-btn"
             type="submit"
             className="w-full py-2 px-4 bg-primary-blue hover:bg-blue-600 text-white font-semibold rounded-md focus:outline-none"
           >
