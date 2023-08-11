@@ -8,12 +8,12 @@ describe('<SearchInput />', () => {
 
     // Mount the SearchInput component with the handleChange spy
     cy.mount(<SearchInput value="" onChange={handleChange} />);
-    
+
     // Wait for the input element to render
     cy.get('input').should('exist');
 
     // Wait for the component to settle and update
-    cy.wait(500); // Adjust the wait time as needed
+    cy.wait(500);
 
   });
 });
