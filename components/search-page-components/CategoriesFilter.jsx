@@ -48,9 +48,9 @@ function CategoriesFilter({ handleCategoryChange,t }) {
   return (
     <div className=" text-gray-700 dark:text-bodyWhite">
       <hr />
-      <h3 className="text-md font-semibold py-4">{t("title-2")}</h3>
+      <h3 className="text-md font-semibold py-2">{t("title-2")}</h3>
 
-      <div className="flex flex-wrap justify-between gap-2 md:gap-4  mb-8 mt-2">
+      <div className="flex flex-wrap justify-between gap-2 md:gap-4  mb-4 mt-2">
         {categories.map((category) => (
           <div key={category.value} className="flex items-center">
             <CheckIcon

@@ -143,7 +143,7 @@ function SearchPage() {
         setSearchResult={setSearchResult}
         t={t}
       />
-      <div className="flex flex-col py-2 mb-8 mt-2">
+      <div className="py-2 mb-3 ">
         <h3 className="text-md font-semibold text-gray-700 dark:text-bodyWhite">
           {t("title-5")}
         </h3>

@@ -35,7 +35,7 @@ export const AuthContextProvider = ({ children }) => {
           password: password,
           city: city,
           username: displayName,
-          photoURL: "https://icon-library.com/images/new-account-icon/new-account-icon-14.jpg",
+          photoURL: "https://firebasestorage.googleapis.com/v0/b/learning-app-team-5.appspot.com/o/review-placeholder-1.png?alt=media&token=e928937b-03be-49ab-8e26-170e44d9aa8a",
           FOLLOWERS: [],
           FOLLOWING: []
         });

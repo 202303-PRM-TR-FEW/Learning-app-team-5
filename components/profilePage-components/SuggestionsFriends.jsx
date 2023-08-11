@@ -8,7 +8,7 @@ import { GetRandomNumbers } from "@/app/context/RandomNumbers";
 import { UserAuth } from "@/app/context/AuthContext";
 import { db } from "@/firebase";
 
-const SuggestionsFriends = ({ t, setRefrash }) => {
+const SuggestionsFriends = ({ t, following }) => {
   const { users } = GetAllUsers();
   const { user } = UserAuth();
   const { getRandomNumbers } = GetRandomNumbers();
@@ -17,6 +17,7 @@ const SuggestionsFriends = ({ t, setRefrash }) => {
   const [message, setMessage] = useState(null);
 
   const AllSuggestions = useMemo(() => {
+    console.log("follwing", following);
     const Allusers = users.filter((friend) => friend.id !== user.uid);
     return Allusers.slice(0, 10);
   }, [users, user.uid]);
@@ -35,7 +36,7 @@ const SuggestionsFriends = ({ t, setRefrash }) => {
   // useMemo hook to set the initial two random users
   const randomTwoUsers = useMemo(() => {
     return getRandomNumbers(newUsers.length > 1 ? newUsers : AllSuggestions, 2);
-  }, [newUsers, AllSuggestions]);
+  }, [newUsers, users]);
 
   const handleAddFriend = async (ID) => {
     const addedUserRef = doc(db, "users", ID);

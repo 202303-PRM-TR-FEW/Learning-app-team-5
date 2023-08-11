@@ -50,7 +50,7 @@ function NavBar({ locale }) {
 
   return (
     <>
-      <div className="absolute top-7 left-6 z-50 py-2">
+      <div className="absolute top-7 left-6 z-50 py-2 hidden md:block">
         <Link href={`${EN}/`}>
           <span>
             <svg
@@ -64,7 +64,7 @@ function NavBar({ locale }) {
       </div>
       <div className="flex justify-center md:flex-col md:mt-[2em] md:w-20 ">
         <nav className="fixed bottom-2 md:absolute top-auto md:top-1 z-50 mt-20 ">
-          <ul className="flex justify-evenly mt-10 md:justify-evenly w-[86vw] list-none md:bg-transparent bg-black/80 backdrop-blur-l p-[1em] rounded-[20px] md:flex-col md:items-center md:h-[25em] md:w-[7em] z-50">
+          <ul className="flex justify-evenly md:justify-evenly w-[76vw] list-none md:bg-transparent bg-black/60 backdrop-blur-l p-[1em] rounded-[20px] md:flex-col md:items-center md:h-[25em] md:w-[6em] z-50">
             {/* Render the navigation items dynamically */}
             {navigationItems.map((item, index) => (
               <li key={index}>
@@ -74,7 +74,7 @@ function NavBar({ locale }) {
                 >
                   <span className="flex flex-col items-center">
                     <svg
-                      className="w-full h-6 lg:h-7 overflow-visible z-[1] "
+                      className="w-full h-6 lg:h-7 overflow-visible "
                       viewBox={item.viewBox ? "0 0 24 24" : "0 0 576 512"}
                     >
                       <path d={item.icon} />

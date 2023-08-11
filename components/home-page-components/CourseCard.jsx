@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import dynamic from "next/dynamic";
 import { UserAuth } from "../../app/context/AuthContext";
 import {
@@ -45,6 +46,9 @@ function Course({
 
   //  return the state of user is sign in or not
   const { user } = UserAuth();
+
+  const placeHolderImage =
+    "https://firebasestorage.googleapis.com/v0/b/learning-app-team-5.appspot.com/o/review-placeholder-1.png?alt=media&token=e928937b-03be-49ab-8e26-170e44d9aa8a";
 
   // check if the course is saved or registered to handle the user interface
   const handleCouresStates = async () => {
@@ -139,7 +143,7 @@ function Course({
   };
 
   return (
-    <div className="rounded-xl bg-white p-2 course-item flex-col w-full my-6 relative dark:bg-indigoDay ">
+    <div className="rounded-xl bg-white p-2 course-item flex-col w-full my-6 relative dark:bg-indigoDay w-full">
       <div>
         <div className="relative ">
           {isLoading && (
@@ -176,13 +180,13 @@ function Course({
             </label>
           </div>
         </div>
-        <div className="justify-around rounded-full bg-white shadow-2xl flex w-[55%] py-1 absolute mt-[-25px] dark:bg-purssianBlue">
+        <div className="justify-between rounded-full bg-white shadow-2xl flex w-[55%] py-1 absolute mt-[-25px] dark:bg-purssianBlue">
           <img
-            className="rounded-full h-12 w-12"
-            src={authorImage}
-            alt="authorImage"
+            className="rounded-full px-1  h-12 w-12"
+            src={isLoading ? placeHolderImage : authorImage}
+            alt="auter-image"
           />
-          <h2 className="px-3 self-center">{authorName}</h2>
+          <h2 className="pr-2 self-center">{authorName}</h2>
         </div>
         <h1 className="font-bold  mt-10  course_title">{title}</h1>
 

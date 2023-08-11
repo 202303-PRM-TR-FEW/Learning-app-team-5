@@ -24,8 +24,8 @@ const SuggestionsFriends = ({
 
     // Listen for real-time updates
     const unsubscribe = onSnapshot(userDoc, (docSnapshot) => {
-      const followingArray = docSnapshot.data()?.FOLLOWING || [];
-      const followersArray = docSnapshot.data()?.FOLLOWERS || [];
+      const followingArray = docSnapshot.data().FOLLOWING ;
+      const followersArray = docSnapshot.data().FOLLOWERS ;
 
       setFollowing(followingArray);
       setFollowers(followersArray);

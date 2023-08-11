@@ -10,6 +10,8 @@ export const UsersContextProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
+
+
     useEffect(() => {
         const q = query(collection(db, "users"));
 
@@ -20,7 +22,7 @@ export const UsersContextProvider = ({ children }) => {
                 usersArray.push({ ...doc.data(), id: doc.id });
             });
 
-            setUsers(usersArray);
+             setUsers(usersArray);
             setIsLoading(false);
         }, (error) => {
             setError(error); // Handle errors in the snapshot listener
