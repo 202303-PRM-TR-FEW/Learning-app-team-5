@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 //list of users we will replace it with firebase data
 const users = [
@@ -62,7 +63,8 @@ const SuggestionsFriends = ({ t }) => {
   );
 };
 
-const FriendSugCard = ({ user, t }) => {
+const FriendSugCard = ({ user }) => {
+  const t = useTranslations("Profile");
   return (
     <div>
       <div className="flex justify-between items-center py-3 px-6 ">

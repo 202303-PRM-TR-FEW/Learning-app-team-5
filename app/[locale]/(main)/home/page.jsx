@@ -13,14 +13,11 @@ function Page() {
   return (
     <>
       {isLoading ? (
-        <div className="flex justify-center items-center h-screen">
+        <div className="flex justify-center items-center h-screen dark:min-h-screen">
           <Spinner className="h-14 w-14" />
         </div>
       ) : (
-        <div
-          className="container mx-auto px-4 min-h-screen
-    max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-[1370px] 3xl:w-[1650px] dark:text-bodyWhite"
-        >
+        <div className=" mx-auto px-4 dark:min-h-screen lg:max-w-[1280px] dark:text-bodyWhite">
           <FeaturedCourse />
           <Categories />
         </div>

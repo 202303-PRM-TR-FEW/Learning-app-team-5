@@ -101,12 +101,15 @@ function Categories() {
   };
 
   return (
-    <div className="font-sans">
+    <div className="font-sans mt-0 xl:pt-12">
       <h2 className="text-4xl font-bold py-6">{t("title-2")}</h2>
-      <div className="grid place-content-center sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 xl:gap-x-20">
+      <div className="grid place-content-center sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 2xl:gap-x-20">
         {categoriesToShow.map((category) => (
-          <Link href={`/home/${category.slug}`} key={category.slug}>
-            <button className="box-content border-2 p-3 drop-shadow-md leading-10 w-72 lg:w-64 3xl:w-80 h-44 bg-white rounded-xl mb-2 text-lg text-gray-500 hover:text-blue-500 hover:bg-blue-200 hover:border-blue-400 flex flex-col items-center justify-center dark:bg-indigoDay dark:border-purssianBlue dark:hover:border-blue-400">
+          <Link
+            href={`/home/${category.slug}`}
+            key={category.slug}
+          >
+            <button className="box-content border-2 p-3 drop-shadow-md leading-10 w-72 lg:w-56  h-44 bg-white rounded-xl mb-2 text-lg text-gray-500 hover:text-blue-500 hover:bg-blue-200 hover:border-blue-400 flex flex-col items-center justify-center dark:bg-indigoDay dark:border-purssianBlue dark:hover:border-blue-400">
               {category.icon}
               <span className="mt-2">{category.name}</span>
             </button>
@@ -114,7 +117,7 @@ function Categories() {
         ))}
         {!showAllCategories && windowWidth < 640 && (
           <button
-            className="box-content border-2 p-3 drop-shadow-md leading-10 sm:w-72 lg:w-64 3xl:w-80 h-44 bg-white rounded-xl mb-2 text-lg text-gray-500 hover:text-blue-500 hover:bg-blue-200 hover:border-blue-400 flex flex-col items-center justify-center dark:bg-indigoDay dark:border-purssianBlue dark:hover:border-blue-400"
+            className="box-content border-2 p-3 drop-shadow-md leading-10 sm:w-72 lg:w-56  h-44 bg-white rounded-xl mb-2 text-lg text-gray-500 hover:text-blue-500 hover:bg-blue-200 hover:border-blue-400 flex flex-col items-center justify-center dark:bg-indigoDay dark:border-purssianBlue dark:hover:border-blue-400"
             onClick={handleShowMore}
           >
             <span className="mt-2">{t("more")}</span>
@@ -122,7 +125,7 @@ function Categories() {
         )}
         {showAllCategories && windowWidth < 640 && (
           <button
-            className="box-content border-2 p-3 drop-shadow-md leading-10 sm:w-72 lg:w-64 3xl:w-80 h-44 bg-white rounded-xl mb-2 text-lg text-gray-500 hover:text-blue-500 hover:bg-blue-200 hover:border-blue-400 flex flex-col items-center justify-center dark:bg-indigoDay dark:border-purssianBlue dark:hover:border-blue-400"
+            className="box-content border-2 p-3 drop-shadow-md leading-10 sm:w-72 lg:w-56  h-44 bg-white rounded-xl mb-2 text-lg text-gray-500 hover:text-blue-500 hover:bg-blue-200 hover:border-blue-400 flex flex-col items-center justify-center dark:bg-indigoDay dark:border-purssianBlue dark:hover:border-blue-400"
             onClick={handleShowLess}
           >
             <span className="mt-2">{t("less")}</span>

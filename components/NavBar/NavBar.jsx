@@ -74,7 +74,7 @@ function NavBar({ locale }) {
                 >
                   <span className="flex flex-col items-center">
                     <svg
-                      className="w-full h-6 lg:h-7 overflow-visible z-[1] "
+                      className="w-full h-6 lg:h-7 overflow-visible "
                       viewBox={item.viewBox ? "0 0 24 24" : "0 0 576 512"}
                     >
                       <path d={item.icon} />
