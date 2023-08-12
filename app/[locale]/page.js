@@ -9,8 +9,8 @@ import SelectLanguage from '@/components/SelectLanguage-component/SelectLanguage
 export default function Home({ params }) {
   const t = useTranslations("Welcome")
   return (
-    <main className="h-screen m-auto max-w-[80%] flex justify-center items-center ">
-      <div className="flex flex-col justify-center items-center 
+    <main className="min-h-screen m-auto max-w-[80%] flex justify-center items-center ">
+      <div className="flex flex-col justify-center items-center my-4 md:my-0
        shadow-2xl rounded-[50px] bg-slate-50 
        md:flex-row dark:border-2 dark:border-indigoDay">
         <div className=' flex flex-col items-start mx-auto  container px-4 md:pl-36 '>

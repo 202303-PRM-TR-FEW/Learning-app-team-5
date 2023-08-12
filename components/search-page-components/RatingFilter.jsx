@@ -25,7 +25,7 @@ function RatingFilter({ searchResult, setSearchResult,t }) {
   return (
     <>
       <hr />
-      <div className="grid grid-flow-col text-gray-700 mb-8 mt-2">
+      <div className="grid grid-flow-col text-gray-700 py-2">
         <div>
           <h3 className="text-md font-semibold text-gray-700 dark:text-bodyWhite py-4">
             {t("title-4")}

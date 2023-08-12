@@ -1,6 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
+import useScreenType from "./useScreenType";
 import { useTranslations } from "next-intl";
 const AccessTimeIcon = dynamic(() => import("@mui/icons-material/AccessTime"));
 const StarBorderIcon = dynamic(() => import("@mui/icons-material/StarBorder"));
@@ -25,8 +26,9 @@ import DropUpMenu from "../Review-components/DropUpMenu";
 
 function CourseOverview({ selectedCourse }) {
   const [showArrowIcons, setShowArrowIcons] = useState(false);
+  const [newReating, setNewRating] = useState(null);
   const t = useTranslations("Courses");
-
+  const isMobile = useScreenType();
   /* This delay for arrow icons is necessary due to the nature of React's initial render! */
   useEffect(() => {
     const delay = setTimeout(() => {
@@ -37,7 +39,11 @@ function CourseOverview({ selectedCourse }) {
 
   if (!selectedCourse) {
     return (
-      <div className="flex flex-col bg-[rgba(251,_251,_251,_0.5)] dark:bg-indigoDay p-4 m-4 rounded-2xl shadow-md justify-center items-center ">
+      <div
+        className={`flex flex-col bg-[rgba(251,_251,_251,_0.5)] dark:bg-indigoDay p-4 m-4 rounded-2xl shadow-md justify-center items-center ${
+          isMobile === "mobile" ? "h-[40%]" : ""
+        } `}
+      >
         <div className="flex w-full justify-center items-center">
           <WavingHandOutlinedIcon className="text-[#56a0fe] text-6xl h-1/2 mr-2" />
           <h1 className="text-2xl font-bold text-[#56a0fe]">
@@ -46,21 +52,26 @@ function CourseOverview({ selectedCourse }) {
         </div>
         {showArrowIcons && (
           <div className="flex w-full justify-center items-center">
-            <ArrowBackIcon className="arrow-icon arrow-icon-lg" />
-            <ArrowUpwardOutlinedIcon className="arrow-icon arrow-icon-sm" />
+            {isMobile === "mobile" ? (
+              <ArrowUpwardOutlinedIcon className="arrow-icon " />
+            ) : (
+              <ArrowBackIcon className="arrow-icon " />
+            )}
+
             <p className="ml-2">{t("Message-2")}</p>
           </div>
         )}
       </div>
     );
   }
+
   return (
-    <div className="flex flex-col bg-white dark:bg-indigoDay p-4 m-4 rounded-2xl shadow-md justify-between ">
+    <div className="flex flex-col bg-white dark:bg-indigoDay overflow-y-auto p-4 m-4 rounded-2xl shadow-md justify-between ">
       {/* IDENTITY */}
-      <div className="lg:h-2/3 w-auto lg:flex lg:flex-col lg:justify-between grid grid-cols-2 lg:mb-2 mb-6 h-full">
+      <div className=" w-auto lg:flex lg:flex-col lg:justify-between grid grid-cols-2 lg:mb-2 mb-6 ">
         {/* IMAGE OR VIDEO  */}
         <div
-          className="hidden sm:block h-[300px] p-4 rounded-2xl w-full lg:w-full"
+          className="hidden sm:block h-[350px] p-4 rounded-2xl w-full lg:w-full"
           style={{
             backgroundImage: `url(${selectedCourse.courseImage})`,
             backgroundSize: "cover",
@@ -114,7 +125,7 @@ function CourseOverview({ selectedCourse }) {
             <div className="flex items-center my-2">
               <StarBorderIcon className="" />
               <p className="text-base ml-2">
-                {selectedCourse.rating}
+                {newReating ? newReating : selectedCourse.rating}
                 <span className="text-sm text-gray-500 dark:text-white">
                   {" "}
                   / 5.0
@@ -128,12 +139,12 @@ function CourseOverview({ selectedCourse }) {
       {/* DESCRIPTION */}
       <div className="h-1/3 hidden lg:block">
         {/* description title */}
-        <div className="flex flex-col justify-center my-2 mt-8">
-          <h2 className="text-[#373737] text-xl font-semibold mb-4">
+        <div className="flex flex-col justify-center my-2 mt-6">
+          <h2 className="text-[#373737] dark:text-bodyWhite text-xl font-semibold mb-4">
             {t("Descripttion")}
           </h2>
           {/* description content */}
-          <div className="max-h-14 overflow-y-auto lg:max-h-full">
+          <div className="max-h-22  ">
             <p className="text-gray-700 text-justify dark:text-bodyWhite">
               {selectedCourse.description}
             </p>
@@ -147,7 +158,8 @@ function CourseOverview({ selectedCourse }) {
           buttonName={
             selectedCourse.isRegistered ? t("Button-1") : t("Button-2")
           }
-          courseID={selectedCourse.docID}
+          courseID={selectedCourse.uid}
+          setNewRating={setNewRating}
         >
           <RatingStars />
         </DropUpMenu>

@@ -10,7 +10,7 @@ const Box = dynamic(() => import("@mui/material/Box"));
 const Rating = dynamic(() => import("@mui/material/Rating"));
 const StarIcon = dynamic(() => import("@mui/icons-material/Star"));
 
-const RatingStars = ({ courseID, setShowPopup }) => {
+const RatingStars = ({ courseID, setShowPopup, setNewRating }) => {
   const [value, setValue] = useState(0);
   const [hover, setHover] = useState(-1);
 
@@ -24,6 +24,7 @@ const RatingStars = ({ courseID, setShowPopup }) => {
       rating: newRate,
     });
     setShowPopup(false);
+    setNewRating(newRate);
   };
   return (
     <div>
@@ -50,7 +51,7 @@ const RatingStars = ({ courseID, setShowPopup }) => {
             <StarIcon
               style={{ opacity: 0.55 }}
               fontSize="inherit"
-              className="dark:text-lightBlack"
+              className="dark:text-gray-400"
             />
           }
           icon={<StarIcon style={{ color: "#2196f3" }} fontSize="inherit" />}

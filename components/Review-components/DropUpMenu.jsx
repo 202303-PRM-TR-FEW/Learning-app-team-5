@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { usePopper } from "react-popper";
 import RatingStars from "./RatingStars";
 
-function DropUpMenu({ buttonName, handleClick, courseID }) {
+function DropUpMenu({ buttonName, handleClick, courseID, setNewRating }) {
   const [referenceElement, setReferenceElement] = useState(null);
   const [popperElement, setPopperElement] = useState(null);
   const [arrowElement, setArrowElement] = useState(null);
@@ -45,6 +45,7 @@ function DropUpMenu({ buttonName, handleClick, courseID }) {
             className="py-3 "
             courseID={courseID}
             setShowPopup={setShowPopup}
+            setNewRating={setNewRating}
           />
           <div ref={setArrowElement} style={styles.arrow} />
           <button

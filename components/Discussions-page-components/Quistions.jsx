@@ -99,7 +99,7 @@ const Questions = ({ Error, setError }) => {
       return;
     }
     if (user.email === questionEmail) {
-      const hasConfirmed = confirm(`${t("Alert")}`);
+      const hasConfirmed = confirm(`${t("Alert-2")}`);
       if (hasConfirmed) {
         const docRef = doc(db, "questions", questionId);
         await deleteDoc(docRef)
@@ -176,8 +176,12 @@ const Questions = ({ Error, setError }) => {
                   onClick={() =>
                     handleDeleteQuestion(question.id, question.data.email)
                   }
-                  className="dark:fill-purssianBlue dark:hover:fill-red-400 hover:fill-red-400
-                  text-3xl hover:text-2xl  cursor-pointer "
+                  className={`dark:fill-purssianBlue ${
+                    user.email === question.data.email
+                      ? "dark:hover:fill-red-400 hover:fill-red-400 cursor-pointer"
+                      : ""
+                  }
+                  text-3xl  `}
                 />
               </div>
               <h2 className="text-xl py-2 font-semibold">
@@ -212,8 +216,7 @@ const Questions = ({ Error, setError }) => {
                         onClick={() =>
                           handleDeleteAnswer(question.id, id, data.email)
                         }
-                        className="dark:fill-purssianBlue dark:hover:fill-red-400 hover:fill-red-400
-                        text-lg hover:text-sm  cursor-pointer "
+                        className={`dark:fill-purssianBlue text-lg ${user.email === data.email ? "dark:hover:fill-red-400 hover:fill-red-400 cursor-pointer":""} `}
                       />
                     </div>
                     <span className="text-md text-gray-400 dark:text-gray-700 font-medium">
