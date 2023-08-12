@@ -17,7 +17,6 @@ const SuggestionsFriends = ({ t, following }) => {
   const [message, setMessage] = useState(null);
 
   const AllSuggestions = useMemo(() => {
-    console.log("follwing", following);
     const Allusers = users.filter(
       (friend) => friend.id !== user.uid && !following?.includes(friend.id)
     );
