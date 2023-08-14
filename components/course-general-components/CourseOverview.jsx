@@ -2,6 +2,7 @@
 import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
 import useScreenType from "./useScreenType";
+import { useTranslations } from "next-intl";
 const AccessTimeIcon = dynamic(() => import("@mui/icons-material/AccessTime"));
 const StarBorderIcon = dynamic(() => import("@mui/icons-material/StarBorder"));
 const ArrowBackIcon = dynamic(() => import("@mui/icons-material/ArrowBack"));
@@ -20,10 +21,12 @@ const LeaderboardOutlinedIcon = dynamic(() =>
 
 import "./CourseCard.css";
 import CourseButton from "./CourseButton";
-import { useTranslations } from "next-intl";
+import RatingStars from "../Review-components/RatingStars";
+import DropUpMenu from "../Review-components/DropUpMenu";
 
 function CourseOverview({ selectedCourse }) {
   const [showArrowIcons, setShowArrowIcons] = useState(false);
+  const [newReating, setNewRating] = useState(null);
   const t = useTranslations("Courses");
   const isMobile = useScreenType();
   /* This delay for arrow icons is necessary due to the nature of React's initial render! */
@@ -38,7 +41,7 @@ function CourseOverview({ selectedCourse }) {
     return (
       <div
         className={`flex flex-col bg-[rgba(251,_251,_251,_0.5)] dark:bg-indigoDay p-4 m-4 rounded-2xl shadow-md justify-center items-center ${
-          isMobile === "mobile"? 'h-[40%]' :""
+          isMobile === "mobile" ? "h-[40%]" : ""
         } `}
       >
         <div className="flex w-full justify-center items-center">
@@ -61,6 +64,7 @@ function CourseOverview({ selectedCourse }) {
       </div>
     );
   }
+
   return (
     <div className="flex flex-col bg-white dark:bg-indigoDay overflow-y-auto p-4 m-4 rounded-2xl shadow-md justify-between ">
       {/* IDENTITY */}
@@ -121,7 +125,7 @@ function CourseOverview({ selectedCourse }) {
             <div className="flex items-center my-2">
               <StarBorderIcon className="" />
               <p className="text-base ml-2">
-                {selectedCourse.rating}
+                {newReating ? newReating : selectedCourse.rating}
                 <span className="text-sm text-gray-500 dark:text-white">
                   {" "}
                   / 5.0
@@ -150,14 +154,15 @@ function CourseOverview({ selectedCourse }) {
 
       {/* PREVIEW AND ENROLL BUTTONS */}
       <div className="flex justify-between my-4">
-        <CourseButton
+        <DropUpMenu
           buttonName={
             selectedCourse.isRegistered ? t("Button-1") : t("Button-2")
           }
-          handleClick={() =>
-            console.log("add preview page navigation to handleClick function")
-          }
-        />
+          courseID={selectedCourse.uid}
+          setNewRating={setNewRating}
+        >
+          <RatingStars />
+        </DropUpMenu>
         <CourseButton
           buttonName={
             selectedCourse.isRegistered ? t("Button-3") : t("Button-4")
