@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import { doc, writeBatch, arrayUnion } from "firebase/firestore";
+import { doc, writeBatch, arrayUnion, getDoc } from "firebase/firestore";
 import { FriendSugCard } from "./SuggestionCard";
 import { GetAllUsers } from "@/app/context/FetchAllUsers";
 import { GetRandomNumbers } from "@/app/context/RandomNumbers";
@@ -43,6 +43,19 @@ const SuggestionsFriends = ({ t, following }) => {
     const addedUserRef = doc(db, "users", ID);
     const currentUserRef = doc(db, "users", user.uid);
 
+    const currentUserSnapshot = await getDoc(currentUserRef);
+    const followingArray = currentUserSnapshot.data().FOLLOWING || [];
+
+    if (followingArray.includes(ID)) {
+      // User is already being followed,
+      setMessage(t("Message-2"));
+      setTimeout(() => {
+        setMessage(null);
+      }, 4000);
+      handleDeleteSuggestion(ID);
+      return;
+    }
+
     const batch = writeBatch(db);
 
     //update the friend followers array
@@ -61,6 +74,13 @@ const SuggestionsFriends = ({ t, following }) => {
   return (
     <section>
       <h2 className="font-bold text-xl py-4">{t("title-3")}</h2>
+      {message && (
+        <div className="rounded-lg w-full flex justify-center items-center pb-4">
+          <p className="bg-green-200 rounded-md border-2 border-green-600 text-lightBlack px-3 py-1 font-medium">
+            {message}
+          </p>
+        </div>
+      )}
       <div
         className={`bg-white dark:bg-indigoDay rounded-xl shadow-lg ${
           showAll ? `overflow-auto h-60` : ``

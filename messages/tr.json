@@ -93,7 +93,8 @@
     "Hide": "Gizle",
     "Submit":"gönder",
     "Input":"Lütfen bulunduğunuz şehri giriniz.",
-  "Message" : "Arkadaş başarıyla eklendi"
+  "Message" : "Arkadaş başarıyla eklendi",
+  "Message-2" : "Kullanıcı zaten takip ediliyor"
   },
   "Discussion":{
     "title":"Topluluktan tavsiye alın.",
