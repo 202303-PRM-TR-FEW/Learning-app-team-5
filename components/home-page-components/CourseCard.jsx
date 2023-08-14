@@ -33,7 +33,6 @@ function Course({
   setError,
   id,
 }) {
-  console.log(authorImage);
   const t = useTranslations("Home");
   const d = useTranslations("Discussion");
 

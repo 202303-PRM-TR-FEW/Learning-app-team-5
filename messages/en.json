@@ -92,7 +92,9 @@
   "View" : "VIEW ALL",
   "Hide": "Hide",
   "Submit":"submit",
-  "Input":"Please enter your current city."
+  "Input":"Please enter your current city.",
+  "Message" : "Friend was added successfully",
+  "Message-2" : "User is already being followed"
   },
   "Discussion":{
     "title": "Seek advice from the community.",
