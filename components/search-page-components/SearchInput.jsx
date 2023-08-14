@@ -1,4 +1,6 @@
+
 function SearchInput({ value, onChange, onSubmit, setSearch, t }) {
+
   const handleChange = (e) => {
     onChange(e.target.value);
   };
@@ -12,6 +14,7 @@ function SearchInput({ value, onChange, onSubmit, setSearch, t }) {
   return (
     <form onSubmit={handleSubmit} className="mt-2">
       <input
+        id="input"
         type="text"
         placeholder={`${t("button")}....`}
         value={value}

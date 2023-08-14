@@ -27,7 +27,9 @@ export default function Home({ params }) {
             <p className='text-primaryBlue py-3 px-4 font-bold'>LearnU</p>
           </div>
 
-          <h1 className='text-5xl font-bold text-[#413F42] dark:text-bodyWhite py-6'>{t('title')}</h1>
+          <h1
+            data-test="welcome-header"
+            className=' text-5xl font-bold text-[#413F42] dark:text-bodyWhite py-6'>{t('title')}</h1>
           <p className='text-gray-600 dark:text-bodyWhite  max-w-full md:max-w-[70%]'>{t("paragraph")}</p>
           <Link href={`${params.locale}/home`}>
             <div className='py-10'>
