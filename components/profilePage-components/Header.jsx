@@ -44,14 +44,6 @@ const Header = ({ user, userData, setShowForm, followers, following }) => {
     setForm(null);
   }
 
-  // const showFriends = useMemo(async () => {
-  //   const userDoc = doc(db, "users", user.uid);
-  //   const userDocSnapShot = await getDoc(userDoc);
-  //   const followingArray = userDocSnapShot.data().FOLLOWING;
-  //   const followersArray = userDocSnapShot.data().FOLLOWERS;
-  //   setFollowing(followingArray);
-  //   setFollowers(followersArray);
-  // }, []);
 
   useEffect(() => {
     if (Allcourses.length > 1) {
@@ -66,7 +58,7 @@ const Header = ({ user, userData, setShowForm, followers, following }) => {
       <div className="flex justify-center self-center w-1/3">
         <Image
           onClick={() => setShowForm(true)}
-          className="rounded-full  m-2 cursor-pointer"
+          className="rounded-full  m-2 cursor-pointer object-fill h-36 w-36"
           src={userData.photoURL}
           alt="profile image"
           height={150}
