@@ -177,7 +177,7 @@ const Questions = ({ Error, setError }) => {
                     handleDeleteQuestion(question.id, question.data.email)
                   }
                   className={`dark:fill-purssianBlue ${
-                    user.email === question.data.email
+                    user?.email === question.data.email
                       ? "dark:hover:fill-red-400 hover:fill-red-400 cursor-pointer"
                       : ""
                   }
@@ -216,7 +216,7 @@ const Questions = ({ Error, setError }) => {
                         onClick={() =>
                           handleDeleteAnswer(question.id, id, data.email)
                         }
-                        className={`dark:fill-purssianBlue text-lg ${user.email === data.email ? "dark:hover:fill-red-400 hover:fill-red-400 cursor-pointer":""} `}
+                        className={`dark:fill-purssianBlue text-lg ${user?.email === data.email ? "dark:hover:fill-red-400 hover:fill-red-400 cursor-pointer":""} `}
                       />
                     </div>
                     <span className="text-md text-gray-400 dark:text-gray-700 font-medium">
