@@ -21,7 +21,7 @@ const FriendHeader = ({ user }) => {
     <div className="flex flex-col md:flex-row w-full  gap-2 items-center">
       <div className="flex justify-center self-center w-1/3">
         <Image
-          className="rounded-full  m-2"
+          className="rounded-full m-2 object-fill h-36 w-36"
           src={user.photoURL}
           alt="profile image"
           height={150}
