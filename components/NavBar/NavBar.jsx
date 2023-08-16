@@ -51,7 +51,7 @@ function NavBar({ params }) {
   return (
     <>
       <div className="absolute top-7 left-6 z-50 py-2 hidden md:block">
-        <Link href={`${EN}/`}>
+        <Link href={`/${EN}/`}>
           <span>
             <svg
               className="w-[3em] h-[2em] px-[1em] py-[0.2em] lg:w-[4em] lg:h-[2m] lg:px-[1em] lg:py-[0.4em] bg-blue-500 rounded-[20px] overflow-visible z-[1] fill-white"
