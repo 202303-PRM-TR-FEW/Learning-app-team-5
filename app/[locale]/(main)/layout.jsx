@@ -4,13 +4,13 @@ import { RandomContextProvider } from "../../context/RandomNumbers";
 import { CoursesContextProvider } from "../../context/FetchAllCourses";
 import { UsersContextProvider } from "../../context/FetchAllUsers";
 
-export default function Layout({ children }) {
+export default function Layout({ children, params }) {
   return (
     <AuthContextProvider>
       <RandomContextProvider>
         <CoursesContextProvider>
           <UsersContextProvider>
-            <NavBar />
+            <NavBar params={params} />
             {children}
           </UsersContextProvider>
         </CoursesContextProvider>

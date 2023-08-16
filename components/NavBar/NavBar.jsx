@@ -12,8 +12,8 @@ import {
   LEARNU_ICON,
 } from "../../public/assets/svgPath";
 
-function NavBar({ locale }) {
-  const EN = locale === "en" ? "en" : "";
+function NavBar({ params }) {
+  const EN = params.locale
   //  user status
   const { user } = UserAuth();
   const t = useTranslations("Navbar");
@@ -21,28 +21,28 @@ function NavBar({ locale }) {
   // Define the navigation items as an array of objects
   const navigationItems = [
     {
-      href: `${EN}/home`,
+      href: `/${EN}/home`,
       icon: HOME_ICON,
       text: `${t("Home")}`,
     },
     {
-      href: `${EN}/search`,
+      href: `/${EN}/search`,
       icon: SEARCH_ICON,
       text: `${t("Search")}`,
     },
     {
-      href: `${EN}/courses`,
+      href: `/${EN}/courses`,
       icon: COURSES_ICON,
       text: `${t("Courses")}`,
     },
     {
-      href: `${EN}/discussions`,
+      href: `/${EN}/discussions`,
       icon: Discussion_Icon,
       text: `${t("Discussions")}`,
       viewBox: "0 0 24 24",
     },
     {
-      href: `${user ? `${EN}/profile` : `${EN}/login`}`,
+      href: `${user ? `/${EN}/profile` : `/${EN}/login`}`,
       icon: PROFILE_ICON,
       text: `${user ? t("Profile") : t("Login")}`,
     },

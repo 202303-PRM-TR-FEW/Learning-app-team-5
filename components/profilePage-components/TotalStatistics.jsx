@@ -4,7 +4,7 @@ const TotalStatistics = ({t}) => {
       <h2 className="font-bold text-xl dark:text-bodyWhite">{t("title")}</h2>
       <div className="flex flex-col md:flex-row gap-x-0 md:gap-x-3">
         <div className=" mt-2 bg-white dark:bg-indigoDay p-2 rounded-[20px] shadow-md md:w-56">
-          <div className=" bg-[#cbe1fa] rounded-[10px]  px-14 py-2 flex justify-center items-center">
+          <div className=" bg-[#cbe1fa] rounded-[10px]  px-14 py-2 flex justify-center items-center ">
             <svg
               viewBox="0 0 24 24"
               className="h-[40px] w-[40px]"
@@ -14,7 +14,7 @@ const TotalStatistics = ({t}) => {
               <path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
             </svg>
           </div>
-          <div className="flex flex-col justify-center items-center py-2 font-medium">
+          <div className="flex flex-col justify-center items-center py-2 font-medium text-center">
             <p>{t("Finished")}</p>
             <p className="text-lg">0</p>
           </div>
