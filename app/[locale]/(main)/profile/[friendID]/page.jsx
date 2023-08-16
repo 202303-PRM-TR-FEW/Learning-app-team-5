@@ -21,7 +21,7 @@ const Page = ({ params }) => {
         <FriendHeader user={setUser} />
         <TotalStatistics t={t} />
       </div>
-      <div className="w-full md:1/2">
+      <div className="w-full md:1/2 mb-48 md:mb-0 pb-4 md:pb-0">
         <UidFriends t={t} friend={setUser} />
       </div>
     </div>

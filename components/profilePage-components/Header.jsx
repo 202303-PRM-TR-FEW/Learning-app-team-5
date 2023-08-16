@@ -44,7 +44,6 @@ const Header = ({ user, userData, setShowForm, followers, following }) => {
     setForm(null);
   }
 
-
   useEffect(() => {
     if (Allcourses.length > 1) {
       setMyCourses(
@@ -58,7 +57,7 @@ const Header = ({ user, userData, setShowForm, followers, following }) => {
       <div className="flex justify-center self-center w-1/3">
         <Image
           onClick={() => setShowForm(true)}
-          className="rounded-full  m-2 cursor-pointer object-fill h-36 w-36"
+          className="rounded-full  m-2 cursor-pointer object-fill h-28  md:h-36 md:w-36"
           src={userData.photoURL}
           alt="profile image"
           height={150}
