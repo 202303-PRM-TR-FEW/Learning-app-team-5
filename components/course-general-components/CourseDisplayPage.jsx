@@ -43,7 +43,7 @@ function CourseDisplayPage({
           </>
         )}
         {Course && <CourseContantOverview Course={Course} />}
-        {Course && <CourseContent />}
+        {Course && <CourseContent selctedModules={selctedModules} />}
       </div>
     </div>
   );
