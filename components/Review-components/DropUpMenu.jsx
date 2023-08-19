@@ -28,7 +28,7 @@ function DropUpMenu({ buttonName, handleClick, courseID, setNewRating }) {
     <>
       <button
         ref={setReferenceElement}
-        className="bg-primaryBlue w-[45%] rounded-2xl text-white py-2 px-4 hover:bg-white hover:text-primaryBlue hover:border-primaryBlue hover:border-2 text-base dark:hover:bg-indigoDay"
+        className="cursor-pointer bg-primaryBlue rounded-2xl text-white py-2 px-24 hover:bg-white hover:text-primaryBlue hover:border-primaryBlue hover:border-2  dark:hover:bg-indigoDay dark:hover:border-primaryBlue dark:hover:border-2 text-center"
         onClick={handleButtonClick}
       >
         {buttonName}
@@ -49,7 +49,7 @@ function DropUpMenu({ buttonName, handleClick, courseID, setNewRating }) {
           />
           <div ref={setArrowElement} style={styles.arrow} />
           <button
-            className="text-black ml-2 text-xl"
+            className="text-black ml-2 text-xl cursor-pointer"
             onClick={handlePopupClose}
           >
             &times;

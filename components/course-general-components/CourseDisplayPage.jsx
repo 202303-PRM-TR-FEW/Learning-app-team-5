@@ -1,11 +1,19 @@
 "use client";
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import CourseList from "./CourseList";
 import CourseOverview from "./CourseOverview";
 import useScreenType from "./useScreenType";
+import CourseContantOverview from "./CourseContantOverview";
+import CourseContent from "./(countinue-components)/CourseContent";
 
-function CourseDisplayPage({ pageTitle, navigationPath, navigationName }) {
+function CourseDisplayPage({
+  pageTitle,
+  navigationPath,
+  navigationName,
+  Course,
+  selctedModules,
+}) {
   const [selectedCourse, setSelectedCourse] = useState(null);
   const isMobile = useScreenType();
 
@@ -20,14 +28,22 @@ function CourseDisplayPage({ pageTitle, navigationPath, navigationName }) {
           isMobile === "mobile" ? "h-screen" : ""
         }`}
       >
-        <CourseList
-          onCourseClick={handleCourseClick}
-          selectedCourse={selectedCourse}
-          pageTitle={pageTitle || "Enter Page Title Here"}
-          navigationPath={navigationPath || "./home"}
-          navigationName={navigationName || "Enter Page Name To Navigate Here"}
-        />
-        <CourseOverview selectedCourse={selectedCourse} />
+        {!Course && (
+          <>
+            <CourseList
+              onCourseClick={handleCourseClick}
+              selectedCourse={selectedCourse}
+              pageTitle={pageTitle || "Enter Page Title Here"}
+              navigationPath={navigationPath || "./home"}
+              navigationName={
+                navigationName || "Enter Page Name To Navigate Here"
+              }
+            />
+            <CourseOverview selectedCourse={selectedCourse} />
+          </>
+        )}
+        {Course && <CourseContantOverview Course={Course} />}
+        {Course && <CourseContent selctedModules={selctedModules} />}
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
 import useScreenType from "./useScreenType";
@@ -163,14 +164,11 @@ function CourseOverview({ selectedCourse }) {
         >
           <RatingStars />
         </DropUpMenu>
-        <CourseButton
-          buttonName={
-            selectedCourse.isRegistered ? t("Button-3") : t("Button-4")
-          }
-          handleClick={() =>
-            console.log("add enroll page navigation to handleClick function")
-          }
-        />
+        <Link href={`/courses/${selectedCourse.id}`}>
+          <button className="cursor-pointer bg-primaryBlue rounded-2xl text-white py-2 px-24 hover:bg-white hover:text-primaryBlue hover:border-primaryBlue hover:border-2  dark:hover:bg-indigoDay dark:hover:border-primaryBlue dark:hover:border-2 text-center">
+            {t("Button-3")}
+          </button>
+        </Link>
       </div>
     </div>
   );
