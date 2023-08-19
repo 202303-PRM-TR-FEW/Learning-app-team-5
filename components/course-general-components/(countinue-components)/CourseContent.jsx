@@ -174,8 +174,8 @@ const CourseContent = ({ selctedModules }) => {
           >
             <AccordionTrigger className="">{course.title}</AccordionTrigger>
             <AccordionContent>
-              <p>{course.description}</p>
               <ul>
+                <li className="py-2">{course.description}</li>
                 {course.content?.map((element, index) => {
                   console.log(element);
                   if (element.type === "text") {
