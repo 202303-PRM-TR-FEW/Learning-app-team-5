@@ -1,8 +1,15 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import dynamic from "next/dynamic";
 import { UserAuth } from "../../app/context/AuthContext";
-import { doc, arrayUnion, updateDoc } from "firebase/firestore";
+import {
+  doc,
+  arrayUnion,
+  updateDoc,
+  arrayRemove,
+  getDoc,
+} from "firebase/firestore";
 import { db } from "@/firebase";
 import { Spinner } from "@material-tailwind/react";
 import { useTranslations } from "next-intl";
@@ -23,70 +30,120 @@ function Course({
   courseImage,
   rating,
   duration,
- 
+  setError,
+  id,
 }) {
-  const t = useTranslations("Home")
+  const t = useTranslations("Home");
+  const d = useTranslations("Discussion");
+
   const hours = Math.floor(duration / 60);
   const minutes = duration % 60;
 
   const [isLoading, setIsLoading] = useState(true);
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const [Registered, setIsRegistered] = useState(false);
+  const [message, setMessage] = useState(null);
+
   //  return the state of user is sign in or not
   const { user } = UserAuth();
 
-  // const t = useTranslations("Home");
+  const placeHolderImage =
+    "https://firebasestorage.googleapis.com/v0/b/learning-app-team-5.appspot.com/o/review-placeholder-1.png?alt=media&token=e928937b-03be-49ab-8e26-170e44d9aa8a";
 
-  const handleBookmarkToggle = () => {
-    setIsBookmarked(!isBookmarked);
+  // check if the course is saved or registered to handle the user interface
+  const handleCouresStates = async () => {
+    const courseDoc = doc(db, "course-data", id);
+    const courseSnapshot = await getDoc(courseDoc);
+    const isUserSaved = courseSnapshot.data().isSaved.includes(user.uid);
+    const isUserRegistered = courseSnapshot
+      .data()
+      .isRegistered.includes(user.uid);
+    setIsBookmarked(isUserSaved);
+    setIsRegistered(isUserRegistered);
+  };
+
+  useEffect(() => {
+    if (user) handleCouresStates();
+  }, [user]);
+
+  const handleBookmarkToggle = async () => {
+    if (!user) {
+      setError(d("Error-1"));
+      setTimeout(() => {
+        setError(null);
+      }, 3000);
+    } else {
+      // Get a reference to the course document
+      const courseDoc = doc(db, "course-data", id);
+
+      // Check if the user's ID is already in the 'isSaved' array
+      const courseSnapshot = await getDoc(courseDoc);
+      const isUserSaved = courseSnapshot.data().isSaved.includes(user.uid);
+
+      // Update the 'isSaved' array based on whether the user's ID is already saved or not
+      if (isUserSaved) {
+        setIsBookmarked(false);
+        // Remove the user's ID from the 'isSaved' array
+        await updateDoc(courseDoc, {
+          isSaved: arrayRemove(user.uid),
+        });
+      } else {
+        setIsBookmarked(true);
+        // Add the user's ID to the 'isSaved' array
+        await updateDoc(courseDoc, {
+          isSaved: arrayUnion(user.uid),
+        });
+      }
+    }
+  };
+
+  const handleGetCourse = async () => {
+    if (!user) {
+      setError(d("Error-1"));
+      setTimeout(() => {
+        setError(null);
+      }, 3000);
+    } else {
+      // Get a reference to the course document
+      const courseDoc = doc(db, "course-data", id);
+
+      // Check if the user's ID is already in the 'isRegistered' array
+      const courseSnapshot = await getDoc(courseDoc);
+      const isUserRegistered = courseSnapshot
+        .data()
+        .isRegistered.includes(user.uid);
+
+      // Update the 'isRegistered' array based on whether the user's ID is already saved or not
+      if (isUserRegistered) {
+        setIsRegistered(false);
+        // Remove the user's ID from the 'isRegistered' array
+        await updateDoc(courseDoc, {
+          isRegistered: arrayRemove(user.uid),
+        });
+        setMessage(t("Message-2"));
+        setTimeout(() => {
+          setMessage(null);
+        }, 3000);
+      } else {
+        setIsRegistered(true);
+        // Add the user's ID to the 'isRegistered' array
+        await updateDoc(courseDoc, {
+          isRegistered: arrayUnion(user.uid),
+        });
+        setMessage(t("Message-1"));
+        setTimeout(() => {
+          setMessage(null);
+        }, 3000);
+      }
+    }
   };
 
   const handleOnLoad = () => {
     setIsLoading(false);
   };
 
-  //set the saved course to user saved courses in firebase
-  // const courseID = doc(db, "users", `${user?.email}`);
-  // const handleSaveCourse = async () => {
-  //   if (user?.email) {
-  //     setIsSaved((pre) => !pre);
-  //     await updateDoc(courseID, {
-  //       savedCourses: arrayUnion({
-  //         id: id,
-  //         title: title,
-  //         authorName: authorName,
-  //         authorImage: authorImage,
-  //         courseImage: courseImage,
-  //         rating: rating,
-  //         duration: duration,
-  //         isSaved: !saved,
-  //       }),
-  //     });
-  //   } else {
-  //     alert("Please sign in to save this course");
-  //   }
-  // };
-  // //set the registerd courses
-  // const handleGetCourse = async () => {
-  //   if (user?.email) {
-  //     await updateDoc(courseID, {
-  //       registeredCourses: arrayUnion({
-  //         id: id,
-  //         title: title,
-  //         authorName: authorName,
-  //         authorImage: authorImage,
-  //         courseImage: courseImage,
-  //         rating: rating,
-  //         duration: duration,
-  //         isRegistered: true,
-  //       }),
-  //     });
-  //   } else {
-  //     alert("Please sign in to save this course");
-  //   }
-  // };
-
   return (
-    <div className="rounded-xl bg-white p-2 course-item flex-col w-full my-6 relative dark:bg-indigoDay ">
+    <div className="rounded-xl bg-white p-2 course-item flex-col w-full my-6 relative dark:bg-indigoDay w-full">
       <div>
         <div className="relative ">
           {isLoading && (
@@ -94,13 +151,22 @@ function Course({
               <Spinner className="h-8 w-8" />
             </div>
           )}
-          <img
-            className="rounded-lg h-32 w-[100%] "
-            src={courseImage}
-            alt="courseImage"
-            onLoad={handleOnLoad}
-            style={isLoading ? { display: "none" } : { display: "block" }}
-          />
+          {message ? (
+            <div className="rounded-lg h-32 w-[100%] flex justify-center items-center">
+              <p className="bg-green-200 rounded-md border-2 border-green-600 text-lightBlack px-3 py-1 font-medium">
+                {message}
+              </p>
+            </div>
+          ) : (
+            <img
+              className="rounded-lg h-32 w-[100%] "
+              src={courseImage}
+              alt="courseImage"
+              onLoad={handleOnLoad}
+              style={isLoading ? { display: "none" } : { display: "block" }}
+            />
+          )}
+
           <div className="absolute top-1 right-1">
             <label className={`ui-bookmark ${isBookmarked ? "active" : ""}`}>
               <input type="checkbox" />
@@ -114,13 +180,13 @@ function Course({
             </label>
           </div>
         </div>
-        <div className="justify-around rounded-full bg-white shadow-2xl flex w-[55%] py-1 absolute mt-[-25px] dark:bg-purssianBlue">
+        <div className="justify-between rounded-full bg-white shadow-2xl flex w-[55%] py-1 absolute mt-[-25px] dark:bg-purssianBlue">
           <img
-            className="rounded-full h-12 w-12"
-            src={authorImage}
-            alt="authorImage"
+            className="rounded-full px-1  h-12 w-12"
+            src={isLoading ? placeHolderImage : authorImage}
+            alt="auter-image"
           />
-          <h2 className="px-3 self-center">{authorName}</h2>
+          <h2 className="pr-2 self-center">{authorName}</h2>
         </div>
         <h1 className="font-bold  mt-10  course_title">{title}</h1>
 
@@ -138,10 +204,10 @@ function Course({
             <StarBorderOutlinedIcon /> {rating} /5
           </span>
           <span
-            // onClick={handleGetCourse}
+            onClick={handleGetCourse}
             className="cursor-pointer bg-primaryBlue  px-4 py-2 text-white rounded-full mx-[2px]"
           >
-            {t("button")}
+            {Registered ? t("button-2") : t("button")}
           </span>
         </div>
         <span></span>

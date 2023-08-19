@@ -1,70 +1,86 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { GetRandomNumbers } from "../../app/context/RandomNumbers";
+import React, { useMemo, useState } from "react";
+import { doc, writeBatch, arrayUnion, getDoc } from "firebase/firestore";
+import { FriendSugCard } from "./SuggestionCard";
+import { GetAllUsers } from "@/app/context/FetchAllUsers";
+import { GetRandomNumbers } from "@/app/context/RandomNumbers";
+import { UserAuth } from "@/app/context/AuthContext";
+import { db } from "@/firebase";
 
-//list of users we will replace it with firebase data
-const users = [
-  {
-    image: "https://loremflickr.com/640/480/girls",
-    name: "Laura Evaes",
-    id: 1,
-  },
-  {
-    image: "https://loremflickr.com/640/480/girls",
-    name: "Anna Clarke",
-    id: 2,
-  },
-  {
-    image: "https://loremflickr.com/640/480/girls",
-    name: "Sally Willy",
-    id: 3,
-  },
-  {
-    image: "https://loremflickr.com/640/480/man",
-    name: "William Walker",
-    id: 4,
-  },
-  {
-    image: "https://loremflickr.com/640/480/man",
-    name: "Alexender Thohmpson",
-    id: 5,
-  },
-  {
-    image: "https://loremflickr.com/640/480/girls",
-    name: "Sarah loury",
-    id: 6,
-  },
-];
-
-const SuggestionsFriends = ({t}) => {
+const SuggestionsFriends = ({ t, following }) => {
+  const { users } = GetAllUsers();
+  const { user } = UserAuth();
   const { getRandomNumbers } = GetRandomNumbers();
 
   const [newUsers, setNewUsers] = useState([]);
+  const [message, setMessage] = useState(null);
+
+  const AllSuggestions = useMemo(() => {
+    const Allusers = users.filter(
+      (friend) => friend.id !== user.uid && !following?.includes(friend.id)
+    );
+    return Allusers;
+  }, [users, user.uid]);
 
   const handleDeleteSuggestion = (id) => {
     if (newUsers.length > 1) {
       setNewUsers(newUsers.filter((user) => user.id !== id));
     } else {
-      setNewUsers(users.filter((user) => user.id !== id));
+      setNewUsers(AllSuggestions.filter((user) => user.id !== id));
     }
   };
 
-  const [randomTwoUsers, setRandomTwoUsers] = useState([]);
   //toggal view or hide states
   const [showAll, setShowAll] = useState(false);
 
-  // useEffect hook to set the initial two random users
-  useEffect(() => {
-    setRandomTwoUsers(
-      //check if newUsers array not empty take the two suggestion from it
-      getRandomNumbers(newUsers.length > 1 ? newUsers : users, 2)
-    );
-  }, [newUsers]);
+  // useMemo hook to set the initial two random users
+  const randomTwoUsers = useMemo(() => {
+    return getRandomNumbers(newUsers.length > 1 ? newUsers : AllSuggestions, 2);
+  }, [newUsers, users]);
+
+  const handleAddFriend = async (ID) => {
+    const addedUserRef = doc(db, "users", ID);
+    const currentUserRef = doc(db, "users", user.uid);
+
+    const currentUserSnapshot = await getDoc(currentUserRef);
+    const followingArray = currentUserSnapshot.data().FOLLOWING || [];
+
+    if (followingArray.includes(ID)) {
+      // User is already being followed,
+      setMessage(t("Message-2"));
+      setTimeout(() => {
+        setMessage(null);
+      }, 4000);
+      handleDeleteSuggestion(ID);
+      return;
+    }
+
+    const batch = writeBatch(db);
+
+    //update the friend followers array
+    batch.update(addedUserRef, { FOLLOWERS: arrayUnion(user.uid) });
+
+    //update the current user following array
+    batch.update(currentUserRef, { FOLLOWING: arrayUnion(ID) });
+
+    await batch.commit();
+    setMessage(t("Message"));
+    setTimeout(() => {
+      setMessage(null);
+    }, 4000);
+  };
 
   return (
     <section>
       <h2 className="font-bold text-xl py-4">{t("title-3")}</h2>
+      {message && (
+        <div className="rounded-lg w-full flex justify-center items-center pb-4">
+          <p className="bg-green-200 rounded-md border-2 border-green-600 text-lightBlack px-3 py-1 font-medium">
+            {message}
+          </p>
+        </div>
+      )}
       <div
         className={`bg-white dark:bg-indigoDay rounded-xl shadow-lg ${
           showAll ? `overflow-auto h-60` : ``
@@ -72,20 +88,22 @@ const SuggestionsFriends = ({t}) => {
       >
         {showAll
           ? //check if newUsers array is not empty, and render the users from it, if not just render from the users array
-            (newUsers.length > 1 ? newUsers : users).map((user, index) => {
+            (newUsers.length > 1 ? newUsers : AllSuggestions).map((friend) => {
               return (
                 <FriendSugCard
-                  key={index}
-                  user={user}
+                  key={friend.id}
+                  friend={friend}
                   click={handleDeleteSuggestion}
+                  Add={handleAddFriend}
                 />
               );
             })
-          : randomTwoUsers.map((user, index) => (
+          : randomTwoUsers.map((friend) => (
               <FriendSugCard
-                key={index}
-                user={user}
+                key={friend.id}
+                friend={friend}
                 click={handleDeleteSuggestion}
+                Add={handleAddFriend}
               />
             ))}
         <p
@@ -98,41 +116,7 @@ const SuggestionsFriends = ({t}) => {
     </section>
   );
 };
+
 //this function create a friend suggestion card to render it in the above SuggestionsFriends function based on user's data
-const FriendSugCard = ({ user, click }) => {
-  return (
-    <div>
-      <div className="flex justify-between items-center py-3 px-6 ">
-        <div className="flex justify-between gap-4 ">
-          <img
-            className="rounded-full h-14 w-14"
-            src={user.image}
-            alt="profile image"
-          />
-          <h3 className="font-medium self-center">{user.name}</h3>
-        </div>
-        <div className="flex justify-between gap-2">
-          <button className="text-white py-1 px-2 bg-primaryBlue rounded-[5px] hover:bg-blue-200">
-            +
-          </button>
-          <div
-            onClick={() => click(user.id)}
-            className="flex justify-center items-center cursor-pointer"
-          >
-            <svg
-              viewBox="0 0 24 20"
-              className="w-[24px] h-[24px] svg-hover"
-              // style={{ fill: "#FE9E23" }}
-            >
-              <path d="M0 0h24v24H0z" fill="none"></path>
-              <path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
-            </svg>
-          </div>
-        </div>
-      </div>
-      <hr className="w-[90%] m-auto" />
-    </div>
-  );
-};
 
 export default SuggestionsFriends;

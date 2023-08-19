@@ -6,9 +6,10 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
-  fetchSignInMethodsForEmail
+  fetchSignInMethodsForEmail,
 } from 'firebase/auth'
-import { setDoc, doc } from "firebase/firestore"
+import { setDoc, doc, onSnapshot } from "firebase/firestore"
+import { useRouter } from "next/navigation";
 
 // create the context
 const AuthContext = createContext()
@@ -16,22 +17,33 @@ const AuthContext = createContext()
 //  the Authentication Provider
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [userData, setUserData] = useState(null);
+  const [Error, setError] = useState(null);
+  const router = useRouter()
 
-  function signUp(email, password) {
+
+  function signUp(email, password, displayName, city) {
+    console.log(displayName)
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
+        // Signed in 
         const user = userCredential.user;
+
+        //  set Firestore document
         return setDoc(doc(db, 'users', user.uid), {
           email: user.email,
-          password: user.password,
-          username: user.username,
-          savedCourses: [],
-          registeredCourses: []
+          password: password,
+          city: city,
+          username: displayName,
+          photoURL: "https://firebasestorage.googleapis.com/v0/b/learning-app-team-5.appspot.com/o/review-placeholder-1.png?alt=media&token=e928937b-03be-49ab-8e26-170e44d9aa8a",
+          FOLLOWERS: [],
+          FOLLOWING: []
         });
-      })
 
+      })
       .catch((error) => {
-        console.error('Error signing up:', error);
+        console.log(error)
+
       });
   }
 
@@ -41,14 +53,16 @@ export const AuthContextProvider = ({ children }) => {
       .then((signInMethods) => {
         // If the email exists in Firebase Authentication, try to sign in with the provided email and password
         if (signInMethods.length > 0) {
-          return signInWithEmailAndPassword(auth, email, password);
+          signInWithEmailAndPassword(auth, email, password)
+          router.push("/profile")
         } else {
           throw new Error('Email not found. Please sign up first.');
         }
       })
 
-      .catch((error) => {
-        console.error('Error signing in:', error);
+      .catch(() => {
+        setError("Email not found. Please sign up first");
+        setTimeout(() => { setError(null) }, 4000)
       });
   }
 
@@ -62,7 +76,20 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      if (currentUser) {
+        const userDoc = doc(db, "users", currentUser.uid);
 
+        const unsubscribe = onSnapshot(userDoc, (docSnapshot) => {
+          if (docSnapshot.exists()) {
+            setUserData(docSnapshot.data());
+          } else {
+            console.log("No such user!");
+          }
+        });
+
+        // Cleanup subscription on unmount
+        return () => unsubscribe();
+      }
     });
 
     return () => unsubscribe();
@@ -70,7 +97,7 @@ export const AuthContextProvider = ({ children }) => {
 
   return (
     // pass all the functions as props so we can use them in our app components
-    <AuthContext.Provider value={{ signIn, logOut, signUp, user }}>
+    <AuthContext.Provider value={{ signIn, logOut, signUp, user, Error, userData }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,4 +1,3 @@
-"use client"
 import React from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
 import classNames from 'classnames';
@@ -78,6 +77,8 @@ const AccordionTrigger = React.forwardRef(({ children, className, ...props }, fo
   </Accordion.Header>
 ));
 
+AccordionTrigger.displayName = "AccordionTrigger";
+
 const AccordionContent = React.forwardRef(({ children, className, ...props }, forwardedRef) => (
   <Accordion.Content
     className={classNames('AccordionContent', className)}
@@ -88,11 +89,11 @@ const AccordionContent = React.forwardRef(({ children, className, ...props }, fo
   </Accordion.Content>
 ));
 
+AccordionContent.displayName = "AccordionContent";
 
 const CourseContent = () => (
-    <>
-      <h1 className='text-xl text-gray-500 font-medium  ml-2 p-5'>Course Overview</h1>
-      <Accordion.Root className="AccordionRoo" type="single" defaultValue="item-1" collapsible>
+    <div className='flex-col w-full'>
+      <Accordion.Root className="AccordionRoo py-4" type="single" defaultValue="item-1" collapsible>
         {randomCourses.map((course, index) => (
           <Accordion.Item key={index} className="AccordionItem" value={`item-${index}`}>
             <AccordionTrigger className="">{course.title}</AccordionTrigger>
@@ -117,7 +118,7 @@ const CourseContent = () => (
         ))}
         
       </Accordion.Root>
-    </>
+    </div>
   );
   
 

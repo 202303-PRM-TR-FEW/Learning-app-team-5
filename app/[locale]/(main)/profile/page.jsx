@@ -4,21 +4,37 @@ import InfoComp from "@/components/profilePage-components/InfoSide";
 import { UserAuth } from "@/app/context/AuthContext";
 import Link from "next/link";
 import { useState } from "react";
+import { Spinner } from "@material-tailwind/react";
 
 function Profile({ params }) {
-  const { user } = UserAuth();
+  const { user, userData } = UserAuth();
   const [language, setLanguage] = useState(params.locale);
+  const [following, setFollowing] = useState([]);
+  const [followers, setFollowers] = useState([]);
 
   return (
     <>
       {user ? (
-        <div
-          className="flex flex-col container mx-auto px-4 min-h-screen md:flex-row md:gap-20  
-     max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-[1350px] text-lightBlack dark:text-bodyWhite"
-        >
-          <InfoComp />
-          <FriendsComp lang={params.locale} />
-        </div>
+        userData ? (
+          <div className="flex flex-col container mx-auto px-4 min-h-screen md:flex-row md:gap-20  lg:max-w-[1280px] text-lightBlack dark:text-bodyWhite">
+            <InfoComp
+              user={user}
+              userData={userData}
+              followers={followers}
+              following={following}
+            />
+            <FriendsComp
+              lang={params.locale}
+              setFollowers={setFollowers}
+              setFollowing={setFollowing}
+              following={following}
+            />
+          </div>
+        ) : (
+          <div className="flex justify-center items-center h-screen">
+            <Spinner className="h-14 w-14" />
+          </div>
+        )
       ) : (
         <div className="h-screen flex justify-center items-center font-bold text-xl md:text-2xl dark:text-bodyWhite ">
           <div className="w-[90%] md:w-[50%] m-x-auto bg-white dark:bg-indigoDay rounded-[20px] text-center">

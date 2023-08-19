@@ -16,7 +16,7 @@ const SelectLanguage = ({ lang }) => {
            hover:text-primaryBlue hover:fill-primaryBlue 
            text-[#413F42] fill-[#413F42] dark:text-bodyWhite dark:fill-bodyWhite
            dark:hover:fill-primaryBlue dark:hover:text-primaryBlue"
-          onClick={() => setIsEnglish((pre) => !pre)}
+
         >
           <TranslateIcon className=" " />
           <button className="font-bold text-lg pl-3  ">English</button>
@@ -29,7 +29,7 @@ const SelectLanguage = ({ lang }) => {
            hover:text-primaryBlue hover:fill-primaryBlue 
            text-[#413F42] fill-[#413F42] dark:text-bodyWhite dark:fill-bodyWhite
            dark:hover:fill-primaryBlue dark:hover:text-primaryBlue"
-          onClick={() => setIsEnglish((pre) => !pre)}
+
         >
           <TranslateIcon className=" " />
           <button className="font-bold text-lg pl-3  ">Türkçe</button>

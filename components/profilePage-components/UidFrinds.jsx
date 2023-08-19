@@ -1,55 +1,25 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { doc, onSnapshot } from "firebase/firestore";
 import { GetAllUsers } from "@/app/context/FetchAllUsers";
-import { UserAuth } from "@/app/context/AuthContext";
 import { useTranslations } from "next-intl";
-import { db } from "@/firebase";
 import Link from "next/link";
 
-const SuggestionsFriends = ({
-  t,
-  setFollowers,
-  setFollowing,
-  following,
-
-}) => {
+const UidFriends = ({ t, friend }) => {
   const { users } = GetAllUsers();
-  const { user } = UserAuth();
   const [myFriends, setMyFriends] = useState([]);
 
-  const showFriends = async () => {
-    const userDoc = doc(db, "users", user.uid);
-
-    // Listen for real-time updates
-    const unsubscribe = onSnapshot(userDoc, (docSnapshot) => {
-      const followingArray = docSnapshot.data().FOLLOWING ;
-      const followersArray = docSnapshot.data().FOLLOWERS ;
-
-      setFollowing(followingArray);
-      setFollowers(followersArray);
-
-      const myFriends = users.filter((friend) =>
-        followingArray.includes(friend.id)
-      );
-      setMyFriends(myFriends);
-    });
-
-    // Cleanup the listener when you no longer need it
-    return () => unsubscribe();
-  };
-
   useEffect(() => {
-    showFriends();
-
+    setMyFriends(users.filter((u) => friend.FOLLOWING?.includes(u.id)));
   }, []);
   //toggal view or hide states
   const [showAll, setShowAll] = useState(false);
 
   return (
-    <section>
-      <h2 className="font-bold text-xl py-4">{t("title-4")}</h2>
+    <section >
+      <h2 className="font-bold text-xl py-4">{`${friend.username} ${t(
+        "title-4"
+      )}`}</h2>
       <div
         className={`bg-white dark:bg-indigoDay rounded-xl shadow-lg ${
           showAll ? `overflow-auto h-60` : ``
@@ -64,7 +34,7 @@ const SuggestionsFriends = ({
               .map((user, index) => (
                 <FriendSugCard key={index} user={user} t={t} />
               ))}
-        {following.length > 2 && (
+        {friend.FOLLOWING?.length > 2 && (
           <p
             onClick={() => setShowAll((pre) => !pre)}
             className="py-4 px-6 font-bold text-primaryBlue cursor-pointer"
@@ -103,4 +73,4 @@ const FriendSugCard = ({ user }) => {
   );
 };
 
-export default SuggestionsFriends;
+export default UidFriends;

@@ -1,30 +1,42 @@
-import CourseContent from "@/components/course-general-components/(countinue-components)/CourseContent";
-import Test1 from "@/components/course-general-components/(countinue-components)/Test1";
+"use client";
+import { GetAllCourses } from "@/app/context/FetchAllCourses";
+import { useState, useEffect } from "react";
+import CourseDisplayPage from "@/components/course-general-components/CourseDisplayPage";
+import { useTranslations } from "next-intl";
+import { UserAuth } from "@/app/context/AuthContext";
+import Link from "next/link";
 
-function preview({ params }) {
-  // Define the 'course' object here with necessary properties
-  const course = {
-    courseImage: "path/to/image",
-    instructorImage: "path/to/instructor/image",
-    title: "Course Title",
-    instructorName: "Instructor Name",
-    category: "Course Category",
-    level: "Course Level",
-    duration: 120, // Course duration in minutes
-    rating: 4.5,
-    // Other properties
-  };
+const Continue = ({ params }) => {
+  const { Allcourses, AllModules } = GetAllCourses();
+  const [selctedCourse, setSelectedCourse] = useState({});
+  const [selctedModules, setSelectedModules] = useState({});
+
+  useEffect(() => {
+    if (Allcourses.length > 1) {
+      const course = Allcourses.find((course) => course.id == params.preview);
+      setSelectedCourse(course);
+    }
+    if (AllModules.length > 1) {
+      setSelectedModules(
+        AllModules.find((module) => module.moduleID == params.preview)
+      );
+    }
+  }, [Allcourses, AllModules]);
+
+  const t = useTranslations("Courses");
+  //  User state
 
   return (
-    <div className="md:flex">
-      <div className="w-full md:w-1/2 lg:w-1/2">
-        <Test1 selectedCourse={course} />
-      </div>
-      <div className="w-full md:w-1/2 lg:w-1/2 h-screen bg-white rounded-md shadow-lg">
-        <CourseContent />
-      </div>
-    </div>
+    <>
+      <CourseDisplayPage
+        pageTitle={t("title-1")}
+        navigationPath={"./saved"}
+        navigationName={t("title-2")}
+        Course={selctedCourse}
+        selctedModules={selctedModules}
+      />
+    </>
   );
-}
+};
 
-export default preview;
+export default Continue;

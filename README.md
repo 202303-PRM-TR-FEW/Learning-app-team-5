@@ -1,1 +1,1 @@
-live preview: https://main--learning-app-team-5.netlify.app/
+live preview: https://learning-app-team-5.vercel.app/
